@@ -10,6 +10,7 @@
   --button-secondary-border: #ebebeb;
 
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
@@ -17,6 +18,57 @@
   background-color: var(--background);
 }
 
+.photoWrapper {
+  padding: 35px 0;
+  display: flex;
+  justify-content: center;
+  max-width: 1400px;
+  gap: 50px;
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.photoDescription {
+  padding: 30px 0;
+}
+
+.aboutSection {
+  background: var(--second-color);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+.aboutSectionWrapper {
+  max-width: 1400px;
+}
+.whereWeMakeCall {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: var(--background);
+  padding: 50px 0;
+}
+
+.whereWeMaCallWrapper {
+  width: 1400px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.qustions {
+  background: var(--background);
+  .MuiAccordion-root {
+      background-color: var(--background);
+    }
+
+}
+ .qustions .MuiAccordion-root {
+    background: var(--background);
+  }
 .main {
   display: flex;
   min-height: 100vh;
@@ -128,8 +180,8 @@ a.secondary {
   }
 
   .page {
-    --background: #000;
-    --foreground: #000;
+    --background: #f9f6f1;
+    --foreground: #f9f6f1;
 
     --text-primary: #ededed;
     --text-secondary: #999;
