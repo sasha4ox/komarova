@@ -12,15 +12,12 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <section className={styles.photoWrapper}>
-        <section className={styles.photo}> 
+        <section className={styles.photoCover}> 
           <Image
-          className={styles.photo}
+            className={styles.photo}
             src="/6919a50384b3346f2a0cc6f1_optimized_737_c737x959-0x0.webp"
             quality={100}
-            // width={737}
-            // height={959}
-             width={475}
-            height={507}
+            fill
             alt="Picture of the author"
           />
         </section>
@@ -70,20 +67,22 @@ export default function Home() {
         </div>
       </section>
        <section className={styles.whereWeMakeCall}>
+        <h1>Контакти</h1>
         <div className={styles.whereWeMaCallWrapper}>
           <section>
-          <p>Контакти</p>
-          <p>Де проходять зустрічі?</p>
-          <button>Записатися</button>
-          </section>
-          <section>
+            <p>Де проходять зустрічі?</p>
             <p>Онлайн сесії</p>
             <p>Zoom; Google Meet; Telegram;Де Вам зручно!</p>
+            <button>Записатися</button>
           </section>
+          {/* <section>
+            <p>Онлайн сесії</p>
+            <p>Zoom; Google Meet; Telegram;Де Вам зручно!</p>
+          </section> */}
         </div>
        </section>
        <section className={styles.faq}>
-        <div className={styles.qustions}>
+        <div className={styles.faqWrapepr}>
           <h1>Часті запитання</h1>
           <AccordionTransition />
         </div>

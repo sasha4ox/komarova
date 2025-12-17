@@ -22,13 +22,13 @@ export default function AccordionTransition() {
   };
 
   return (
-    <div>
+    <div className={styles.questions}>
       <Accordion
         expanded={expanded}
         onChange={handleExpansion}
         // slots={{ transition }}
         slotProps={{ transition: { timeout: 400 } }}
-        classes={styles.qustions}
+        classes={ {root: styles.accordion}}
         sx={[
           expanded
             ? {
@@ -64,7 +64,7 @@ export default function AccordionTransition() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      <Accordion  classes={ {root: styles.accordion}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2-content"
@@ -80,7 +80,7 @@ export default function AccordionTransition() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      <Accordion  classes={ {root: styles.accordion}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3-content"
@@ -97,7 +97,7 @@ export default function AccordionTransition() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      <Accordion  classes={ {root: styles.accordion}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel4-content"
@@ -118,7 +118,7 @@ export default function AccordionTransition() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      <Accordion  classes={ {root: styles.accordion}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel5-content"
@@ -135,7 +135,7 @@ export default function AccordionTransition() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      <Accordion  classes={ {root: styles.accordion}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel6-content"
@@ -152,7 +152,7 @@ export default function AccordionTransition() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      <Accordion  classes={ {root: styles.accordion}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel7-content"
