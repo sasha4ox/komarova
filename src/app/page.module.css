@@ -71,7 +71,10 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 50px 0;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 50px;
+  padding-top: 25px;
 }
 
 .aboutSectionWrapper {
@@ -87,6 +90,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
   }
 }
 
@@ -103,8 +107,10 @@
 .whereWeMaCallWrapper {
   width: 1400px;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   padding: 20px;
+  font-size: 24px;
 }
 
 @media (max-width: 950px) {
@@ -133,6 +139,10 @@
 .offers {
   width: 100%;
   padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .offersCards {
@@ -143,16 +153,34 @@
 
 .offersMainHeader {
   display: flex;
+  align-items: center;
   flex-direction: column;
   padding: 20px 0;
   color: var(--third-color);
-  align-items:flex-end;
-  max-width: 1300px;
+  width: 1400px;
+}
+
+@media (max-width: 950px) {
+  .offersMainHeader {
+    width: 100%;
+  }
+}
+
+.sectionName {
+  font-family: var(--font-yeseva-one);
+  font-size: 20px;
+  color: var(--text-second-color);
+  display: flex;
+  justify-content: flex-start;
+  align-self: flex-start;
+  text-transform: uppercase;
+  padding-bottom: 20px;
 }
 
 .offersHeaderDescription {
   display: flex;
   gap: 100px;
+  font-size: 24px;
 }
 
 @media (max-width: 950px) {
@@ -166,8 +194,10 @@
   }
 
   .offersHeaderDescription {
+    width: 100%;
     flex-direction: column;
     gap: 5px;
+    align-items: center;
   }
 
 }

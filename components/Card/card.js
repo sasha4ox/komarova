@@ -32,8 +32,8 @@ import CheckIcon from "@mui/icons-material/Check";
                 <List>
                     {items && items.map(item => {
                         return (
-                             <>
-                               <ListItem disablePadding>
+                             
+                               <ListItem disablePadding key={item}>
                                 <ListItemButton>
                                     <ListItemIcon classes={{root: styles.offerChecks}}>
                                     <CheckIcon sx={{ color: 'white' }} />
@@ -41,7 +41,7 @@ import CheckIcon from "@mui/icons-material/Check";
                                     <ListItemText primary={item} />
                                 </ListItemButton>
                                 </ListItem> 
-                            </>
+                            
                         )
                            
                     })}

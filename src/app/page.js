@@ -8,6 +8,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CheckIcon from '@mui/icons-material/Check';
 import Card from '../../components/Card/card'
+import Form from '../../components/Form/form'
 
 export default function Home() {
   return (
@@ -63,16 +64,17 @@ export default function Home() {
       </section>
       <section className={styles.aboutSection}>
         <div className={styles.aboutSectionWrapper}>
+          <h1 className={styles.sectionName}>Про мене</h1>
           <h1>Ірина Комарова</h1>
           <p>Я - практикуючий психолог з орієнтацією на тілесний індивідуальний процес клієнта, психолог-сексолог, гештальт-терапевт в процесі навчання. Викладач на курсах Академії сексології та сексуального виховання. Ведуча бранчів на тему сексуальності.</p>
         </div>
       </section>
       <section className={styles.offers}>
         <div className={styles.offersMainHeader}>
-          <span>ПОСЛУГИ</span>
+          <h1 className={styles.sectionName}>ПОСЛУГИ</h1>
           <div className={styles.offersHeaderDescription}>
             <span>Вартість терапії</span>
-            <span>Я надаю послуги для дорослих та сімейних пар.</span>
+            {/* <span>Я надаю послуги для дорослих та сімейних пар.</span> */}
           </div>
         </div>
         <div className={styles.offersCards}>
@@ -103,8 +105,8 @@ export default function Home() {
         </div>
       </section>
       <section className={styles.whereWeMakeCall}>
-      <h1>Контакти</h1>
       <div className={styles.whereWeMaCallWrapper}>
+         <h1 className={styles.sectionName}>Контакти</h1>
         <section>
           <p>Де проходять зустрічі?</p>
           <p>Онлайн сесії</p>
@@ -117,12 +119,13 @@ export default function Home() {
         </section> */}
       </div>
       </section>
-       <section className={styles.faq}>
-        <div className={styles.faqWrapepr}>
-          <h1>Часті запитання</h1>
-          <AccordionTransition />
-        </div>
-       </section>
+      <Form />
+      <section className={styles.faq}>
+      <div className={styles.faqWrapepr}>
+        <h1>Часті запитання</h1>
+        <AccordionTransition />
+      </div>
+      </section>
     </div>
   );
 }
