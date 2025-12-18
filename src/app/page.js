@@ -7,6 +7,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CheckIcon from '@mui/icons-material/Check';
+import Card from '../../components/Card/card'
 
 export default function Home() {
   return (
@@ -24,7 +25,7 @@ export default function Home() {
         <section className={styles.photoDescription}>
           <h1>Привіт, я Ірина Комарвоа, умію допомогти і підтримати</h1>
 
-          <List>
+        <List>
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -66,21 +67,56 @@ export default function Home() {
           <p>Я - практикуючий психолог з орієнтацією на тілесний індивідуальний процес клієнта, психолог-сексолог, гештальт-терапевт в процесі навчання. Викладач на курсах Академії сексології та сексуального виховання. Ведуча бранчів на тему сексуальності.</p>
         </div>
       </section>
-       <section className={styles.whereWeMakeCall}>
-        <h1>Контакти</h1>
-        <div className={styles.whereWeMaCallWrapper}>
-          <section>
-            <p>Де проходять зустрічі?</p>
-            <p>Онлайн сесії</p>
-            <p>Zoom; Google Meet; Telegram;Де Вам зручно!</p>
-            <button>Записатися</button>
-          </section>
-          {/* <section>
-            <p>Онлайн сесії</p>
-            <p>Zoom; Google Meet; Telegram;Де Вам зручно!</p>
-          </section> */}
+      <section className={styles.offers}>
+        <div className={styles.offersMainHeader}>
+          <span>ПОСЛУГИ</span>
+          <div className={styles.offersHeaderDescription}>
+            <span>Вартість терапії</span>
+            <span>Я надаю послуги для дорослих та сімейних пар.</span>
+          </div>
         </div>
-       </section>
+        <div className={styles.offersCards}>
+          <Card
+            name="Індивідуальна терапія" 
+            price="60хв /1900 грн" 
+            photo="644766939d13bf000c4a9cb6_optimized_1396.webp" 
+            checkName="Робота, що спрямована на отримання змін у житті клієнта:" 
+            items={
+              [
+                "Зустрічі (психотерапевтичні сесії) проходять один раз або двічі на тиждень",
+                "Безпечний протір, де можна зрозуміти свої почуття і знайти розуміння своїх бажань",
+                "Минуле ми не можемо змінити, але можемо знайти шлях як жити зараз"
+              ]}
+          />
+          <Card 
+            name="Парна терапія" 
+            price="80хв /3300 грн" 
+            photo="6447662c03c327000d49aa94_optimized_931.webp" 
+            checkName="Допомога у вирішенні проблем в житті пари:" 
+            items={
+              [
+                "Пошук шляхів подолання труднощів у взаємовідносинах.",
+                "З дорослішанням дітей і розставанням, правдою і брехнею, горем і втратою…",
+                "Простір, де можна побачити один одного face-to-face і далі вирішувати як з цим жити: разом чи уже на відстані.."
+            ]} 
+          />
+        </div>
+      </section>
+      <section className={styles.whereWeMakeCall}>
+      <h1>Контакти</h1>
+      <div className={styles.whereWeMaCallWrapper}>
+        <section>
+          <p>Де проходять зустрічі?</p>
+          <p>Онлайн сесії</p>
+          <p>Zoom; Google Meet; Telegram;Де Вам зручно!</p>
+          <button>Записатися</button>
+        </section>
+        {/* <section>
+          <p>Онлайн сесії</p>
+          <p>Zoom; Google Meet; Telegram;Де Вам зручно!</p>
+        </section> */}
+      </div>
+      </section>
        <section className={styles.faq}>
         <div className={styles.faqWrapepr}>
           <h1>Часті запитання</h1>

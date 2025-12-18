@@ -130,6 +130,48 @@
   background-color: var(--background) !important;
 }
 
+.offers {
+  width: 100%;
+  padding: 10px;
+}
+
+.offersCards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.offersMainHeader {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  color: var(--third-color);
+  align-items:flex-end;
+  max-width: 1300px;
+}
+
+.offersHeaderDescription {
+  display: flex;
+  gap: 100px;
+}
+
+@media (max-width: 950px) {
+  .offersCards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .offersMainHeader {
+    align-items: flex-start;
+  }
+
+  .offersHeaderDescription {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+}
+
 /* .main {
   display: flex;
   min-height: 100vh;
