@@ -34,9 +34,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       
       <body className={`${geistSans.variable} ${geistMono.variable} ${yesevaSans.variable}`}>
-        <header className={header}>
-          <HeaderComponent />
-        </header>
+        <HeaderComponent />
         {children}
       </body>
     </html>

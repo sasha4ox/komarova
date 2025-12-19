@@ -3,3 +3,40 @@
     justify-content: center;
     align-items: center;
 }
+
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    background: var(--second-color);
+    color: var(--third-color)
+}
+
+.headerWrapper {
+    width: 1400px;
+    display: flex;
+    align-items: center;
+    gap: 250px;
+}
+
+@media (max-width: 1400px) {
+  .headerWrapper {
+    width: 100%;
+    gap: 50px;
+  }
+}
+
+@media (max-width: 800px) {
+  .headerWrapper {
+    width: 100%;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+  .name {
+    font-size: 14px;
+  }
+}
+.name {
+    /* font-size: 30px; */
+}

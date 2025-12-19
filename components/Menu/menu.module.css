@@ -14,6 +14,7 @@
 @media (max-width: 950px) {
   .mobileMenu {
     display: flex;
+    justify-content: flex-end;
   }
 
   .menu {
@@ -21,3 +22,38 @@
   }
   
 }
+
+
+.hoverunderlineanimation {
+  display: inline-block;
+  position: relative;
+  font-size: 20px;
+}
+
+.hoverunderlineanimation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: var(--third-color);
+  transition: transform 0.25s ease-out;
+}
+.hoverunderlineanimation:hover {
+    color: var(--fouth-color);
+}
+
+.hoverunderlineanimation:hover::after {
+  transform: scaleX(1);
+}
+
+.hoverunderlineanimation::after {
+  transform-origin: bottom center;
+}
+
+.hoverunderlineanimation:hover::after {
+  transform-origin: bottom center;
+}
+

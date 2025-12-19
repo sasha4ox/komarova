@@ -35,7 +35,7 @@ export default function Menu() {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={(event) => scrollToContent(event, 'offers')}>
+            <ListItemButton onClick={(event) => scrollToContent(event, 'contacts')}>
               <ListItemIcon>
                 <PermContactCalendarIcon/>
               </ListItemIcon>
@@ -61,7 +61,7 @@ export default function Menu() {
   );
 
   return (
-    <div>
+    <>
         <div className={styles.mobileMenu}>
             {open ? <MenuOpenIcon />: <MenuIcon onClick={toggleDrawer(true)}/>}
             <Drawer open={open} onClose={toggleDrawer(false)}>
@@ -69,9 +69,9 @@ export default function Menu() {
             </Drawer>
         </div>
         <div className={styles.menu}>
-            <a onClick={(event) => scrollToContent(event, 'offers')}> Послуги</a>
-            <a onClick={(event) => scrollToContent(event, 'contacts')}> Контакти</a>
+            <a onClick={(event) => scrollToContent(event, 'offers')} className={styles.hoverunderlineanimation}> Послуги</a>
+            <a onClick={(event) => scrollToContent(event, 'contacts')} className={styles.hoverunderlineanimation}> Контакти</a>
         </div>
-    </div>
+    </>
   );
 }
