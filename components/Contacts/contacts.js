@@ -30,16 +30,19 @@ const style = {
 };
 
 export default function Contacts() {
-const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
     <div className={styles.whereWeMaCallWrapper}>
         <h1 className={styles.sectionName}>Контакти</h1>
         <section>
-          <p>Де проходять зустрічі?</p>
-          <p>Онлайн сесії</p>
-          <p>Zoom; Google Meet; Telegram;Де Вам зручно!</p>
+          <p className={styles.whereWeMaCallHeader}>Де проходять зустрічі?</p>
+          {/* <p>Онлайн сесії в:</p> */}
+          {/* <p className={styles.whereWeMaCallApps}>Zoom;<br/> Google Meet;<br/> Telegram;<br/>Де Вам зручно!</p> */}
+          <p>Онлайн-сесії проходять у зручному для Вас форматі. Ви можете обрати будь-яку платформу — Zoom, Google Meet або Telegram.
+Ми підлаштовуємося під Ваші можливості та вподобання, щоб консультація проходила комфортно, без зайвого стресу та з максимальною користю.
+Де Вам зручно — там і працюємо.</p>
           <button className={styles.whereWeMaCallButton} onClick={handleOpen}>Записатися</button>
         </section>
         {/* <section>

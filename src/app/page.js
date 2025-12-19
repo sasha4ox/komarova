@@ -70,7 +70,7 @@ export default function Home() {
           <p>Я - практикуючий психолог з орієнтацією на тілесний індивідуальний процес клієнта, психолог-сексолог, гештальт-терапевт в процесі навчання. Викладач на курсах Академії сексології та сексуального виховання. Ведуча бранчів на тему сексуальності.</p>
         </div>
       </section>
-      <section className={styles.offers}>
+      <section className={styles.offers} id="offers">
         <div className={styles.offersMainHeader}>
           <h1 className={styles.sectionName}>ПОСЛУГИ</h1>
           <div className={styles.offersHeaderDescription}>
@@ -105,7 +105,7 @@ export default function Home() {
           />
         </div>
       </section>
-      <section className={styles.whereWeMakeCall}>
+      <section className={styles.whereWeMakeCall} id="contacts">
       <Contacts/>
       </section>
       <Form />
