@@ -9,6 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import CheckIcon from '@mui/icons-material/Check';
 import Card from '../../components/Card/card'
 import Form from '../../components/Form/form'
+import Contacts from '../../components/Contacts/contacts'
 
 export default function Home() {
   return (
@@ -105,19 +106,7 @@ export default function Home() {
         </div>
       </section>
       <section className={styles.whereWeMakeCall}>
-      <div className={styles.whereWeMaCallWrapper}>
-         <h1 className={styles.sectionName}>Контакти</h1>
-        <section>
-          <p>Де проходять зустрічі?</p>
-          <p>Онлайн сесії</p>
-          <p>Zoom; Google Meet; Telegram;Де Вам зручно!</p>
-          <button>Записатися</button>
-        </section>
-        {/* <section>
-          <p>Онлайн сесії</p>
-          <p>Zoom; Google Meet; Telegram;Де Вам зручно!</p>
-        </section> */}
-      </div>
+      <Contacts/>
       </section>
       <Form />
       <section className={styles.faq}>

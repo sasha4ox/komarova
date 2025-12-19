@@ -5,6 +5,7 @@
     --text-second-color: #725e65;
     --second-color:#EAe5de;
     --third-color: #352228;
+    --fourth-color: #4d3d42;
 }
 
 @media (prefers-color-scheme: dark) {

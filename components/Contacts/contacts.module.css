@@ -1,0 +1,63 @@
+.whereWeMakeCall {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: var(--background);
+  padding: 50px 0;
+}
+
+.whereWeMaCallWrapper {
+    position: relative;
+  width: 1400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px;
+  font-size: 24px;
+}
+
+@media (max-width: 950px) {
+  .whereWeMakeCall {
+    padding: 10px;
+  }
+
+  .whereWeMaCallWrapper {
+    width: 100%;
+  }
+}
+
+.sectionName {
+  font-family: var(--font-yeseva-one);
+  font-size: 20px;
+  color: var(--text-second-color);
+  display: flex;
+  justify-content: flex-start;
+  align-self: flex-start;
+  text-transform: uppercase;
+  padding-bottom: 20px;
+}
+
+.modal {
+    position: 'absolute';
+    top: '50%';
+    left: '50%';
+    transform: 'translate(-50%, -50%)';
+    border: '2px solid #000';
+}
+
+.whereWeMaCallButton {
+    margin-top: 25px;
+    cursor: pointer;
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--fourth-color);
+    box-shadow: none;
+    border: none;
+    font-size: 20px;
+    width: 200px;
+    &:hover {
+        background: var(--third-color);
+    }
+}
