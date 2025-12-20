@@ -1,0 +1,94 @@
+.photo {
+  object-fit: cover;
+}
+
+.photoCover {
+  position: relative;
+  width: 475px;
+  height: 507px;
+}
+
+.descriptionCardPhotoCover {
+   position: relative;
+   width: 382px;
+   height: 210px;
+}
+
+.descriptionCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 0 10px;
+  font-size: 20px;
+  height: 330px;
+  border-radius: 15px;
+  width: 412px;
+  background-color: var(--second-color);
+}
+
+@media (max-width: 950px) {
+ .descriptionCard {
+    width: 320px;
+ }
+
+ .descriptionCardPhotoCover {
+    width: 310px;
+ }
+
+ .descriptionCardName {
+    text-align: center;
+ }
+}
+
+
+.whatWeDoOffersMainHeader {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 0;
+  color: var(--third-color);
+  width: 1400px;
+}
+
+@media (max-width: 950px) {
+  .whatWeDoOffersMainHeader {
+    width: 100%;
+  }
+}
+
+.whatWeDoSectionName {
+  font-family: var(--font-yeseva-one);
+  font-size: 20px;
+  color: var(--text-second-color);
+  display: flex;
+  justify-content: flex-start;
+  align-self: flex-start;
+  text-transform: uppercase;
+  padding-bottom: 20px;
+}
+
+.whatWeDoOffersHeaderDescription {
+  display: flex;
+  gap: 100px;
+  font-size: 24px;
+}
+
+@media (max-width: 950px) {
+  .offersCards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .whatWeDoOffersMainHeader {
+    align-items: flex-start;
+  }
+
+  .whatWeDoOffersHeaderDescription {
+    width: 100%;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+
+}

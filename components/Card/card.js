@@ -9,8 +9,6 @@ import ListItemText from "@mui/material/ListItemText";
 import CheckIcon from "@mui/icons-material/Check";
 
   export default function Card({ name, price, photo, checkName, items}) {
-    console.log("items", items)
-    console.log("photo", photo)
     return (
       <>
         <div className={styles.offerCard}>

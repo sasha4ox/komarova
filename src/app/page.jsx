@@ -10,6 +10,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import Card from '../../components/Card/card'
 import Form from '../../components/Form/form'
 import Contacts from '../../components/Contacts/contacts'
+import DescriptionCard from '../../components/DescriptionCard/descriptionCard'
 
 export default function Home() {
   return (
@@ -25,7 +26,7 @@ export default function Home() {
           />
         </section>
         <section className={styles.photoDescription}>
-          <h1>Привіт, я Ірина Комарвоа, умію допомогти і підтримати</h1>
+          <h1>Привіт, я Ірина Комарова, умію допомогти і підтримати</h1>
 
         <List>
           <ListItem disablePadding>
@@ -57,7 +58,7 @@ export default function Home() {
               <ListItemIcon>
                 <CheckIcon />
               </ListItemIcon>
-              <ListItemText primary='Підтримка в еміграціїї.' />
+              <ListItemText primary='Підтримка в еміграції.' />
             </ListItemButton>
           </ListItem>
         </List>
@@ -70,9 +71,43 @@ export default function Home() {
           <p>Я - практикуючий психолог з орієнтацією на тілесний індивідуальний процес клієнта, психолог-сексолог, гештальт-терапевт в процесі навчання. Викладач на курсах Академії сексології та сексуального виховання. Ведуча бранчів на тему сексуальності.</p>
         </div>
       </section>
+      <section className={styles.whatWeDo}>
+        <div className={styles.whatWeDoOffersMainHeader}>
+          <h1 className={styles.sectionName}>ПОСЛУГИ</h1>
+          <div className={styles.whatWeDoOffersHeaderDescription}>
+            <span>Приходьте на консультацію, якщо у вас:</span>
+          </div>
+        </div>
+        <div className={styles.descriptionCardWrapper}>
+          <DescriptionCard
+          photo="1.webp"
+          name="Тривожність"
+          />
+          <DescriptionCard
+            photo="2.webp"
+            name="Любовна залежність"
+          />
+          <DescriptionCard
+            photo="3.webp"
+            name="Труднощі в міжособистих взаєминах"
+          />
+          <DescriptionCard
+            photo="4.webp"
+            name="Невпевненість у собі"
+          />
+          <DescriptionCard
+            photo="5.webp"
+            name="Почуття самотності"
+          />
+          <DescriptionCard
+            photo="6.webp"
+            name="Бажання краще пізнати себе"
+          />
+        </div>
+      </section>
       <section className={styles.offers} id="offers">
         <div className={styles.offersMainHeader}>
-          <h1 className={styles.sectionName}>ПОСЛУГИ</h1>
+          <h1 className={styles.sectionName}>вартість</h1>
           <div className={styles.offersHeaderDescription}>
             <span>Вартість терапії</span>
             {/* <span>Я надаю послуги для дорослих та сімейних пар.</span> */}
@@ -87,7 +122,7 @@ export default function Home() {
             items={
               [
                 "Зустрічі (психотерапевтичні сесії) проходять один раз або двічі на тиждень",
-                "Безпечний протір, де можна зрозуміти свої почуття і знайти розуміння своїх бажань",
+                "Безпечний простір, де можна зрозуміти свої почуття і знайти розуміння своїх бажань",
                 "Минуле ми не можемо змінити, але можемо знайти шлях як жити зараз"
               ]}
           />
