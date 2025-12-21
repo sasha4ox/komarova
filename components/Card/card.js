@@ -22,7 +22,7 @@ import CheckIcon from "@mui/icons-material/Check";
                 src={`/${photo}`}
                 quality={100}
                 fill
-                alt="Picture of the author"
+                alt={`Фото для ${name}`}
               />
             </div>
             <div>

@@ -16,53 +16,70 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <section className={styles.photoWrapper}>
-        <section className={styles.photoCover}> 
+        <div className={styles.photoCover}> 
           <Image
             className={styles.photo}
             src="/6919a50384b3346f2a0cc6f1_optimized_737_c737x959-0x0.webp"
             quality={100}
             fill
-            alt="Picture of the author"
+            alt="Портрет психолога Ірини Комарової"
           />
-        </section>
-        <section className={styles.photoDescription}>
+        </div>
+        <div className={styles.photoDescription}>
           <h1>Привіт, я Ірина Комарова, умію допомогти і підтримати</h1>
-
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <CheckIcon />
-              </ListItemIcon>
-              <ListItemText primary='Допомагаю усвідомити себе, свої "так" і "ні" - у житті, в стосунках, в тілі..' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <CheckIcon />
-              </ListItemIcon>
-              <ListItemText primary='Зменшити тривожність, звільнитися від старих програм і жити в гармонії з собою і світом.' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <CheckIcon />
-              </ListItemIcon>
-              <ListItemText primary='Працюю з парами та людьми в особистих кризах.' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <CheckIcon />
-              </ListItemIcon>
-              <ListItemText primary='Підтримка в еміграції.' />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        </section>
+          <ul className={styles.phtoDescriptionList}>
+            <li>
+              <CheckIcon />
+              <span>Допомагаю усвідомити себе, свої "так" і "ні" - у житті, в стосунках, в тілі..</span>
+            </li>
+             <li>
+              <CheckIcon />
+              <span>Зменшити тривожність, звільнитися від старих програм і жити в гармонії з собою і світом.</span>
+            </li>
+             <li>
+              <CheckIcon />
+              <span>Працюю з парами та людьми в особистих кризах.</span>
+            </li>
+             <li>
+              <CheckIcon />
+              <span>Підтримка в еміграції.</span>
+            </li>
+          </ul>
+          {/* <List>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <CheckIcon />
+                </ListItemIcon>
+                <ListItemText primary='Допомагаю усвідомити себе, свої "так" і "ні" - у житті, в стосунках, в тілі..' />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <CheckIcon />
+                </ListItemIcon>
+                <ListItemText primary='Зменшити тривожність, звільнитися від старих програм і жити в гармонії з собою і світом.' />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <CheckIcon />
+                </ListItemIcon>
+                <ListItemText primary='Працюю з парами та людьми в особистих кризах.' />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <CheckIcon />
+                </ListItemIcon>
+                <ListItemText primary='Підтримка в еміграції.' />
+              </ListItemButton>
+            </ListItem>
+          </List> */}
+        </div>
       </section>
       <section className={styles.aboutSection}>
         <div className={styles.aboutSectionWrapper}>
@@ -73,7 +90,7 @@ export default function Home() {
       </section>
       <section className={styles.whatWeDo}>
         <div className={styles.whatWeDoOffersMainHeader}>
-          <h1 className={styles.sectionName}>ПОСЛУГИ</h1>
+          <h2 className={styles.whatWeDoSectionName}>ПОСЛУГИ</h2>
           <div className={styles.whatWeDoOffersHeaderDescription}>
             <span>Приходьте на консультацію, якщо у вас:</span>
           </div>
@@ -107,7 +124,7 @@ export default function Home() {
       </section>
       <section className={styles.offers} id="offers">
         <div className={styles.offersMainHeader}>
-          <h1 className={styles.sectionName}>вартість</h1>
+          <h2 className={styles.sectionName}>вартість</h2>
           <div className={styles.offersHeaderDescription}>
             <span>Вартість терапії</span>
             {/* <span>Я надаю послуги для дорослих та сімейних пар.</span> */}
@@ -141,14 +158,14 @@ export default function Home() {
         </div>
       </section>
       <section className={styles.whereWeMakeCall} id="contacts">
-      <Contacts/>
+        <Contacts/>
       </section>
-      <Form />
+        <Form />
       <section className={styles.faq}>
-      <div className={styles.faqWrapepr}>
-        <h1>Часті запитання</h1>
-        <AccordionTransition />
-      </div>
+        <div className={styles.faqWrapepr}>
+          <h1>Часті запитання</h1>
+          <AccordionTransition />
+        </div>
       </section>
     </div>
   );
