@@ -1,7 +1,5 @@
 import { Geist, Geist_Mono, Yeseva_One } from "next/font/google";
 import "./globals.css";
-import { header } from "./../../styles/header.module.css"
-import Link from 'next/link'
 import HeaderComponent from '../../components/header'
 
 const geistSans = Geist({
@@ -14,7 +12,6 @@ const yesevaSans = Yeseva_One({
   weight: "400",
   subsets: ["cyrillic"],
 });
-
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -57,9 +54,6 @@ export const metadata = {
     })
   }
 };
-
-
-
 
 export default function RootLayout({ children }) {
   return (

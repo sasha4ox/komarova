@@ -1,9 +1,10 @@
 'use client'
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import FormControl, { useFormControl } from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import Alert from '@mui/material/Alert';
 import { useForm, Controller } from 'react-hook-form';
 import { MuiTelInput } from 'mui-tel-input'
 import styles from "./form.module.css";
@@ -38,8 +39,8 @@ const conriesToShow = [
                     ]
 
 export default function Form() {
-  const { control, handleSubmit } = useForm({
-   
+  const { control, handleSubmit, setError, formState: { isSubmitting } } = useForm({
+  
   defaultValues: {
     firstName: "",
     phone: "",
@@ -47,7 +48,25 @@ export default function Form() {
   },
   });
 
-  const onSubmit = (data) => console.log(data);
+  const [isEmailSent, setIsEmailSent] = useState(false);
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'post',
+        headers: {
+        'Content-Type': 'application/json',
+          },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        setIsEmailSent(true)
+      }
+    } catch (error) {
+        setIsEmailSent(false)
+        setError("email", { type: "custom", message: "Нажаль, ми не змогли відправити запит!" })
+    }
+
+  } 
 
   return (
     <section className={styles.formWrapper}>
@@ -95,7 +114,13 @@ export default function Form() {
         <Controller
           name="email"
           control={control}
-          rules={{ required: "Це поле обов'язкове" }}
+          rules={{
+          required: "Це поле обов'язкове",
+          pattern: {
+            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            message: "Введіть коректну email адресу",
+          },
+        }}
           render={({ field, fieldState: { error } }) => (
               <TextField
                   {...field}
@@ -106,7 +131,10 @@ export default function Form() {
               />
           )}
         />
-        <button type="submit" className={styles.send}>Надіслати запит</button>
+        {isEmailSent && <Alert severity="success" sx={{ mb: 2 }}>
+    ✅    Запит успішно надіслано! Ми звʼяжемося з вами найближчим часом.
+        </Alert>}
+        <button type="submit" className={styles.send}>{isSubmitting ? "Надсилаю запит" : "Надіслати запит"}</button>
       </form>
     </section>
   );

@@ -1,11 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import AccordionTransition from '../../components/accordion'
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import AccordionTransition from '../../components/accordion';
 import CheckIcon from '@mui/icons-material/Check';
 import Card from '../../components/Card/card'
 import Form from '../../components/Form/form'
@@ -19,9 +14,10 @@ export default function Home() {
         <div className={styles.photoCover}> 
           <Image
             className={styles.photo}
-            src="/6919a50384b3346f2a0cc6f1_optimized_737_c737x959-0x0.webp"
+            src="/photo_2025-12-26_00-55-17.webp"
             quality={100}
             fill
+            loading="lazy"
             alt="Портрет психолога Ірини Комарової"
           />
         </div>
