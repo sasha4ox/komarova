@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import Accordion, {
-  AccordionSlots,
   accordionClasses,
 } from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -11,7 +10,6 @@ import AccordionDetails, {
 } from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Fade from '@mui/material/Fade';
 import styles from './../src/app/page.module.css'
 
 export default function AccordionTransition() {
@@ -50,7 +48,7 @@ export default function AccordionTransition() {
         ]}
       >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel1-content"
           id="panel1-header"
         >

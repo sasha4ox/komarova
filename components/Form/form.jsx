@@ -72,13 +72,13 @@ export default function Form() {
     <section className={styles.formWrapper}>
       <span className={styles.formHeader}>Якщо у вас залишились питання чи запити щодо Вашої проблеми з психічним здоров’ям, будь ласка, не соромтеся зв’язатися зі мною.</span>
       <div className={styles.links}>
-        <a href="https://t.me/KonungFox" target="_blank"  className={styles.link}>
+        <a href="https://t.me/KonungFox" target="_blank"  className={styles.link} aria-label="Приєднуйтесь до Telegram">
           <TelegramIcon fontSize='large'/>
         </a>
-        <a className={styles.link} target="_blank">
+        <a className={styles.link} href="https://www.facebook.com/" target="_blank" aria-label="Приєднуйтесь до Facebook">
           <FacebookIcon fontSize='large'/>
         </a>
-        <a className={styles.link} target="_blank">
+        <a className={styles.link} href="https://www.instagram.com/" target="_blank" aria-label="Приєднуйтесь до Instagram">
           <InstagramIcon fontSize='large'/>
         </a>
       </div>

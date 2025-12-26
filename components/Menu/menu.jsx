@@ -11,6 +11,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+import QuizIcon from '@mui/icons-material/Quiz';
+import PaymentsIcon from '@mui/icons-material/Payments';
 import { scrollToContent } from '../../helpers/scrollTo'
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
@@ -29,7 +31,7 @@ export default function Menu() {
           <ListItem disablePadding>
             <ListItemButton onClick={(event) => scrollToContent(event, 'offers')}>
               <ListItemIcon>
-                <MedicalInformationIcon/>
+                <PermContactCalendarIcon/>
               </ListItemIcon>
               <ListItemText primary={'Послуги'} />
             </ListItemButton>
@@ -42,7 +44,22 @@ export default function Menu() {
               <ListItemText primary={'Контакти'} />
             </ListItemButton>
           </ListItem>
-          
+          <ListItem disablePadding>
+            <ListItemButton onClick={(event) => scrollToContent(event, 'price')}>
+              <ListItemIcon>
+                <PaymentsIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Ціни'} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={(event) => scrollToContent(event, 'faq')}>
+              <ListItemIcon>
+                <QuizIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Часті питання'} />
+            </ListItemButton>
+          </ListItem>
       </List>
       <Divider />
       {/* <List>
@@ -69,8 +86,10 @@ export default function Menu() {
             </Drawer>
         </div>
         <div className={styles.menu}>
-            <a onClick={(event) => scrollToContent(event, 'offers')} className={styles.hoverunderlineanimation}> Послуги</a>
-            <a onClick={(event) => scrollToContent(event, 'contacts')} className={styles.hoverunderlineanimation}> Контакти</a>
+            <a onClick={(event) => scrollToContent(event, 'offers')} className={styles.hoverunderlineanimation} href='#ofers'> Послуги</a>
+            <a onClick={(event) => scrollToContent(event, 'contacts')} className={styles.hoverunderlineanimation} href='#Contats'> Контакти</a>
+            <a onClick={(event) => scrollToContent(event, 'price')} className={styles.hoverunderlineanimation} href='#price'> Ціни</a>
+            <a onClick={(event) => scrollToContent(event, 'faq')} className={styles.hoverunderlineanimation} href='#faq'> Часті питання</a>
         </div>
     </>
   );

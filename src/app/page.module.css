@@ -68,9 +68,10 @@
 @media (max-width: 950px) {
   .photoWrapper {
     flex-direction: column;
-    max-width: 300px;
+    align-items: center;
+    width: 100%;
     gap: 10px;
-    padding-top: 10px;
+    padding: 10px;
   }
   
   .photoCover {
@@ -140,14 +141,37 @@
   }
 }
 
+/* .faq {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
 .faqWrapepr {
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    padding: 20px 0;
+  }
 }
 
 .accordion {
   background-color: var(--second-color) !important;
   margin-bottom: 0px !important;
   margin-top: 0px !important;
+
+  button {
+     background-color: var(--second-color) !important;
+     span {
+      color: var(--third-color);
+      font-size: 18px;
+      font-weight: 600;
+     }
+     
+  }
 }
 .questions {
   background-color: var(--background) !important;

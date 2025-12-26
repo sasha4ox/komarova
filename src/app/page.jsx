@@ -9,7 +9,7 @@ import DescriptionCard from '../../components/DescriptionCard/descriptionCard'
 
 export default function Home() {
   return (
-    <div className={styles.page}>
+    <main className={styles.page}>
       <section className={styles.photoWrapper}>
         <div className={styles.photoCover}> 
           <Image
@@ -26,19 +26,19 @@ export default function Home() {
           <ul className={styles.phtoDescriptionList}>
             <li>
               <CheckIcon />
-              <span>Допомагаю усвідомити себе, свої "так" і "ні" - у житті, в стосунках, в тілі..</span>
+              <span>Підтримую в усвідомленні себе, своїх внутрішніх дозволів і заборон у повсякденному житті, взаєминах і тілесних відчуттях.</span>
             </li>
              <li>
               <CheckIcon />
-              <span>Зменшити тривожність, звільнитися від старих програм і жити в гармонії з собою і світом.</span>
+              <span>Навчитися проживати життя без постійної тривоги, відмовитися від обмежувальних програм і бути в балансі з собою та світом.</span>
             </li>
              <li>
               <CheckIcon />
-              <span>Працюю з парами та людьми в особистих кризах.</span>
+              <span>Підтримую пари та індивідуальних клієнтів у періоди особистих викликів і змін.</span>
             </li>
              <li>
               <CheckIcon />
-              <span>Підтримка в еміграції.</span>
+              <span>Супровід і підтримка під час переїзду та життя за кордоном.</span>
             </li>
           </ul>
           {/* <List>
@@ -81,10 +81,10 @@ export default function Home() {
         <div className={styles.aboutSectionWrapper}>
           <h1 className={styles.sectionName}>Про мене</h1>
           <h1>Ірина Комарова</h1>
-          <p>Я - практикуючий психолог з орієнтацією на тілесний індивідуальний процес клієнта, психолог-сексолог, гештальт-терапевт в процесі навчання. Викладач на курсах Академії сексології та сексуального виховання. Ведуча бранчів на тему сексуальності.</p>
+          <p>Я — практикуючий психолог з орієнтацією на тілесний індивідуальний процес клієнта. Працюю з емоційними станами, внутрішніми конфліктами та життєвими кризами, допомагаю краще усвідомити себе, свої потреби й межі. Наразі навчаюся гештальт-терапії, що дозволяє поглиблювати роботу з переживаннями та досвідом «тут і тепер».</p>
         </div>
       </section>
-      <section className={styles.whatWeDo}>
+      <section className={styles.whatWeDo} id="offers">
         <div className={styles.whatWeDoOffersMainHeader}>
           <h2 className={styles.whatWeDoSectionName}>ПОСЛУГИ</h2>
           <div className={styles.whatWeDoOffersHeaderDescription}>
@@ -118,7 +118,7 @@ export default function Home() {
           />
         </div>
       </section>
-      <section className={styles.offers} id="offers">
+      <section className={styles.offers} id="price">
         <div className={styles.offersMainHeader}>
           <h2 className={styles.sectionName}>вартість</h2>
           <div className={styles.offersHeaderDescription}>
@@ -134,9 +134,9 @@ export default function Home() {
             checkName="Робота, що спрямована на отримання змін у житті клієнта:" 
             items={
               [
-                "Зустрічі (психотерапевтичні сесії) проходять один раз або двічі на тиждень",
-                "Безпечний простір, де можна зрозуміти свої почуття і знайти розуміння своїх бажань",
-                "Минуле ми не можемо змінити, але можемо знайти шлях як жити зараз"
+                "Сесії проводяться один або два рази на тиждень, залежно від потреб клієнта.",
+                "Місце, де можна вільно дослідити свої почуття та краще зрозуміти власні потреби.",
+                "Ми не здатні переписати минуле, проте можемо обрати, як жити тут і зараз."
               ]}
           />
           <Card 
@@ -146,9 +146,9 @@ export default function Home() {
             checkName="Допомога у вирішенні проблем в житті пари:" 
             items={
               [
-                "Пошук шляхів подолання труднощів у взаємовідносинах.",
-                "З дорослішанням дітей і розставанням, правдою і брехнею, горем і втратою…",
-                "Простір, де можна побачити один одного face-to-face і далі вирішувати як з цим жити: разом чи уже на відстані.."
+                "Пошук способів подолати труднощі у стосунках.",
+                "З дорослішанням дітей, переживанням втрат, правди і брехні.",
+                "Місце, де можна побачити один одного та вирішити, як далі будувати життя — разом або на відстані."
             ]} 
           />
         </div>
@@ -157,12 +157,12 @@ export default function Home() {
         <Contacts/>
       </section>
         <Form />
-      <section className={styles.faq}>
+      <section className={styles.faq} id="faq">
         <div className={styles.faqWrapepr}>
-          <h1>Часті запитання</h1>
+          <h2>Часті запитання</h2>
           <AccordionTransition />
         </div>
-      </section>
-    </div>
+      </section> 
+    </main>
   );
 }
