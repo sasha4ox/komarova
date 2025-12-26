@@ -130,7 +130,7 @@ export default function Home() {
           <Card
             name="Індивідуальна терапія" 
             price="60хв /1900 грн" 
-            photo="644766939d13bf000c4a9cb6_optimized_1396.webp" 
+            photo="Lechenie-psihologicheskogo-besplodiya-800x532.webp" 
             checkName="Робота, що спрямована на отримання змін у житті клієнта:" 
             items={
               [
@@ -142,7 +142,7 @@ export default function Home() {
           <Card 
             name="Парна терапія" 
             price="80хв /3300 грн" 
-            photo="6447662c03c327000d49aa94_optimized_931.webp" 
+            photo="bipolar-disorder2.webp" 
             checkName="Допомога у вирішенні проблем в житті пари:" 
             items={
               [

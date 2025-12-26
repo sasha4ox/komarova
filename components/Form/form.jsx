@@ -11,6 +11,7 @@ import styles from "./form.module.css";
 import TelegramIcon from '@mui/icons-material/Telegram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
+
 const conriesToShow = [
                     // EU
                     'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT',
@@ -70,7 +71,7 @@ export default function Form() {
 
   return (
     <section className={styles.formWrapper}>
-      <span className={styles.formHeader}>Якщо у вас залишились питання чи запити щодо Вашої проблеми з психічним здоров’ям, будь ласка, не соромтеся зв’язатися зі мною.</span>
+      <span className={styles.formHeader}>Якщо у вас залишилися питання або потреба обговорити вашу проблему з психічним здоров’ям, будь ласка, не вагайтеся звернутися до мене.</span>
       <div className={styles.links}>
         <a href="https://t.me/KonungFox" target="_blank"  className={styles.link} aria-label="Приєднуйтесь до Telegram">
           <TelegramIcon fontSize='large'/>
