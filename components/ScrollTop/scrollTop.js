@@ -39,7 +39,7 @@ export default function ScrollTop() {
       onClick={scrollToTop}
       className={styles.button}
     >
-      <ArrowCircleUpIcon/>
+      <ArrowCircleUpIcon sx={{ color: 'white' }}/>
     </button>}
   </>
   )
