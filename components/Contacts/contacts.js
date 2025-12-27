@@ -54,7 +54,7 @@ export default function Contacts() {
             <Modal
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="modal-modal-title"
+                aria-labelledby="modal-modal-title-card"
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style} >

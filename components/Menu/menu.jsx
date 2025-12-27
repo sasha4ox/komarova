@@ -49,7 +49,7 @@ export default function Menu() {
               <ListItemIcon>
                 <PaymentsIcon />
               </ListItemIcon>
-              <ListItemText primary={'Ціни'} />
+              <ListItemText primary={'Вартість'} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
@@ -62,18 +62,6 @@ export default function Menu() {
           </ListItem>
       </List>
       <Divider />
-      {/* <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <button className={styles.whereWeMaCallButton} onClick={handleOpen}></button>
-              </ListItemIcon>
-              <ListItemText primary={'Записатися'} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List> */}
     </Box>
   );
 
@@ -88,7 +76,7 @@ export default function Menu() {
         <div className={styles.menu}>
             <a onClick={(event) => scrollToContent(event, 'offers')} className={styles.hoverunderlineanimation} href='#ofers'> Послуги</a>
             <a onClick={(event) => scrollToContent(event, 'contacts')} className={styles.hoverunderlineanimation} href='#Contats'> Контакти</a>
-            <a onClick={(event) => scrollToContent(event, 'price')} className={styles.hoverunderlineanimation} href='#price'> Ціни</a>
+            <a onClick={(event) => scrollToContent(event, 'price')} className={styles.hoverunderlineanimation} href='#price'> Вартість</a>
             <a onClick={(event) => scrollToContent(event, 'faq')} className={styles.hoverunderlineanimation} href='#faq'> Часті питання</a>
         </div>
     </>

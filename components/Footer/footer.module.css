@@ -14,3 +14,18 @@
     padding: 20px 0;
   }
 }
+
+.foxWrapper {
+  background: #000;
+  width: 100%;
+  color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.foxLink {
+  display: flex;
+  align-items: center;
+}

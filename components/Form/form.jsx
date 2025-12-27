@@ -1,9 +1,6 @@
 'use client'
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import FormControl, { useFormControl } from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import Alert from '@mui/material/Alert';
 import { useForm, Controller } from 'react-hook-form';
 import { MuiTelInput } from 'mui-tel-input'
@@ -91,7 +88,7 @@ export default function Form() {
           render={({ field, fieldState: { error } }) => (
               <TextField
                   {...field}
-                  label="Ваше ім'я або псевдоним"
+                  label="Ваше ім'я"
                   variant="outlined"
                   error={!!error}
                   helperText={error ? error.message : null}

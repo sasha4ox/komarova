@@ -6,6 +6,7 @@ import Card from '../../components/Card/card'
 import Form from '../../components/Form/form'
 import Contacts from '../../components/Contacts/contacts'
 import DescriptionCard from '../../components/DescriptionCard/descriptionCard'
+import ScrollTop from '../../components/ScrollTop/scrollTop'
 
 export default function Home() {
   return (
@@ -41,40 +42,6 @@ export default function Home() {
               <span>Супровід і підтримка під час переїзду та життя за кордоном.</span>
             </li>
           </ul>
-          {/* <List>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText primary='Допомагаю усвідомити себе, свої "так" і "ні" - у житті, в стосунках, в тілі..' />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText primary='Зменшити тривожність, звільнитися від старих програм і жити в гармонії з собою і світом.' />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText primary='Працюю з парами та людьми в особистих кризах.' />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText primary='Підтримка в еміграції.' />
-              </ListItemButton>
-            </ListItem>
-          </List> */}
         </div>
       </section>
       <section className={styles.aboutSection}>
@@ -123,7 +90,6 @@ export default function Home() {
           <h2 className={styles.sectionName}>вартість</h2>
           <div className={styles.offersHeaderDescription}>
             <span>Вартість терапії</span>
-            {/* <span>Я надаю послуги для дорослих та сімейних пар.</span> */}
           </div>
         </div>
         <div className={styles.offersCards}>
@@ -162,7 +128,8 @@ export default function Home() {
           <h2>Часті запитання</h2>
           <AccordionTransition />
         </div>
-      </section> 
+      </section>
+      <ScrollTop />
     </main>
   );
 }
