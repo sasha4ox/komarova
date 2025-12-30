@@ -68,6 +68,7 @@ export default function Form() {
 
   return (
     <section className={styles.formWrapper}>
+      <h2>Записатись на Консультацію</h2>
       <span className={styles.formHeader}>Якщо у вас залишилися питання або потреба обговорити вашу проблему з психічним здоров’ям, будь ласка, не вагайтеся звернутися до мене.</span>
       <div className={styles.links}>
         <a href="https://t.me/KonungFox" target="_blank"  className={styles.link} aria-label="Приєднуйтесь до Telegram">

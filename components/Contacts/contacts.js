@@ -1,4 +1,5 @@
 'use client'
+import Typewriter from 'typewriter-effect';
 import { useMemo, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import FormControl, { useFormControl } from '@mui/material/FormControl';

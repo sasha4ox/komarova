@@ -32,6 +32,13 @@
     cursor: pointer;
 }
 
+.formWrapper {
+    h2 {
+        padding-bottom: 25px;
+        font-size: 22px;
+    }
+}
+
 .send {
     cursor: pointer;
     padding: 20px;

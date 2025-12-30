@@ -1,0 +1,36 @@
+.typeWriterWrapper {
+    /* background-color: var(--second-color); */
+    font-family: var(--font-great-vibes);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    font-size: 80px;
+    height: 100vh;
+}
+
+.typewriterButton {
+    margin-top: 25px;
+    cursor: pointer;
+    padding: 20px 10px;
+    border-radius: 10px;
+    background: var(--fourth-color);
+    box-shadow: none;
+    border: none;
+    font-size: 20px;
+    width: 320px;
+    color: aliceblue;
+    &:hover {
+        background: var(--third-color);
+    }
+}
+
+@media (max-width: 950px) {
+  .typeWriterWrapper {
+    font-size: 54px;
+    padding: 0 20px;
+  }
+
+}

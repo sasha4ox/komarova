@@ -118,8 +118,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: var(--background);
+  background: var(--second-color);
   padding: 50px 0;
+  margin-bottom: 50px;
 }
 
 .whereWeMaCallWrapper {

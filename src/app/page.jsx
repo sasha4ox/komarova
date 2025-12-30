@@ -2,11 +2,12 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import AccordionTransition from '../../components/accordion';
 import CheckIcon from '@mui/icons-material/Check';
-import Card from '../../components/Card/card'
-import Form from '../../components/Form/form'
-import Contacts from '../../components/Contacts/contacts'
-import DescriptionCard from '../../components/DescriptionCard/descriptionCard'
-import ScrollTop from '../../components/ScrollTop/scrollTop'
+import Card from '../../components/Card/card';
+import Form from '../../components/Form/form';
+import Contacts from '../../components/Contacts/contacts';
+import DescriptionCard from '../../components/DescriptionCard/descriptionCard';
+import ScrollTop from '../../components/ScrollTop/scrollTop';
+import TypeWriter from '../../components/Typewriter/typewriter';
 
 export default function Home() {
   return (
@@ -119,6 +120,7 @@ export default function Home() {
           />
         </div>
       </section>
+      <TypeWriter/>
       <section className={styles.whereWeMakeCall} id="contacts">
         <Contacts/>
       </section>
