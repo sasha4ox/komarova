@@ -8,23 +8,14 @@ function useScrollDirection(): Boolean {
     if (typeof window === 'undefined') return;
 
     const handleScroll = () => {
-      // const currentScrollY = window.scrollY;
-      // console.log('currentScrollY,', currentScrollY)
-      // console.log('scrollY,', scrollY)
-      // if (currentScrollY > scrollY) {
-      //   setIsScrollToBottom(true);
-      // } else if (currentScrollY < scrollY) {
-      //   setIsScrollToBottom(false);
-      // }
-      // setScrollY(currentScrollY);
-      setScrollY(window.scrollY);
-      console.log('document.body.scrollTop', window.scrollY )
-       console.log('window.scrollY > 150', window.scrollY > 150 )
-      if (window.scrollY > 150) {
-        console.log('qqHERES')
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > scrollY && currentScrollY-100 > scrollY) {
         setIsScrollToBottom(true);
-      } else {
-        setIsScrollToBottom(false)
+        setScrollY(currentScrollY);
+      } else if (currentScrollY < scrollY && currentScrollY+100 < scrollY) {
+        setIsScrollToBottom(false);
+        setScrollY(currentScrollY);
       }
     };
 

@@ -30,9 +30,6 @@ export default function ScrollTop() {
     return () => window.removeEventListener('scroll', updatePosition);
   }, []);
 
-
-  console.log('scrollPosition', scrollPosition)
-
   return (
   <>
   {scrollPosition >= WHEN_SHOW_BUTTON &&  <button 
