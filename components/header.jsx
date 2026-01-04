@@ -1,12 +1,19 @@
   'use client'
 
-  import Link from 'next/link'
-  import styles from './header.module.css'
-  import Menu from '../components/Menu/menu'
+  import Link from 'next/link';
+  import classNames from 'classnames';
+  import styles from './header.module.css';
+  import Menu from '../components/Menu/menu';
+  import useScrollDirection from '../helpers/scrollDirection';
 
   export default function HeaderComponent() {
+    const isScrollToBottom = useScrollDirection();
+    console.log('isScrollToBottom',isScrollToBottom)
     return (
-     <header className={styles.header}>
+     <header className= {classNames({
+      [styles.header]: !isScrollToBottom,
+      [styles.hideHeader]: isScrollToBottom,
+    })}>
         <div className={styles.headerWrapper}>
           <Link className={styles.name} href='/' aria-label='Logo for Iryna Komarova'>
             <h1>Ірина Комарова</h1>
