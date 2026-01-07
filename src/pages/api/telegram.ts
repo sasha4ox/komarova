@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-const BOT_TOKEN = '8202816891:AAHfoB0CO4xKHHBeNHzINzm31jHtJGtt234';
-const CHAT_ID = '-5253487144';
+const BOT_TOKEN = process.env.BOT_TOKEN;
+const CHAT_ID = process.env.CHAT_ID;
 
 export default async function TelegramHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
