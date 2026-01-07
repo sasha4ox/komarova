@@ -1,20 +1,10 @@
 'use client'
-import Typewriter from 'typewriter-effect';
 import { useMemo, useState } from 'react';
-import TextField from '@mui/material/TextField';
-import FormControl, { useFormControl } from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import { useForm, Controller } from 'react-hook-form';
-import { MuiTelInput } from 'mui-tel-input'
 import styles from "./contacts.module.css";
-import TelegramIcon from '@mui/icons-material/Telegram';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Form from '../Form/form'
-import { borderRadius, width } from '@mui/system';
+import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
   position: 'absolute',
@@ -59,6 +49,7 @@ export default function Contacts() {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style} >
+                  <CloseIcon onClick={handleClose} style={{position: 'absolute', right: '20px', top: '20px', cursor: 'pointer'}}/>
                     <Form/>
                 </Box>
             </Modal>

@@ -5,7 +5,7 @@ import styles from './typewriter.module.css'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Form from '../Form/form'
-
+import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
   position: 'absolute',
@@ -25,8 +25,6 @@ export default function TypeWriter() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
-
 
   return (
     <section className={styles.typeWriterWrapper}>
@@ -65,6 +63,7 @@ export default function TypeWriter() {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style} >
+                  <CloseIcon onClick={handleClose} style={{position: 'absolute', right: '20px', top: '20px', cursor: 'pointer'}}/>
                     <Form/>
                 </Box>
             </Modal>

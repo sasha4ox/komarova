@@ -6,6 +6,7 @@ import styles from "./descriptionCard.module.css";
 import Modal from '@mui/material/Modal';
 import Form from '../Form/form';
 import Box from '@mui/material/Box';
+import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
   position: 'absolute',
@@ -49,6 +50,7 @@ export default function DescriptionCard({ name, photo}) {
               aria-describedby="modal-modal-description"
           >
               <Box sx={style} >
+                <CloseIcon onClick={handleModal} style={{position: 'absolute', right: '20px', top: '20px', cursor: 'pointer'}}/>
                   <Form/>
               </Box>
           </Modal>

@@ -49,7 +49,7 @@ export default function Form() {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('/api/telegram', {
         method: 'post',
         headers: {
         'Content-Type': 'application/json',
@@ -124,6 +124,20 @@ export default function Form() {
               <TextField
                   {...field}
                   label="Ваш e-mail"
+                  variant="outlined"
+                  error={!!error}
+                  helperText={error ? error.message : null}
+              />
+          )}
+        />
+         <Controller
+          name="text"
+          control={control}
+          render={({ field, fieldState: { error } }) => (
+              <TextField
+                  {...field}
+                  label="Повідомлення для мене"
+                  multiline 
                   variant="outlined"
                   error={!!error}
                   helperText={error ? error.message : null}
