@@ -5,8 +5,6 @@ const CHAT_ID = process.env.CHAT_ID;
 export default async function TelegramHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
   const body = req.body;
-
-
   const thirdPartyResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: {
@@ -22,12 +20,13 @@ export default async function TelegramHandler(req: NextApiRequest, res: NextApiR
           `
       }),
     });
-    
-    if (thirdPartyResponse.status === 200) {
-       res.send({ ok: true });
-    } else {
-      res.status(400).json({ status: 'BAD REQUEST', error: thirdPartyResponse });
-    }
+  const response = await thirdPartyResponse.json();
+
+  if (thirdPartyResponse.status === 200) {
+      res.send({ ok: true });
+  } else {
+    res.status(400).json({ status: 'BAD REQUEST', error: response });
+  }
     
   } catch(error) {
     res.status(500).json({ status: 'BAD REQUEST' });
