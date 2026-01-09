@@ -8,7 +8,7 @@
 
   export default function HeaderComponent() {
     const isScrollToBottom = useScrollDirection();
-    console.log('isScrollToBottom',isScrollToBottom)
+    
     return (
      <header className= {classNames({
       [styles.header]: !isScrollToBottom,
