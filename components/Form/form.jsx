@@ -137,7 +137,8 @@ export default function Form() {
           render={({ field, fieldState: { error } }) => (
               <TextField
                   {...field}
-                  label="Повідомлення для мене"
+                  label="Ваш запит"
+                  placeholder="Напишіть свій запит"
                   multiline 
                   variant="outlined"
                   error={!!error}
