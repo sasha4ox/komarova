@@ -57,6 +57,7 @@ export default function Form() {
         body: JSON.stringify(data),
       });
       if (response.ok) {
+        gtag_report_conversion()
         setIsEmailSent(true)
       }
     } catch (error) {

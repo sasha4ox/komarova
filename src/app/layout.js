@@ -85,6 +85,28 @@ export default function RootLayout({ children }) {
                       `,
                       }}
       />
+      <Script
+        id='google-analytics-report-conversion'
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
+                      __html: `
+                       function gtag_report_conversion(url) {
+                        var callback = function () {
+                          if (typeof(url) != 'undefined') {
+                            window.location = url;
+                          }
+                        };
+                        gtag('event', 'conversion', {
+                            'send_to': 'AW-778100487/MoN6CJDR1uAbEIe-g_MC',
+                            'value': 1.0,
+                            'currency': 'UAH',
+                            'event_callback': callback
+                        });
+                        return false;
+                      }
+                      `,
+                      }}
+      />
       <body className={`${geistSans.variable} ${geistMono.variable} ${yesevaSans.variable} ${greatVibes.variable}`}>
         <HeaderComponent />
         {children}
