@@ -70,6 +70,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <meta name="google-site-verification" content="TR--N6OV8NJ0SCNRunEeDhPJgWKWA1IDzB5zCSIJJt8" />
       {/* <!-- Google tag (gtag.js) -->  */}
       <Script strategy="afterInteractive" async src="https://www.googletagmanager.com/gtag/js?id=AW-778100487"></Script>
       <Script
