@@ -37,14 +37,15 @@ const style = {
 export default function Menu() {
   const [open, setOpen] = React.useState(false);
   const modalRef = useRef(null);
-  const toggleDrawer = (newOpen) => () => {
+  const toggleDrawer = () => {
     console.log("toggleDrawer", open)
-    setOpen(newOpen);
+    setOpen(!open);
   };
+
 
   const ref = useRef(null);
 
-  useOnClickOutside(ref, () => toggleDrawer(false));
+  useOnClickOutside(ref, () => toggleDrawer());
 
   useEffect(()=> {
     if(open) {
@@ -55,10 +56,10 @@ export default function Menu() {
   }, [open])
 
   const DrawerList = (
-    <Box sx={{ width: 250, position: 'fixed', left: '0', top: 0, background: 'white', height: '100vh' }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 250, position: 'fixed', left: '0', top: 0, background: 'white', height: '100vh' }} role="presentation" onClick={() => toggleDrawer()}>
       <List>
           <ListItem disablePadding>
-            <ListItemButton onClick={(event) => scrollToContent(event, 'offers')}>
+            <ListItemButton  component={Link} href="/#offers">
               <ListItemIcon>
                 <PermContactCalendarIcon/>
               </ListItemIcon>
@@ -66,7 +67,7 @@ export default function Menu() {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={(event) => scrollToContent(event, 'contacts')}>
+            <ListItemButton  component={Link} href="/#contacts">
               <ListItemIcon>
                 <PermContactCalendarIcon/>
               </ListItemIcon>
@@ -74,7 +75,7 @@ export default function Menu() {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={(event) => scrollToContent(event, 'price')}>
+            <ListItemButton  component={Link} href="/#price">
               <ListItemIcon>
                 <PaymentsIcon />
               </ListItemIcon>
@@ -82,7 +83,7 @@ export default function Menu() {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={(event) => scrollToContent(event, 'faq')}>
+            <ListItemButton  component={Link} href="/#faq">
               <ListItemIcon>
                 <QuizIcon />
               </ListItemIcon>
@@ -119,14 +120,14 @@ export default function Menu() {
   return (
     <>
         <div className={styles.mobileMenu} >
-            {open ? <MenuOpenIcon />: <MenuIcon onClick={toggleDrawer(true)}/>}
+            {open ? <MenuOpenIcon onClick={() => toggleDrawer()}/>: <MenuIcon onClick={() => toggleDrawer()}/>}
             {open ? DrawerList : null}
         </div>
         <div className={styles.menu}>
-            <a onClick={(event) => scrollToContent(event, 'offers')} className={styles.hoverunderlineanimation} href='#ofers'> Послуги</a>
-            <a onClick={(event) => scrollToContent(event, 'contacts')} className={styles.hoverunderlineanimation} href='#Contats'> Контакти</a>
-            <a onClick={(event) => scrollToContent(event, 'price')} className={styles.hoverunderlineanimation} href='#price'> Вартість</a>
-            <a onClick={(event) => scrollToContent(event, 'faq')} className={styles.hoverunderlineanimation} href='#faq'> Часті питання</a>
+            <Link className={styles.hoverunderlineanimation} href='/#ofers'> Послуги</Link>
+            <Link className={styles.hoverunderlineanimation} href='/#contacts'> Контакти</Link>
+            <Link className={styles.hoverunderlineanimation} href='/#price'> Вартість</Link>
+            <Link className={styles.hoverunderlineanimation} href='/#faq'> Часті питання</Link>
             <Link href="/polityka-konfidentsiynosti" className={styles.hoverunderlineanimation}>Політика конфіденційності</Link>
             <Link href="/oferta" className={styles.hoverunderlineanimation}>Публічна оферта</Link>
         </div>

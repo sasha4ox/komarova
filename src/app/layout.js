@@ -2,11 +2,8 @@ import { Geist, Geist_Mono, Yeseva_One, Great_Vibes } from "next/font/google";
 import "./globals.css";
 import HeaderComponent from '../../components/header'
 import Footer from '../../components/Footer/footer'
-// .great-vibes-regular {
-//   font-family: "Great Vibes", cursive;
-//   font-weight: 400;
-//   font-style: normal;
-// }
+import Script from 'next/script';
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -30,17 +27,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: 'Психолог Ірина Комарова — онлайн консультації',
- description:
-    'Психолог Ірина Комарова. Онлайн консультації, індивідуальна та парна терапія. Допомога при тривожності, кризах та еміграції.',
+  title: 'Психолог Ірина Комарова — онлайн консультації та психотерапія',
+  description:
+    'Психолог Ірина Комарова — онлайн консультації для дорослих. Індивідуальна та парна терапія, допомога при тривожності, кризах та еміграції. Конфіденційно.',
   keywords: [
     'психолог онлайн',
-    'психотерапія',
+    'психолог Україна',
+    'психотерапія онлайн',
     'психолог Ірина Комарова',
+    'індивідуальна психотерапія',
+    'парна терапія',
     'тривожність',
-    'парна терапія'
+    'емоційні кризи'
   ],
-   other: {
+  other: {
     'application/ld+json': JSON.stringify({
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -66,10 +66,25 @@ export const metadata = {
   }
 };
 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      
+      {/* <!-- Google tag (gtag.js) -->  */}
+      <Script strategy="afterInteractive" async src="https://www.googletagmanager.com/gtag/js?id=AW-778100487"></Script>
+      <Script
+        id='google-analytics'
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
+                      __html: `
+                       window.dataLayer = window.dataLayer || [];
+                      function gtag(){dataLayer.push(arguments);}
+                      gtag('js', new Date());
+
+                      gtag('config', 'AW-778100487');
+                      `,
+                      }}
+      />
       <body className={`${geistSans.variable} ${geistMono.variable} ${yesevaSans.variable} ${greatVibes.variable}`}>
         <HeaderComponent />
         {children}
