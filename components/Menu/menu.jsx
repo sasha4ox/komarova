@@ -124,7 +124,7 @@ export default function Menu() {
             {open ? DrawerList : null}
         </div>
         <div className={styles.menu}>
-            <Link className={styles.hoverunderlineanimation} href='/#ofers'> Послуги</Link>
+            <Link className={styles.hoverunderlineanimation} href='/#offers'> Послуги</Link>
             <Link className={styles.hoverunderlineanimation} href='/#contacts'> Контакти</Link>
             <Link className={styles.hoverunderlineanimation} href='/#price'> Вартість</Link>
             <Link className={styles.hoverunderlineanimation} href='/#faq'> Часті питання</Link>
