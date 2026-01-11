@@ -3,6 +3,7 @@ import "../app/globals.css";
 import HeaderComponent from '../../components/header';
 import Footer from '../../components/Footer/footer';
 import Script from 'next/script';
+import ScrollTop from '../../components/ScrollTop/scrollTop';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -89,7 +90,8 @@ export default function RootLayout({ Component, pageProps }) {
         <HeaderComponent />
           <Component {...pageProps} />
         <Footer />
-      </body>
+        <ScrollTop />
+      </body> 
     </html>
   );
 }
