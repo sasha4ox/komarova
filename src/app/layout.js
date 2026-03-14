@@ -3,7 +3,6 @@ import "./globals.css";
 import HeaderComponent from '../../components/header'
 import Footer from '../../components/Footer/footer'
 import Script from 'next/script';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -113,7 +112,6 @@ export default function RootLayout({ children }) {
         <HeaderComponent />
         {children}
         <Footer />
-        <SpeedInsights />
       </body>
     </html>
   );
