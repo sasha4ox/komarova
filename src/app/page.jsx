@@ -16,7 +16,7 @@ export default function Home() {
         <div className={styles.photoCover}> 
           <Image
             className={styles.photo}
-            src="/photo_2025-12-26_00-55-17.webp"
+            src="/mainImage.jpg"
             quality={100}
             fill
             loading="lazy"
