@@ -33,7 +33,7 @@ export default function Oferta() {
         <p><strong>6.1.</strong> Виконавець залишає за собою право змінювати цю Політику з розміщенням нової редакції на сайті.</p>
 
         <h2>7. Контактна інформація</h2>
-        <p><strong>ФОП Комарвоа Ірина Володимирівна</strong></p>
+        <p><strong>ФОП Комарова Ірина Володимирівна</strong></p>
         {/* <p>
             Сайт:
             <a href="https://ira-ustymenko-psy.com.ua" target="_blank" rel="noopener noreferrer">
