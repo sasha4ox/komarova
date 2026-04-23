@@ -5,9 +5,6 @@ import Alert from '@mui/material/Alert';
 import { useForm, Controller } from 'react-hook-form';
 import { MuiTelInput } from 'mui-tel-input'
 import styles from "./form.module.css";
-import TelegramIcon from '@mui/icons-material/Telegram';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
 
 const conriesToShow = [
                     // EU
@@ -37,6 +34,7 @@ const conriesToShow = [
                     ]
 
 export default function Form() {
+  const showSocialLinks = false;
   const { control, handleSubmit, setError, formState: { isSubmitting } } = useForm({
   
   defaultValues: {
@@ -71,17 +69,11 @@ export default function Form() {
     <section className={styles.formWrapper}>
       <h2>Записатись на Консультацію</h2>
       <span className={styles.formHeader}>Якщо у вас залишилися питання або потреба обговорити вашу проблему з психічним здоров’ям, будь ласка, не вагайтеся звернутися до мене.</span>
-      <div className={styles.links}>
-        <a href="https://t.me/KonungFox" target="_blank"  className={styles.link} aria-label="Приєднуйтесь до Telegram">
-          <TelegramIcon fontSize='large'/>
-        </a>
-        <a className={styles.link} href="https://www.facebook.com/" target="_blank" aria-label="Приєднуйтесь до Facebook">
-          <FacebookIcon fontSize='large'/>
-        </a>
-        <a className={styles.link} href="https://www.instagram.com/" target="_blank" aria-label="Приєднуйтесь до Instagram">
-          <InstagramIcon fontSize='large'/>
-        </a>
-      </div>
+      {showSocialLinks && (
+        <div className={styles.links}>
+          {/* Social links are intentionally hidden for now */}
+        </div>
+      )}
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Controller
           name="firstName"
