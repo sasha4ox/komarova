@@ -72,7 +72,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <meta name="google-site-verification" content="TR--N6OV8NJ0SCNRunEeDhPJgWKWA1IDzB5zCSIJJt8" />
       {/* <!-- Google tag (gtag.js) -->  */}
-      <Script strategy="afterInteractive" async src="https://www.googletagmanager.com/gtag/js?id=AW-778100487"></Script>
+      <Script strategy="afterInteractive" async src="https://www.googletagmanager.com/gtag/js?id=AW-18083838611"></Script>
       <Script
         id='google-analytics'
                     strategy="afterInteractive"
@@ -82,7 +82,7 @@ export default function RootLayout({ children }) {
                       function gtag(){dataLayer.push(arguments);}
                       gtag('js', new Date());
 
-                      gtag('config', 'AW-778100487');
+                      gtag('config', 'AW-18083838611');
                       `,
                       }}
       />
@@ -98,7 +98,7 @@ export default function RootLayout({ children }) {
                           }
                         };
                         gtag('event', 'conversion', {
-                            'send_to': 'AW-778100487/MoN6CJDR1uAbEIe-g_MC',
+                            'send_to': 'AW-18083838611/MoN6CJDR1uAbEIe-g_MC',
                             'value': 1.0,
                             'currency': 'UAH',
                             'event_callback': callback

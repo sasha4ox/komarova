@@ -82,7 +82,7 @@ export default function RootLayout({ Component, pageProps }) {
                       function gtag(){dataLayer.push(arguments);}
                       gtag('js', new Date());
 
-                      gtag('config', 'AW-778100487');
+                      gtag('config', 'AW-18083838611');
                       `,
                       }}
       />
