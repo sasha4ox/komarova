@@ -1,9 +1,8 @@
 'use client'
-import { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import Alert from '@mui/material/Alert';
 import { useForm, Controller } from 'react-hook-form';
 import { MuiTelInput } from 'mui-tel-input'
+import { useRouter } from 'next/navigation';
 import styles from "./form.module.css";
 
 const conriesToShow = [
@@ -34,6 +33,7 @@ const conriesToShow = [
                     ]
 
 export default function Form() {
+  const router = useRouter();
   const showSocialLinks = false;
   const { control, handleSubmit, setError, formState: { isSubmitting } } = useForm({
   
@@ -43,8 +43,6 @@ export default function Form() {
     email: ""
   },
   });
-
-  const [isEmailSent, setIsEmailSent] = useState(false);
   const onSubmit = async (data) => {
     try {
       const response = await fetch('/api/telegram', {
@@ -55,11 +53,9 @@ export default function Form() {
         body: JSON.stringify(data),
       });
       if (response.ok) {
-        gtag_report_conversion()
-        setIsEmailSent(true)
+        router.push('/form-confirmation');
       }
     } catch (error) {
-        setIsEmailSent(false)
         setError("email", { type: "custom", message: "Нажаль, ми не змогли відправити запит!" })
     }
 
@@ -138,9 +134,6 @@ export default function Form() {
               />
           )}
         />
-        {isEmailSent && <Alert severity="success" sx={{ mb: 2 }}>
-    ✅    Запит успішно надіслано! Ми звʼяжемося з вами найближчим часом.
-        </Alert>}
         <button type="submit" className={styles.send}>{isSubmitting ? "Надсилаю запит" : "Надіслати запит"}</button>
       </form>
     </section>
