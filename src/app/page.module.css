@@ -125,6 +125,33 @@
   transform: translateY(-1px);
 }
 
+.heroCtaSecondary {
+  margin-top: 12px;
+  width: 100%;
+  max-width: 520px;
+  height: 56px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: #c4977a;
+  color: #fff;
+  font-size: 26px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 14px rgba(196, 151, 122, 0.45);
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.heroCtaSecondary:hover {
+  background: #b3876a;
+  box-shadow: 0 6px 18px rgba(196, 151, 122, 0.55);
+  transform: translateY(-1px);
+}
+
 .heroHint {
   margin: 16px 0 0;
   color: #9b8070;
@@ -163,6 +190,11 @@
   }
 
   .heroCta {
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .heroCtaSecondary {
     height: 50px;
     font-size: 20px;
   }

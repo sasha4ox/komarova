@@ -32,7 +32,7 @@ const conriesToShow = [
                     'ZA'  // South Africa
                     ]
 
-export default function Form() {
+export default function Form({ defaultText = "", compact = false }) {
   const router = useRouter();
   const showSocialLinks = false;
   const { control, handleSubmit, setError, formState: { isSubmitting } } = useForm({
@@ -40,7 +40,8 @@ export default function Form() {
   defaultValues: {
     firstName: "",
     phone: "",
-    email: ""
+    email: "",
+    text: defaultText,
   },
   });
   const onSubmit = async (data) => {
@@ -64,7 +65,9 @@ export default function Form() {
   return (
     <section className={styles.formWrapper}>
       <h2>Записатись на Консультацію</h2>
-      <span className={styles.formHeader}>Якщо у вас залишилися питання або потреба обговорити вашу проблему з психічним здоров’ям, будь ласка, не вагайтеся звернутися до мене.</span>
+      {!compact && (
+        <span className={styles.formHeader}>Якщо у вас залишилися питання або потреба обговорити вашу проблему з психічним здоров’ям, будь ласка, не вагайтеся звернутися до мене.</span>
+      )}
       {showSocialLinks && (
         <div className={styles.links}>
           {/* Social links are intentionally hidden for now */}

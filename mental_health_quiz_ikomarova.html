@@ -1,0 +1,263 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.quiz-wrap { max-width: 600px; margin: 0 auto; padding: 1.5rem 1rem; }
+.progress-bar-bg { height: 4px; background: var(--color-border-tertiary); border-radius: 2px; margin-bottom: 2rem; }
+.progress-bar-fill { height: 4px; background: #7F77DD; border-radius: 2px; transition: width 0.4s ease; }
+.step-label { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 0.5rem; }
+.question { font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 1.5rem; line-height: 1.4; }
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option-btn {
+  text-align: left; padding: 14px 16px; border-radius: var(--border-radius-lg);
+  border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary);
+  font-size: 15px; color: var(--color-text-primary); cursor: pointer; line-height: 1.4;
+  transition: border-color 0.15s, background 0.15s;
+}
+.option-btn:hover { border-color: #7F77DD; background: #EEEDFE; color: #3C3489; }
+.option-btn.selected { border-color: #534AB7; background: #EEEDFE; color: #3C3489; border-width: 1.5px; }
+.nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
+.btn-back { font-size: 14px; color: var(--color-text-secondary); background: none; border: none; cursor: pointer; padding: 8px 0; }
+.btn-back:hover { color: var(--color-text-primary); }
+.btn-next {
+  padding: 10px 24px; border-radius: var(--border-radius-md);
+  background: #534AB7; color: #fff; border: none; font-size: 15px; font-weight: 500;
+  cursor: pointer; opacity: 0.4; pointer-events: none; transition: opacity 0.2s;
+}
+.btn-next.active { opacity: 1; pointer-events: all; }
+.btn-next.active:hover { background: #3C3489; }
+.result-wrap { text-align: center; padding: 1rem 0; }
+.result-emoji { font-size: 48px; margin-bottom: 1rem; }
+.result-cat { font-size: 13px; font-weight: 500; color: #534AB7; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+.result-title { font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 1rem; line-height: 1.3; }
+.result-desc { font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 1.5rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+.result-bars { margin: 1.5rem 0; text-align: left; }
+.bar-row { margin-bottom: 10px; }
+.bar-label { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px; display: flex; justify-content: space-between; }
+.bar-bg { height: 6px; background: var(--color-border-tertiary); border-radius: 3px; }
+.bar-fill { height: 6px; border-radius: 3px; background: #7F77DD; transition: width 0.6s ease; }
+.cta-btn {
+  display: inline-block; padding: 13px 28px; background: #534AB7; color: #fff;
+  border-radius: var(--border-radius-md); font-size: 15px; font-weight: 500;
+  text-decoration: none; cursor: pointer; border: none;
+}
+.cta-btn:hover { background: #3C3489; }
+.restart-btn { display: block; margin: 12px auto 0; font-size: 13px; color: var(--color-text-secondary); background: none; border: none; cursor: pointer; }
+.restart-btn:hover { color: var(--color-text-primary); }
+.disclaimer { font-size: 12px; color: var(--color-text-tertiary); margin-top: 1.5rem; line-height: 1.5; }
+</style>
+
+<div class="quiz-wrap">
+  <h2 class="sr-only">Квіз психічного здоров'я від психолога Ірини Комарової</h2>
+  <div id="quiz-screen">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress" style="width:14%"></div></div>
+    <div class="step-label" id="step-label">Питання 1 з 7</div>
+    <div class="question" id="question-text"></div>
+    <div class="options" id="options"></div>
+    <div class="nav">
+      <button class="btn-back" id="btn-back" onclick="goBack()">← Назад</button>
+      <button class="btn-next" id="btn-next" onclick="goNext()">Далі →</button>
+    </div>
+    <p class="disclaimer">Це не клінічний інструмент і не замінює консультацію спеціаліста.</p>
+  </div>
+  <div id="result-screen" style="display:none"></div>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "Що найчастіше заважає тобі вночі?",
+    opts: [
+      { text: "Тривожні думки, які не вимикаються", cat: "anxiety" },
+      { text: "Думки про стосунки або близьких", cat: "relations" },
+      { text: "Відчуття, що щось іде не так у житті", cat: "selfcrisis" },
+      { text: "Просто немає сил, але сон не приходить", cat: "burnout" },
+      { text: "Загалом сплю добре — просто цікаво пройти", cat: "self" }
+    ]
+  },
+  {
+    q: "Як ти зазвичай реагуєш на конфлікт?",
+    opts: [
+      { text: "Хвилююся заздалегідь, ще до розмови", cat: "anxiety" },
+      { text: "Боюся втратити людину, тому уникаю або поступаюся", cat: "relations" },
+      { text: "Сумніваюся, чи маю право на свою точку зору", cat: "selfcrisis" },
+      { text: "Немає енергії сваритися — байдуже", cat: "burnout" },
+      { text: "Спокійно — зазвичай вирішую без стресу", cat: "self" }
+    ]
+  },
+  {
+    q: "Якби ти описав(ла) свій внутрішній стан одним словом?",
+    opts: [
+      { text: "Напруга", cat: "anxiety" },
+      { text: "Самотність", cat: "relations" },
+      { text: "Загубленість", cat: "selfcrisis" },
+      { text: "Спустошеність", cat: "burnout" },
+      { text: "Цікавість", cat: "self" }
+    ]
+  },
+  {
+    q: "Що тебе найбільше турбує в стосунках?",
+    opts: [
+      { text: "Постійний страх, що щось піде не так", cat: "anxiety" },
+      { text: "Залежність від реакції іншої людини", cat: "relations" },
+      { text: "Не розумію, чого я взагалі хочу від стосунків", cat: "selfcrisis" },
+      { text: "Немає сил вкладати в них енергію", cat: "burnout" },
+      { text: "Загалом все добре — хочу зрозуміти глибше", cat: "self" }
+    ]
+  },
+  {
+    q: "Коли востаннє ти відчував(ла) справжній спокій?",
+    opts: [
+      { text: "Важко пригадати — тривога фонова і постійна", cat: "anxiety" },
+      { text: "Коли в стосунках все було добре", cat: "relations" },
+      { text: "Не пам'ятаю, коли відчував(ла) себе «собою»", cat: "selfcrisis" },
+      { text: "Давно — зараз просто функціоную", cat: "burnout" },
+      { text: "Нещодавно — загалом відчуваю себе добре", cat: "self" }
+    ]
+  },
+  {
+    q: "Що зараз найважче?",
+    opts: [
+      { text: "Відпустити контроль і не накручувати себе", cat: "anxiety" },
+      { text: "Будувати близькість без страху бути відкинутим(ою)", cat: "relations" },
+      { text: "Зрозуміти, хто я і чого хочу", cat: "selfcrisis" },
+      { text: "Знайти хоч якусь мотивацію", cat: "burnout" },
+      { text: "Нічого конкретного — просто хочу більше розуміти себе", cat: "self" }
+    ]
+  },
+  {
+    q: "Чого ти найбільше хочеш від терапії?",
+    opts: [
+      { text: "Навчитися заспокоювати себе і менше хвилюватися", cat: "anxiety" },
+      { text: "Розібратися в стосунках і своїх паттернах", cat: "relations" },
+      { text: "Знайти себе і відчути внутрішню опору", cat: "selfcrisis" },
+      { text: "Повернути енергію і радість від життя", cat: "burnout" },
+      { text: "Краще пізнати себе — навіть без гострої проблеми", cat: "self" }
+    ]
+  }
+];
+
+const results = {
+  anxiety: {
+    emoji: "🌊",
+    cat: "Тривога і напруга",
+    title: "Ти живеш у режимі очікування небезпеки",
+    desc: "Твоя нервова система постійно напоготові. Це виснажує — навіть коли зовні все спокійно. Тривога піддається терапії, і часто зміни відчуваються вже після кількох сесій."
+  },
+  relations: {
+    emoji: "🤝",
+    cat: "Стосунки і близькість",
+    title: "Близькість для тебе — це і бажане, і страшне",
+    desc: "Ти вкладаєш багато в стосунки, але щось заважає відчути справжню опору поруч з іншою людиною. Це можна дослідити — і змінити."
+  },
+  selfcrisis: {
+    emoji: "🧭",
+    cat: "Самооцінка і криза",
+    title: "Ти шукаєш себе — і це потребує сміливості",
+    desc: "Відчуття загубленості або внутрішнього конфлікту — не слабкість. Це сигнал, що настав час краще познайомитися з собою і знайти свою опору."
+  },
+  burnout: {
+    emoji: "🕯️",
+    cat: "Виснаження",
+    title: "Твої ресурси на межі",
+    desc: "Коли немає сил навіть на те, що раніше приносило радість — це не лінь. Це важливий сигнал, який варто почути вчасно, поки не стало важче."
+  },
+  self: {
+    emoji: "🌱",
+    cat: "Самопізнання",
+    title: "Ти в ресурсі — і це найкращий час для роботи над собою",
+    desc: "Терапія не лише для криз. Глибше розуміння себе допомагає приймати кращі рішення, будувати стосунки і жити більш усвідомлено."
+  }
+};
+
+const catLabels = { anxiety: "Тривога", relations: "Стосунки", selfcrisis: "Самооцінка", burnout: "Виснаження", self: "Самопізнання" };
+
+let current = 0;
+let answers = [];
+
+function render() {
+  const q = questions[current];
+  document.getElementById('step-label').textContent = `Питання ${current + 1} з ${questions.length}`;
+  document.getElementById('progress').style.width = `${((current + 1) / questions.length) * 100}%`;
+  document.getElementById('question-text').textContent = q.q;
+  document.getElementById('btn-back').style.visibility = current === 0 ? 'hidden' : 'visible';
+
+  const container = document.getElementById('options');
+  container.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn' + (answers[current] === i ? ' selected' : '');
+    btn.textContent = o.text;
+    btn.onclick = () => selectOption(i);
+    container.appendChild(btn);
+  });
+
+  const nextBtn = document.getElementById('btn-next');
+  nextBtn.textContent = current === questions.length - 1 ? 'Показати результат →' : 'Далі →';
+  nextBtn.className = 'btn-next' + (answers[current] !== undefined ? ' active' : '');
+}
+
+function selectOption(i) {
+  answers[current] = i;
+  document.querySelectorAll('.option-btn').forEach((b, idx) => {
+    b.className = 'option-btn' + (idx === i ? ' selected' : '');
+  });
+  document.getElementById('btn-next').className = 'btn-next active';
+}
+
+function goNext() {
+  if (answers[current] === undefined) return;
+  if (current < questions.length - 1) {
+    current++;
+    render();
+  } else {
+    showResult();
+  }
+}
+
+function goBack() {
+  if (current > 0) { current--; render(); }
+}
+
+function showResult() {
+  const scores = { anxiety: 0, relations: 0, selfcrisis: 0, burnout: 0, self: 0 };
+  answers.forEach((a, qi) => { scores[questions[qi].opts[a].cat]++; });
+
+  const winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+  const r = results[winner];
+  const total = questions.length;
+
+  document.getElementById('quiz-screen').style.display = 'none';
+  const rs = document.getElementById('result-screen');
+  rs.style.display = 'block';
+
+  let barsHtml = Object.entries(scores).map(([cat, score]) => `
+    <div class="bar-row">
+      <div class="bar-label"><span>${catLabels[cat]}</span><span>${score}/${total}</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${Math.round((score/total)*100)}%"></div></div>
+    </div>
+  `).join('');
+
+  rs.innerHTML = `
+    <div class="result-wrap">
+      <div class="result-emoji">${r.emoji}</div>
+      <div class="result-cat">${r.cat}</div>
+      <div class="result-title">${r.title}</div>
+      <div class="result-desc">${r.desc}</div>
+      <div class="result-bars">${barsHtml}</div>
+      <a class="cta-btn" href="https://ikomarova.com/#contacts" target="_blank">Записатися на консультацію</a>
+      <button class="restart-btn" onclick="restart()">Пройти ще раз</button>
+      <p class="disclaimer">Це не клінічний інструмент і не замінює консультацію спеціаліста.</p>
+    </div>
+  `;
+}
+
+function restart() {
+  current = 0; answers = [];
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  render();
+}
+
+render();
+</script>

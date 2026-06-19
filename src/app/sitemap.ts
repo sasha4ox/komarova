@@ -9,6 +9,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: 'https://ikomarova.com/quiz',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: 'https://ikomarova.com/polityka-konfidentsiynosti',
       lastModified: new Date(),
       changeFrequency: 'yearly',

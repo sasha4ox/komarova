@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./page.module.css";
 import AccordionTransition from '../../components/accordion';
 import CheckIcon from '@mui/icons-material/Check';
@@ -25,6 +26,14 @@ export default function Home() {
     transform: 'translate(-50%, -50%)',
     bgcolor: 'background.paper',
     borderRadius: '15px',
+    maxHeight: {
+      xs: '90vh',
+      sm: '90vh',
+    },
+    overflowY: {
+      xs: 'auto',
+      sm: 'auto',
+    },
     width: {
       xs: '90%',
       sm: '90%',
@@ -131,6 +140,9 @@ export default function Home() {
           >
             Записатись на консультацію →
           </button>
+          <Link href="/quiz" className={styles.heroCtaSecondary}>
+            Пройти квіз →
+          </Link>
           <p className={styles.heroHint}>Перша зустріч — знайомство.</p>
         </div>
       </section>
