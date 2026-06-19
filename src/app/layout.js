@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono, Yeseva_One, Great_Vibes } from "next/font/google";
 import "./globals.css";
+import styles from "./layout.module.css";
 import HeaderComponent from '../../components/header'
 import Footer from '../../components/Footer/footer'
 import Script from 'next/script';
@@ -109,9 +110,11 @@ export default function RootLayout({ children }) {
                       }}
       />
       <body className={`${geistSans.variable} ${geistMono.variable} ${yesevaSans.variable} ${greatVibes.variable}`}>
-        <HeaderComponent />
-        {children}
-        <Footer />
+        <div className={styles.pageShell}>
+          <HeaderComponent />
+          <div className={styles.main}>{children}</div>
+          <Footer />
+        </div>
       </body>
     </html>
   );

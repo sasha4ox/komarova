@@ -1,5 +1,5 @@
 .page {
-  min-height: calc(100vh - 200px);
+  flex: 1;
   background: var(--background);
   padding: 2rem 0 4rem;
 }
