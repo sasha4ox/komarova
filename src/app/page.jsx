@@ -143,7 +143,6 @@ export default function Home() {
           <Link href="/quiz" className={styles.heroCtaSecondary}>
             Пройти квіз →
           </Link>
-          <p className={styles.heroHint}>Перша зустріч — знайомство.</p>
         </div>
       </section>
       <section className={styles.aboutSection}>
