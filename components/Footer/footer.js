@@ -49,13 +49,13 @@ export default function Footer() {
             <h3 className={styles.columnTitle}>Контакти</h3>
             <ul className={styles.contactList}>
               <li>
-                <a
+                {/* <a
                   href="tel:+380931524517"
                   className={styles.contactLink}
                   aria-label="Набрати психолога Ірина Комарова"
                 >
                   +380 (93) 152 45 17
-                </a>
+                </a> */}
               </li>
               <li>
                 <a href="mailto:irinavfox@gmail.com" className={styles.contactLink}>
