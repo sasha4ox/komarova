@@ -1,0 +1,14 @@
+.privacyPolicy {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    ul {
+        padding-left: 40px;
+    }
+    h1 {
+        text-align: center;
+        margin: 30px 0;
+    }
+}

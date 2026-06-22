@@ -4,6 +4,7 @@
 
 .menu {
     display: flex;
+    align-items: center;
     gap: 25px;
 
     a {
@@ -20,7 +21,6 @@
   .menu {
     display: none;
   }
-  
 }
 
 
@@ -56,4 +56,3 @@
 .hoverunderlineanimation:hover::after {
   transform-origin: bottom center;
 }
-

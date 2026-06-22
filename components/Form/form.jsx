@@ -1,143 +1,170 @@
-'use client'
-import TextField from '@mui/material/TextField';
-import { useForm, Controller } from 'react-hook-form';
-import { MuiTelInput } from 'mui-tel-input'
-import { useRouter } from 'next/navigation';
+"use client";
+
+import TextField from "@mui/material/TextField";
+import { useForm, Controller } from "react-hook-form";
+import { MuiTelInput } from "mui-tel-input";
+import { useLocale, useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import styles from "./form.module.css";
 
 const conriesToShow = [
-                    // EU
-                    'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT',
-                    'LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE', 'UA',
-
-                    // Major / common world countries
-                    'US', // United States
-                    'CA', // Canada
-                    'GB', // United Kingdom
-                    'AU', // Australia
-                    'NZ', // New Zealand
-                    'JP', // Japan
-                    'CN', // China
-                    'IN', // India
-                    'BR', // Brazil
-                    'MX', // Mexico
-                    'KR', // South Korea
-                    'SG', // Singapore
-                    'CH', // Switzerland
-                    'NO', // Norway
-                    'TR', // Turkey
-                    'IL', // Israel
-                    'AE', // United Arab Emirates
-                    'SA', // Saudi Arabia
-                    'ZA'  // South Africa
-                    ]
+  "AT",
+  "BE",
+  "BG",
+  "HR",
+  "CY",
+  "CZ",
+  "DK",
+  "EE",
+  "FI",
+  "FR",
+  "DE",
+  "GR",
+  "HU",
+  "IE",
+  "IT",
+  "LV",
+  "LT",
+  "LU",
+  "MT",
+  "NL",
+  "PL",
+  "PT",
+  "RO",
+  "SK",
+  "SI",
+  "ES",
+  "SE",
+  "UA",
+  "US",
+  "CA",
+  "GB",
+  "AU",
+  "NZ",
+  "JP",
+  "CN",
+  "IN",
+  "BR",
+  "MX",
+  "KR",
+  "SG",
+  "CH",
+  "NO",
+  "TR",
+  "IL",
+  "AE",
+  "SA",
+  "ZA",
+];
 
 export default function Form({ defaultText = "", compact = false }) {
   const router = useRouter();
+  const locale = useLocale();
+  const t = useTranslations("form");
   const showSocialLinks = false;
-  const { control, handleSubmit, setError, formState: { isSubmitting } } = useForm({
-  
-  defaultValues: {
-    firstName: "",
-    phone: "",
-    email: "",
-    text: defaultText,
-  },
-  });
+  const { control, handleSubmit, setError, formState: { isSubmitting } } =
+    useForm({
+      defaultValues: {
+        firstName: "",
+        phone: "",
+        email: "",
+        text: defaultText,
+        locale,
+      },
+    });
+
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('/api/telegram', {
-        method: 'post',
+      const response = await fetch("/api/telegram", {
+        method: "post",
         headers: {
-        'Content-Type': 'application/json',
-          },
-        body: JSON.stringify(data),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...data, locale }),
       });
       if (response.ok) {
-        router.push('/form-confirmation');
+        router.push("/form-confirmation");
       }
-    } catch (error) {
-        setError("email", { type: "custom", message: "Нажаль, ми не змогли відправити запит!" })
+    } catch {
+      setError("email", { type: "custom", message: t("error") });
     }
-
-  } 
+  };
 
   return (
     <section className={styles.formWrapper}>
-      <h2>Записатись на Консультацію</h2>
-      {!compact && (
-        <span className={styles.formHeader}>Якщо у вас залишилися питання або потреба обговорити вашу проблему з психічним здоров’ям, будь ласка, не вагайтеся звернутися до мене.</span>
-      )}
-      {showSocialLinks && (
-        <div className={styles.links}>
-          {/* Social links are intentionally hidden for now */}
-        </div>
-      )}
+      <h2>{t("title")}</h2>
+      {!compact && <span className={styles.formHeader}>{t("intro")}</span>}
+      {showSocialLinks && <div className={styles.links} />}
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Controller
           name="firstName"
           control={control}
-          rules={{ required: "Це поле обов'язкове" }}
+          rules={{ required: t("required") }}
           render={({ field, fieldState: { error } }) => (
-              <TextField
-                  {...field}
-                  label="Ваше ім'я"
-                  variant="outlined"
-                  error={!!error}
-                  helperText={error ? error.message : null}
-              />
+            <TextField
+              {...field}
+              label={t("firstName")}
+              variant="outlined"
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
         <Controller
           name="phone"
           control={control}
-          rules={{ required: "Телефон є обов'язковим полем" }}
+          rules={{ required: t("phoneRequired") }}
           render={({ field, fieldState: { error } }) => (
-              <MuiTelInput {...field}
-                  defaultCountry="UA"
-                  onlyCountries={conriesToShow}
-                  label="Ваш телефон"
-                  variant="outlined"
-                  error={!!error}
-                  helperText={error ? error.message : null} />
+            <MuiTelInput
+              {...field}
+              defaultCountry="UA"
+              onlyCountries={conriesToShow}
+              lang={locale === "ru" ? "ru" : "uk"}
+              label={t("phone")}
+              variant="outlined"
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
         <Controller
           name="email"
           control={control}
           rules={{
-          required: "Це поле обов'язкове",
-          pattern: {
-            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            message: "Введіть коректну email адресу",
-          },
-        }}
+            required: t("required"),
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: t("emailInvalid"),
+            },
+          }}
           render={({ field, fieldState: { error } }) => (
-              <TextField
-                  {...field}
-                  label="Ваш e-mail"
-                  variant="outlined"
-                  error={!!error}
-                  helperText={error ? error.message : null}
-              />
+            <TextField
+              {...field}
+              label={t("email")}
+              variant="outlined"
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
-         <Controller
+        <Controller
           name="text"
           control={control}
           render={({ field, fieldState: { error } }) => (
-              <TextField
-                  {...field}
-                  label="Ваш запит"
-                  placeholder="Напишіть свій запит"
-                  multiline 
-                  variant="outlined"
-                  error={!!error}
-                  helperText={error ? error.message : null}
-              />
+            <TextField
+              {...field}
+              label={t("request")}
+              placeholder={t("placeholder")}
+              multiline
+              variant="outlined"
+              error={!!error}
+              helperText={error ? error.message : null}
+            />
           )}
         />
-        <button type="submit" className={styles.send}>{isSubmitting ? "Надсилаю запит" : "Надіслати запит"}</button>
+        <button type="submit" className={styles.send}>
+          {isSubmitting ? t("submitting") : t("submit")}
+        </button>
       </form>
     </section>
   );

@@ -1,21 +1,26 @@
-import Link from "next/link";
+"use client";
+
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import styles from "./footer.module.css";
 
-const navLinks = [
-  { href: "/#offers", label: "Послуги" },
-  { href: "/#price", label: "Вартість" },
-  { href: "/quiz", label: "Квіз" },
-  { href: "/#contacts", label: "Записатися" },
-  { href: "/#faq", label: "Часті питання" },
-];
-
-const legalLinks = [
-  { href: "/polityka-konfidentsiynosti", label: "Політика конфіденційності" },
-  { href: "/oferta", label: "Публічна оферта" },
-];
-
 export default function Footer() {
+  const tNav = useTranslations("nav");
+  const tFooter = useTranslations("footer");
   const year = new Date().getFullYear();
+
+  const navLinks = [
+    { href: "/#offers", label: tNav("services") },
+    { href: "/#price", label: tNav("price") },
+    { href: "/quiz", label: tNav("quiz") },
+    { href: "/#contacts", label: tNav("book") },
+    { href: "/#faq", label: tNav("faq") },
+  ];
+
+  const legalLinks = [
+    { href: "/polityka-konfidentsiynosti", label: tNav("privacy") },
+    { href: "/oferta", label: tNav("oferta") },
+  ];
 
   return (
     <footer className={styles.footer}>
@@ -23,17 +28,15 @@ export default function Footer() {
         <div className={styles.columns}>
           <section className={styles.brand}>
             <Link href="/" className={styles.brandLink}>
-              <h2 className={styles.brandName}>Ірина Комарова</h2>
+              <h2 className={styles.brandName}>{tFooter("brandName")}</h2>
             </Link>
-            <p className={styles.brandRole}>Психолог для дорослих</p>
-            <p className={styles.brandTagline}>
-              Онлайн-консультації · Zoom, Meet, Telegram
-            </p>
-            <p className={styles.brandPrice}>1900 грн / 60 хв</p>
+            <p className={styles.brandRole}>{tFooter("brandRole")}</p>
+            <p className={styles.brandTagline}>{tFooter("tagline")}</p>
+            <p className={styles.brandPrice}>{tFooter("price")}</p>
           </section>
 
-          <nav className={styles.nav} aria-label="Навігація в підвалі">
-            <h3 className={styles.columnTitle}>Навігація</h3>
+          <nav className={styles.nav} aria-label={tFooter("navAria")}>
+            <h3 className={styles.columnTitle}>{tFooter("navigation")}</h3>
             <ul className={styles.navList}>
               {navLinks.map((link) => (
                 <li key={link.href}>
@@ -46,17 +49,8 @@ export default function Footer() {
           </nav>
 
           <section className={styles.contact}>
-            <h3 className={styles.columnTitle}>Контакти</h3>
+            <h3 className={styles.columnTitle}>{tFooter("contacts")}</h3>
             <ul className={styles.contactList}>
-              <li>
-                {/* <a
-                  href="tel:+380931524517"
-                  className={styles.contactLink}
-                  aria-label="Набрати психолога Ірина Комарова"
-                >
-                  +380 (93) 152 45 17
-                </a> */}
-              </li>
               <li>
                 <a href="mailto:irinavfox@gmail.com" className={styles.contactLink}>
                   irinavfox@gmail.com
@@ -67,11 +61,17 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottomBar}>
-          <p className={styles.copyright}>© {year} Ірина Комарова</p>
+          <p className={styles.copyright}>
+            {tFooter("copyright", { year })}
+          </p>
           <div className={styles.legalLinks}>
             {legalLinks.map((link, index) => (
               <span key={link.href} className={styles.legalItem}>
-                {index > 0 && <span className={styles.legalDivider} aria-hidden="true">·</span>}
+                {index > 0 && (
+                  <span className={styles.legalDivider} aria-hidden="true">
+                    ·
+                  </span>
+                )}
                 <Link href={link.href} className={styles.legalLink}>
                   {link.label}
                 </Link>

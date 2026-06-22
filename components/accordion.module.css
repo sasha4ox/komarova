@@ -1,0 +1,19 @@
+.accordion {
+  background-color: var(--second-color) !important;
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+}
+
+.accordion button {
+  background-color: var(--second-color) !important;
+}
+
+.accordion button span {
+  color: var(--third-color);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.questions {
+  background-color: var(--background) !important;
+}

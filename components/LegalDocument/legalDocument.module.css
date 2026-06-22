@@ -1,0 +1,32 @@
+.document {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+  line-height: 1.7;
+}
+
+.document h1 {
+  margin-bottom: 24px;
+}
+
+.document h2 {
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+.document h3 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.document p {
+  margin-bottom: 12px;
+}
+
+.document ul {
+  margin: 0 0 16px 20px;
+}
+
+.document li {
+  margin-bottom: 8px;
+}

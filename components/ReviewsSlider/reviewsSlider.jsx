@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
@@ -10,6 +11,7 @@ import styles from "./reviewsSlider.module.css";
 const AUTO_PLAY_DELAY_MS = 5000;
 
 export default function ReviewsSlider({ reviews }) {
+  const t = useTranslations("reviewsSlider");
   const autoplayRef = useRef(
     Autoplay({
       delay: AUTO_PLAY_DELAY_MS,
@@ -58,12 +60,12 @@ export default function ReviewsSlider({ reviews }) {
     <section className={styles.reviewsSection}>
       <div className={styles.reviewsWrapper}>
         <div className={styles.reviewsHeader}>
-          <h2 className={styles.sectionName}>відгуки</h2>
-          <h3>Що кажуть клієнти</h3>
+          <h2 className={styles.sectionName}>{t("title")}</h2>
+          <h3>{t("subtitle")}</h3>
           <div className={styles.reviewsRating}>
             <span className={styles.reviewsScore}>4.9</span>
             <span className={styles.reviewsStars}>★★★★★</span>
-            <span className={styles.reviewsCount}>на основі 260+ відгуків</span>
+            <span className={styles.reviewsCount}>{t("count")}</span>
           </div>
         </div>
 
@@ -72,7 +74,7 @@ export default function ReviewsSlider({ reviews }) {
             type="button"
             className={`${styles.controlButton} ${styles.controlButtonLeft}`}
             onClick={goToPrev}
-            aria-label="Попередній відгук"
+            aria-label={t("prevAria")}
           >
             <ArrowBackIosNewRoundedIcon fontSize="small" />
           </button>
@@ -95,17 +97,27 @@ export default function ReviewsSlider({ reviews }) {
             type="button"
             className={`${styles.controlButton} ${styles.controlButtonRight}`}
             onClick={goToNext}
-            aria-label="Наступний відгук"
+            aria-label={t("nextAria")}
           >
             <ArrowForwardIosRoundedIcon fontSize="small" />
           </button>
         </div>
 
         <div className={styles.mobileControls}>
-          <button type="button" className={styles.mobileControlButton} onClick={goToPrev}>
+          <button
+            type="button"
+            className={styles.mobileControlButton}
+            onClick={goToPrev}
+            aria-label={t("prevAria")}
+          >
             <ArrowBackIosNewRoundedIcon fontSize="small" />
           </button>
-          <button type="button" className={styles.mobileControlButton} onClick={goToNext}>
+          <button
+            type="button"
+            className={styles.mobileControlButton}
+            onClick={goToNext}
+            aria-label={t("nextAria")}
+          >
             <ArrowForwardIosRoundedIcon fontSize="small" />
           </button>
         </div>
