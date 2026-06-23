@@ -2,7 +2,7 @@
 
 import TextField from "@mui/material/TextField";
 import { useForm, Controller } from "react-hook-form";
-import { MuiTelInput } from "mui-tel-input";
+import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import styles from "./form.module.css";
@@ -57,6 +57,15 @@ const conriesToShow = [
   "ZA",
 ];
 
+const ERROR_FIELD_MAP = {
+  invalid_email: "email",
+  disposable_email: "email",
+  invalid_phone: "phone",
+  missing_fields: "email",
+  name_too_long: "firstName",
+  text_too_long: "text",
+};
+
 export default function Form({ defaultText = "", compact = false }) {
   const router = useRouter();
   const locale = useLocale();
@@ -73,20 +82,56 @@ export default function Form({ defaultText = "", compact = false }) {
       },
     });
 
+  const getErrorMessage = (code) => {
+    switch (code) {
+      case "disposable_email":
+        return t("disposableEmail");
+      case "invalid_phone":
+        return t("phoneInvalid");
+      case "invalid_email":
+        return t("emailInvalid");
+      case "submit_failed":
+        return t("submitFailed");
+      default:
+        return t("error");
+    }
+  };
+
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("/api/telegram", {
+      const response = await fetch("/api/submit", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ ...data, locale }),
       });
+
+      const result = await response.json().catch(() => ({}));
+
       if (response.ok) {
+        if (result.pendingEmail) {
+          const params = new URLSearchParams({ email: data.email });
+          router.push(`/email-pending?${params.toString()}`);
+          return;
+        }
+
         router.push("/form-confirmation");
+        return;
       }
+
+      const errorCode = result.error || "submit_failed";
+      const field = ERROR_FIELD_MAP[errorCode] || "email";
+      const message =
+        process.env.NODE_ENV === "development" && result.detail
+          ? `${getErrorMessage(errorCode)} (${result.detail})`
+          : getErrorMessage(errorCode);
+      setError(field, {
+        type: "custom",
+        message,
+      });
     } catch {
-      setError("email", { type: "custom", message: t("error") });
+      setError("email", { type: "custom", message: t("submitFailed") });
     }
   };
 
@@ -113,7 +158,13 @@ export default function Form({ defaultText = "", compact = false }) {
         <Controller
           name="phone"
           control={control}
-          rules={{ required: t("phoneRequired") }}
+          rules={{
+            required: t("phoneRequired"),
+            validate: (value) =>
+              matchIsValidTel(value, {
+                onlyCountries: conriesToShow,
+              }) || t("phoneInvalid"),
+          }}
           render={({ field, fieldState: { error } }) => (
             <MuiTelInput
               {...field}

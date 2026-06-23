@@ -1,48 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-
-const BOT_TOKEN = process.env.BOT_TOKEN;
-const CHAT_ID = process.env.CHAT_ID;
-
-function localeTag(locale?: string) {
-  if (locale === "ru") return "[RU]";
-  if (locale === "uk") return "[UK]";
-  return "";
-}
+import { sendTelegramNotification } from "@/lib/telegramNotify";
 
 export default async function TelegramHandler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "method_not_allowed" });
+  }
+
   try {
     const body = req.body;
-    const prefix = localeTag(body.locale);
-
-    const thirdPartyResponse = await fetch(
-      `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: `${prefix ? `${prefix} ` : ""}💬 Website:\n
-          Ім'я: ${body.firstName}\r\n
-          Пошта: ${body.email}\r\n
-          Телефон: ${body.phone}\r\n
-           ${body.text ? `Повідомлення: ${body.text}` : ""}
-          `,
-        }),
-      },
-    );
-    const response = await thirdPartyResponse.json();
-
-    if (thirdPartyResponse.status === 200) {
-      res.send({ ok: true });
-    } else {
-      res.status(400).json({ status: "BAD REQUEST", error: response });
-    }
-  } catch {
-    res.status(500).json({ status: "BAD REQUEST" });
+    await sendTelegramNotification({
+      firstName: String(body.firstName ?? ""),
+      email: String(body.email ?? ""),
+      phone: String(body.phone ?? ""),
+      text: String(body.text ?? ""),
+      locale: String(body.locale ?? "uk"),
+    });
+    res.status(200).json({ ok: true });
+  } catch (error) {
+    res.status(500).json({ status: "BAD REQUEST", error });
   }
 }
