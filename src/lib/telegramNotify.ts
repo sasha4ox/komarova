@@ -33,9 +33,9 @@ export async function sendTelegramNotification(body: SubmissionBody) {
           Ім'я: ${body.firstName}\r\n
           Пошта: ${body.email}\r\n
           Телефон: ${body.phone}\r\n
+          ${body.text ? `Повідомлення: ${body.text}\r\n` : ""}
           ${locationDetails ? `${locationDetails}\r\n` : ""}
           ${sourceDetails ? `${sourceDetails}\r\n` : ""}
-           ${body.text ? `Повідомлення: ${body.text}` : ""}
           `,
       }),
     },
