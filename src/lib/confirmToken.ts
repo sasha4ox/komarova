@@ -1,7 +1,10 @@
 import { SignJWT, jwtVerify } from "jose";
 import { normalizeAttribution } from "./attribution";
 import { normalizeLocation } from "./location";
-import type { SubmissionBody } from "./validateSubmission";
+import {
+  isContactMethod,
+  type SubmissionBody,
+} from "./validateSubmission";
 
 const TOKEN_TTL = "24h";
 
@@ -31,16 +34,26 @@ export async function verifyConfirmToken(
     const firstName = String(payload.firstName ?? "");
     const email = String(payload.email ?? "");
     const phone = String(payload.phone ?? "");
+    const contactMethod = String(payload.contactMethod ?? "");
     const text = String(payload.text ?? "");
     const locale = String(payload.locale ?? "uk");
     const attribution = normalizeAttribution(payload as Record<string, unknown>);
     const location = normalizeLocation(payload as Record<string, unknown>);
 
-    if (!firstName || !email || !phone) {
+    if (!firstName || !email || !phone || !isContactMethod(contactMethod)) {
       return null;
     }
 
-    return { firstName, email, phone, text, locale, attribution, location };
+    return {
+      firstName,
+      email,
+      phone,
+      contactMethod,
+      text,
+      locale,
+      attribution,
+      location,
+    };
   } catch {
     return null;
   }

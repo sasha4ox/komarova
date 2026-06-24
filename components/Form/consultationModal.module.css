@@ -1,0 +1,36 @@
+.modalBox {
+  scrollbar-width: thin;
+  scrollbar-color: #c4977a var(--second-color);
+}
+
+.modalBox::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modalBox::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 14px 0;
+}
+
+.modalBox::-webkit-scrollbar-thumb {
+  background: #c4977a;
+  border-radius: 999px;
+}
+
+.modalBox::-webkit-scrollbar-thumb:hover {
+  background: var(--fourth-color);
+}
+
+.closeBtn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  z-index: 1;
+  color: var(--third-color);
+  transition: color 0.15s;
+}
+
+.closeBtn:hover {
+  color: var(--fourth-color);
+}

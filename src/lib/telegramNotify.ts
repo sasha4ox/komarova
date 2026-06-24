@@ -1,4 +1,4 @@
-import type { SubmissionBody } from "./validateSubmission";
+import type { ContactMethod, SubmissionBody } from "./validateSubmission";
 import { formatAttributionDetails } from "./attribution";
 import { formatLocationDetails } from "./location";
 
@@ -9,6 +9,20 @@ function localeTag(locale?: string) {
   if (locale === "ru") return "[RU]";
   if (locale === "uk") return "[UK]";
   return "";
+}
+
+const CONTACT_METHOD_LABELS: Record<ContactMethod, { uk: string; ru: string }> =
+  {
+    telegram: { uk: "Telegram", ru: "Telegram" },
+    viber: { uk: "Viber", ru: "Viber" },
+    whatsapp: { uk: "WhatsApp", ru: "WhatsApp" },
+    signal: { uk: "Signal", ru: "Signal" },
+    phone: { uk: "Телефонний дзвінок", ru: "Телефонный звонок" },
+  };
+
+function contactMethodLabel(method: ContactMethod, locale?: string) {
+  const labels = CONTACT_METHOD_LABELS[method];
+  return locale === "ru" ? labels.ru : labels.uk;
 }
 
 export async function sendTelegramNotification(body: SubmissionBody) {
@@ -33,6 +47,7 @@ export async function sendTelegramNotification(body: SubmissionBody) {
           Ім'я: ${body.firstName}\r\n
           Пошта: ${body.email}\r\n
           Телефон: ${body.phone}\r\n
+          Спосіб зв'язку: ${contactMethodLabel(body.contactMethod, body.locale)}\r\n
           ${body.text ? `Повідомлення: ${body.text}\r\n` : ""}
           ${locationDetails ? `${locationDetails}\r\n` : ""}
           ${sourceDetails ? `${sourceDetails}\r\n` : ""}

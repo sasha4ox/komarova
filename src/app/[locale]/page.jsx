@@ -8,10 +8,9 @@ import styles from "./page.module.css";
 import AccordionTransition from "../../../components/accordion";
 import CheckIcon from "@mui/icons-material/Check";
 import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import CloseIcon from "@mui/icons-material/Close";
 import Card from "../../../components/Card/card";
 import Form from "../../../components/Form/form";
+import ConsultationModalBox from "../../../components/Form/ConsultationModalBox";
 import Contacts from "../../../components/Contacts/contacts";
 import DescriptionCard from "../../../components/DescriptionCard/descriptionCard";
 import ScrollTop from "../../../components/ScrollTop/scrollTop";
@@ -26,28 +25,6 @@ const SERVICE_PHOTOS = [
   "5.webp",
   "6.webp",
 ];
-
-const consultationModalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  bgcolor: "background.paper",
-  borderRadius: "15px",
-  maxHeight: {
-    xs: "90vh",
-    sm: "90vh",
-  },
-  overflowY: {
-    xs: "auto",
-    sm: "auto",
-  },
-  width: {
-    xs: "90%",
-    sm: "90%",
-    md: "420px",
-  },
-};
 
 export default function Home() {
   const t = useTranslations();
@@ -177,18 +154,9 @@ export default function Home() {
         onClose={() => setIsConsultationModalOpen(false)}
         aria-labelledby="consultation-modal-title"
       >
-        <Box sx={consultationModalStyle}>
-          <CloseIcon
-            onClick={() => setIsConsultationModalOpen(false)}
-            style={{
-              position: "absolute",
-              right: "20px",
-              top: "20px",
-              cursor: "pointer",
-            }}
-          />
-          <Form />
-        </Box>
+        <ConsultationModalBox
+          onClose={() => setIsConsultationModalOpen(false)}
+        />
       </Modal>
       <ScrollTop />
     </main>

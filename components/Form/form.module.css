@@ -59,3 +59,23 @@
     max-width: none;
   }
 }
+
+.formWrapperInModal {
+  padding: 44px 24px 36px;
+}
+
+.formWrapperInModal h2 {
+  padding-bottom: 16px;
+  font-size: 20px;
+}
+
+.formWrapperInModal .formHeader {
+  font-size: 18px;
+  padding: 12px 0 4px;
+}
+
+@media (min-width: 768px) {
+  .formWrapperInModal {
+    padding: 48px 28px 40px;
+  }
+}

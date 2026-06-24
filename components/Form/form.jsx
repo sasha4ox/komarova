@@ -1,6 +1,7 @@
 "use client";
 
 import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 import { useForm, Controller } from "react-hook-form";
 import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import { useLocale, useTranslations } from "next-intl";
@@ -68,11 +69,20 @@ const ERROR_FIELD_MAP = {
   disposable_email: "email",
   invalid_phone: "phone",
   missing_fields: "email",
+  missing_contact_method: "contactMethod",
   name_too_long: "firstName",
   text_too_long: "text",
 };
 
-export default function Form({ defaultText = "", compact = false }) {
+const CONTACT_METHODS = [
+  { value: "telegram", labelKey: "contactTelegram" },
+  { value: "viber", labelKey: "contactViber" },
+  { value: "whatsapp", labelKey: "contactWhatsapp" },
+  { value: "signal", labelKey: "contactSignal" },
+  { value: "phone", labelKey: "contactPhoneCall" },
+];
+
+export default function Form({ defaultText = "", compact = false, inModal = false }) {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations("form");
@@ -82,6 +92,7 @@ export default function Form({ defaultText = "", compact = false }) {
       defaultValues: {
         firstName: "",
         phone: "",
+        contactMethod: "",
         email: "",
         text: defaultText,
         locale,
@@ -94,6 +105,8 @@ export default function Form({ defaultText = "", compact = false }) {
         return t("disposableEmail");
       case "invalid_phone":
         return t("phoneInvalid");
+      case "missing_contact_method":
+        return t("contactMethodRequired");
       case "invalid_email":
         return t("emailInvalid");
       case "submit_failed":
@@ -163,7 +176,9 @@ export default function Form({ defaultText = "", compact = false }) {
   };
 
   return (
-    <section className={styles.formWrapper}>
+    <section
+      className={`${styles.formWrapper}${inModal ? ` ${styles.formWrapperInModal}` : ""}`}
+    >
       <h2>{t("title")}</h2>
       {!compact && <span className={styles.formHeader}>{t("intro")}</span>}
       {showSocialLinks && <div className={styles.links} />}
@@ -203,6 +218,27 @@ export default function Form({ defaultText = "", compact = false }) {
               error={!!error}
               helperText={error ? error.message : null}
             />
+          )}
+        />
+        <Controller
+          name="contactMethod"
+          control={control}
+          rules={{ required: t("contactMethodRequired") }}
+          render={({ field, fieldState: { error } }) => (
+            <TextField
+              {...field}
+              select
+              label={t("contactMethodLabel")}
+              variant="outlined"
+              error={!!error}
+              helperText={error ? error.message : null}
+            >
+              {CONTACT_METHODS.map(({ value, labelKey }) => (
+                <MenuItem key={value} value={value}>
+                  {t(labelKey)}
+                </MenuItem>
+              ))}
+            </TextField>
           )}
         />
         <Controller

@@ -8,9 +8,20 @@ import { countryNameFromCode, type SubmissionLocation } from "./location";
 
 export type { SubmissionAttribution };
 
+export const CONTACT_METHODS = [
+  "telegram",
+  "viber",
+  "whatsapp",
+  "signal",
+  "phone",
+] as const;
+
+export type ContactMethod = (typeof CONTACT_METHODS)[number];
+
 export type SubmissionBody = {
   firstName: string;
   phone: string;
+  contactMethod: ContactMethod;
   email: string;
   text?: string;
   locale?: string;
@@ -18,8 +29,13 @@ export type SubmissionBody = {
   location?: SubmissionLocation;
 };
 
+export function isContactMethod(value: string): value is ContactMethod {
+  return CONTACT_METHODS.includes(value as ContactMethod);
+}
+
 export type ValidationErrorCode =
   | "missing_fields"
+  | "missing_contact_method"
   | "invalid_email"
   | "disposable_email"
   | "invalid_phone"
@@ -32,7 +48,11 @@ const EMAIL_REGEX =
 const MAX_NAME_LENGTH = 100;
 const MAX_TEXT_LENGTH = 5000;
 
-export function normalizeSubmission(body: unknown): SubmissionBody | null {
+export type NormalizedSubmission = Omit<SubmissionBody, "contactMethod"> & {
+  contactMethod: string;
+};
+
+export function normalizeSubmission(body: unknown): NormalizedSubmission | null {
   if (!body || typeof body !== "object") {
     return null;
   }
@@ -42,6 +62,7 @@ export function normalizeSubmission(body: unknown): SubmissionBody | null {
   return {
     firstName: String(data.firstName ?? "").trim(),
     phone: String(data.phone ?? "").trim(),
+    contactMethod: String(data.contactMethod ?? "").trim(),
     email: String(data.email ?? "").trim().toLowerCase(),
     text: String(data.text ?? "").trim(),
     locale: String(data.locale ?? "uk").trim() || "uk",
@@ -50,13 +71,19 @@ export function normalizeSubmission(body: unknown): SubmissionBody | null {
 }
 
 export function validateSubmission(
-  body: SubmissionBody,
+  body: NormalizedSubmission,
 ):
   | { ok: true; data: SubmissionBody }
   | { ok: false; code: ValidationErrorCode } {
   if (!body.firstName || !body.phone || !body.email) {
     return { ok: false, code: "missing_fields" };
   }
+
+  if (!body.contactMethod || !isContactMethod(body.contactMethod)) {
+    return { ok: false, code: "missing_contact_method" };
+  }
+
+  const contactMethod = body.contactMethod;
 
   if (body.firstName.length > MAX_NAME_LENGTH) {
     return { ok: false, code: "name_too_long" };
@@ -84,6 +111,7 @@ export function validateSubmission(
     ok: true,
     data: {
       ...body,
+      contactMethod,
       phone: phoneNumber.formatInternational(),
       locale: body.locale === "ru" ? "ru" : "uk",
       location: phoneNumber.country

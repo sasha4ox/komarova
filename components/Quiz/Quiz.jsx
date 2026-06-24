@@ -3,32 +3,8 @@
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import CloseIcon from "@mui/icons-material/Close";
-import Form from "../Form/form";
+import ConsultationModalBox from "../Form/ConsultationModalBox";
 import styles from "./quiz.module.css";
-
-const consultationModalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  bgcolor: "background.paper",
-  borderRadius: "15px",
-  maxHeight: {
-    xs: "90vh",
-    sm: "90vh",
-  },
-  overflowY: {
-    xs: "auto",
-    sm: "auto",
-  },
-  width: {
-    xs: "90%",
-    sm: "90%",
-    md: "420px",
-  },
-};
 
 function computeScores(answers, questions) {
   const scores = {
@@ -151,21 +127,11 @@ export default function Quiz() {
           onClose={() => setIsConsultationModalOpen(false)}
           aria-labelledby="quiz-consultation-modal-title"
         >
-          <Box sx={consultationModalStyle}>
-            <CloseIcon
-              onClick={() => setIsConsultationModalOpen(false)}
-              style={{
-                position: "absolute",
-                right: "20px",
-                top: "20px",
-                cursor: "pointer",
-              }}
-            />
-            <Form
-              compact
-              defaultText={buildQuizMessage(result, scores)}
-            />
-          </Box>
+          <ConsultationModalBox
+            onClose={() => setIsConsultationModalOpen(false)}
+            compact
+            defaultText={buildQuizMessage(result, scores)}
+          />
         </Modal>
       </div>
     );

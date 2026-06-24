@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { sendTelegramNotification } from "@/lib/telegramNotify";
+import { isContactMethod } from "@/lib/validateSubmission";
 
 export default async function TelegramHandler(
   req: NextApiRequest,
@@ -11,10 +12,14 @@ export default async function TelegramHandler(
 
   try {
     const body = req.body;
+    const contactMethodRaw = String(body.contactMethod ?? "phone");
     await sendTelegramNotification({
       firstName: String(body.firstName ?? ""),
       email: String(body.email ?? ""),
       phone: String(body.phone ?? ""),
+      contactMethod: isContactMethod(contactMethodRaw)
+        ? contactMethodRaw
+        : "phone",
       text: String(body.text ?? ""),
       locale: String(body.locale ?? "uk"),
     });
