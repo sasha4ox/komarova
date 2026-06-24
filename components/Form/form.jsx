@@ -5,6 +5,11 @@ import { useForm, Controller } from "react-hook-form";
 import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
+import {
+  hasRecentLeadSubmission,
+  markLeadSubmitted,
+  storeLeadTransactionId,
+} from "../../helpers/leadTracking";
 import styles from "./form.module.css";
 
 const conriesToShow = [
@@ -92,12 +97,22 @@ export default function Form({ defaultText = "", compact = false }) {
         return t("emailInvalid");
       case "submit_failed":
         return t("submitFailed");
+      case "duplicate_submission":
+        return t("alreadySubmitted");
       default:
         return t("error");
     }
   };
 
   const onSubmit = async (data) => {
+    if (hasRecentLeadSubmission(data.email, data.phone)) {
+      setError("email", {
+        type: "custom",
+        message: t("alreadySubmitted"),
+      });
+      return;
+    }
+
     try {
       const response = await fetch("/api/submit", {
         method: "post",
@@ -110,6 +125,17 @@ export default function Form({ defaultText = "", compact = false }) {
       const result = await response.json().catch(() => ({}));
 
       if (response.ok) {
+        if (result.duplicate) {
+          setError("email", {
+            type: "custom",
+            message: t("alreadySubmitted"),
+          });
+          return;
+        }
+
+        markLeadSubmitted(data.email, data.phone);
+        storeLeadTransactionId(data.email, data.phone);
+
         if (result.pendingEmail) {
           const params = new URLSearchParams({ email: data.email });
           router.push(`/email-pending?${params.toString()}`);
@@ -213,7 +239,7 @@ export default function Form({ defaultText = "", compact = false }) {
             />
           )}
         />
-        <button type="submit" className={styles.send}>
+        <button type="submit" className={styles.send} disabled={isSubmitting}>
           {isSubmitting ? t("submitting") : t("submit")}
         </button>
       </form>

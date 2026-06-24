@@ -2,6 +2,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { verifyConfirmToken } from "@/lib/confirmToken";
 import { getSiteUrl } from "@/lib/emailVerification";
 import { sendTelegramNotification } from "@/lib/telegramNotify";
+import {
+  buildSubmissionKey,
+  isCompletedSubmission,
+  markCompletedSubmission,
+} from "@/lib/submissionDedup";
 
 function getConfirmationUrl(locale: string) {
   const base = getSiteUrl();
@@ -38,7 +43,13 @@ export default async function confirmEmailHandler(
   }
 
   try {
-    await sendTelegramNotification(payload);
+    const submissionKey = buildSubmissionKey(payload.email, payload.phone);
+
+    if (!isCompletedSubmission(submissionKey)) {
+      await sendTelegramNotification(payload);
+      markCompletedSubmission(submissionKey);
+    }
+
     return res.redirect(302, getConfirmationUrl(payload.locale || "uk"));
   } catch {
     const locale = payload.locale || "uk";

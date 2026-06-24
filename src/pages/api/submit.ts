@@ -4,6 +4,12 @@ import { isEmailVerificationEnabled } from "@/lib/emailVerification";
 import { sendConfirmationEmail } from "@/lib/sendConfirmationEmail";
 import { sendTelegramNotification } from "@/lib/telegramNotify";
 import {
+  buildSubmissionKey,
+  isDuplicateSubmission,
+  markCompletedSubmission,
+  markPendingSubmission,
+} from "@/lib/submissionDedup";
+import {
   normalizeSubmission,
   validateSubmission,
   type ValidationErrorCode,
@@ -28,15 +34,22 @@ export default async function submitHandler(
   }
 
   const data = validation.data;
+  const submissionKey = buildSubmissionKey(data.email, data.phone);
+
+  if (isDuplicateSubmission(submissionKey)) {
+    return res.status(200).json({ ok: true, duplicate: true });
+  }
 
   try {
     if (!isEmailVerificationEnabled()) {
       await sendTelegramNotification(data);
+      markCompletedSubmission(submissionKey);
       return res.status(200).json({ ok: true });
     }
 
     const token = await createConfirmToken(data);
     await sendConfirmationEmail(data, token);
+    markPendingSubmission(submissionKey);
 
     return res.status(200).json({ ok: true, pendingEmail: true });
   } catch (error) {

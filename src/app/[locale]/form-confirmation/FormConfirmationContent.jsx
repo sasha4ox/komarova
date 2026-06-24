@@ -3,17 +3,14 @@
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { fireConversionOnce } from "../../../../helpers/leadTracking";
 import styles from "./formConfirmation.module.css";
 
 export default function FormConfirmationContent() {
   const t = useTranslations("confirmation");
 
   useEffect(() => {
-    if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      window.gtag("event", "conversion", {
-        send_to: "AW-18083838611/--elCKrciKIcEJP1ha9D",
-      });
-    }
+    fireConversionOnce();
   }, []);
 
   return (
