@@ -1,5 +1,8 @@
+import { hasGoogleAdsClick } from "./attribution";
+
 const LEAD_KEY = "komarova_lead_submitted";
 const CONVERSION_KEY = "komarova_conversion_fired";
+const TRANSACTION_KEY = "komarova_lead_transaction_id";
 const WINDOW_MS = 24 * 60 * 60 * 1000;
 
 export function buildLeadKey(email, phone) {
@@ -67,7 +70,9 @@ export function storeLeadTransactionId(email, phone) {
     return;
   }
 
-  sessionStorage.setItem("komarova_lead_transaction_id", buildTransactionId(email, phone));
+  const transactionId = buildTransactionId(email, phone);
+  sessionStorage.setItem(TRANSACTION_KEY, transactionId);
+  localStorage.setItem(TRANSACTION_KEY, transactionId);
 }
 
 export function fireConversionOnce() {
@@ -75,9 +80,14 @@ export function fireConversionOnce() {
     return;
   }
 
+  // Only report to Google Ads when the user actually arrived via a Google Ad click.
+  if (!hasGoogleAdsClick()) {
+    return;
+  }
+
   const transactionId =
-    sessionStorage.getItem("komarova_lead_transaction_id") ||
-    localStorage.getItem(CONVERSION_KEY);
+    sessionStorage.getItem(TRANSACTION_KEY) ||
+    localStorage.getItem(TRANSACTION_KEY);
 
   if (!transactionId) {
     return;
@@ -94,5 +104,6 @@ export function fireConversionOnce() {
   });
 
   localStorage.setItem(CONVERSION_KEY, transactionId);
-  sessionStorage.removeItem("komarova_lead_transaction_id");
+  sessionStorage.removeItem(TRANSACTION_KEY);
+  localStorage.removeItem(TRANSACTION_KEY);
 }

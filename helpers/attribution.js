@@ -137,3 +137,7 @@ export function getAttribution() {
       `${window.location.pathname}${window.location.search}`,
   };
 }
+
+export function hasGoogleAdsClick() {
+  return Boolean(getAttribution().gclid);
+}
