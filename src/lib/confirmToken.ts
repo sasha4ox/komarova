@@ -1,4 +1,6 @@
 import { SignJWT, jwtVerify } from "jose";
+import { normalizeAttribution } from "./attribution";
+import { normalizeLocation } from "./location";
 import type { SubmissionBody } from "./validateSubmission";
 
 const TOKEN_TTL = "24h";
@@ -31,12 +33,14 @@ export async function verifyConfirmToken(
     const phone = String(payload.phone ?? "");
     const text = String(payload.text ?? "");
     const locale = String(payload.locale ?? "uk");
+    const attribution = normalizeAttribution(payload as Record<string, unknown>);
+    const location = normalizeLocation(payload as Record<string, unknown>);
 
     if (!firstName || !email || !phone) {
       return null;
     }
 
-    return { firstName, email, phone, text, locale };
+    return { firstName, email, phone, text, locale, attribution, location };
   } catch {
     return null;
   }

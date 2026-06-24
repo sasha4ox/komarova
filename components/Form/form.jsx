@@ -10,6 +10,7 @@ import {
   markLeadSubmitted,
   storeLeadTransactionId,
 } from "../../helpers/leadTracking";
+import { getAttribution } from "../../helpers/attribution";
 import styles from "./form.module.css";
 
 const conriesToShow = [
@@ -119,7 +120,7 @@ export default function Form({ defaultText = "", compact = false }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...data, locale }),
+        body: JSON.stringify({ ...data, locale, attribution: getAttribution() }),
       });
 
       const result = await response.json().catch(() => ({}));

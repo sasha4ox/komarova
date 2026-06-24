@@ -1,5 +1,12 @@
 import { parsePhoneNumberFromString } from "libphonenumber-js";
+import {
+  normalizeAttribution,
+  type SubmissionAttribution,
+} from "./attribution";
 import { isDisposableEmailDomain } from "./disposableEmailDomains";
+import { countryNameFromCode, type SubmissionLocation } from "./location";
+
+export type { SubmissionAttribution };
 
 export type SubmissionBody = {
   firstName: string;
@@ -7,6 +14,8 @@ export type SubmissionBody = {
   email: string;
   text?: string;
   locale?: string;
+  attribution?: SubmissionAttribution;
+  location?: SubmissionLocation;
 };
 
 export type ValidationErrorCode =
@@ -36,6 +45,7 @@ export function normalizeSubmission(body: unknown): SubmissionBody | null {
     email: String(data.email ?? "").trim().toLowerCase(),
     text: String(data.text ?? "").trim(),
     locale: String(data.locale ?? "uk").trim() || "uk",
+    attribution: normalizeAttribution(data),
   };
 }
 
@@ -76,6 +86,15 @@ export function validateSubmission(
       ...body,
       phone: phoneNumber.formatInternational(),
       locale: body.locale === "ru" ? "ru" : "uk",
+      location: phoneNumber.country
+        ? {
+            phoneCountryCode: phoneNumber.country,
+            phoneCountry: countryNameFromCode(
+              phoneNumber.country,
+              body.locale === "ru" ? "ru" : "uk",
+            ),
+          }
+        : body.location,
     },
   };
 }

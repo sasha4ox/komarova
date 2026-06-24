@@ -1,4 +1,6 @@
 import type { SubmissionBody } from "./validateSubmission";
+import { formatAttributionDetails } from "./attribution";
+import { formatLocationDetails } from "./location";
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = process.env.CHAT_ID;
@@ -15,6 +17,8 @@ export async function sendTelegramNotification(body: SubmissionBody) {
   }
 
   const prefix = localeTag(body.locale);
+  const sourceDetails = formatAttributionDetails(body.attribution);
+  const locationDetails = formatLocationDetails(body.location);
 
   const response = await fetch(
     `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
@@ -29,6 +33,8 @@ export async function sendTelegramNotification(body: SubmissionBody) {
           Ім'я: ${body.firstName}\r\n
           Пошта: ${body.email}\r\n
           Телефон: ${body.phone}\r\n
+          ${locationDetails ? `${locationDetails}\r\n` : ""}
+          ${sourceDetails ? `${sourceDetails}\r\n` : ""}
            ${body.text ? `Повідомлення: ${body.text}` : ""}
           `,
       }),

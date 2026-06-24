@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createConfirmToken } from "@/lib/confirmToken";
 import { isEmailVerificationEnabled } from "@/lib/emailVerification";
+import { buildSubmissionLocation } from "@/lib/location";
+import { getRequestGeo } from "@/lib/requestGeo";
 import { sendConfirmationEmail } from "@/lib/sendConfirmationEmail";
 import { sendTelegramNotification } from "@/lib/telegramNotify";
 import {
@@ -33,7 +35,14 @@ export default async function submitHandler(
     return res.status(400).json({ error: validation.code });
   }
 
-  const data = validation.data;
+  const data = {
+    ...validation.data,
+    location: buildSubmissionLocation(
+      getRequestGeo(req),
+      validation.data.location?.phoneCountryCode,
+      validation.data.locale,
+    ),
+  };
   const submissionKey = buildSubmissionKey(data.email, data.phone);
 
   if (isDuplicateSubmission(submissionKey)) {

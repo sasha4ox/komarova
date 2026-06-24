@@ -7,6 +7,7 @@ import "../globals.css";
 import styles from "../layout.module.css";
 import HeaderComponent from "../../../components/header";
 import Footer from "../../../components/Footer/footer";
+import AttributionCapture from "../../../components/AttributionCapture/AttributionCapture";
 import { routing } from "../../i18n/routing";
 
 const geistSans = Geist({
@@ -132,6 +133,7 @@ export default async function LocaleLayout({ children, params }) {
         className={`${geistSans.variable} ${geistMono.variable} ${yesevaSans.variable} ${greatVibes.variable}`}
       >
         <NextIntlClientProvider messages={messages}>
+          <AttributionCapture />
           <div className={styles.pageShell}>
             <HeaderComponent />
             <div className={styles.main}>{children}</div>
