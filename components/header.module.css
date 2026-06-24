@@ -53,6 +53,10 @@
   gap: 135px;
 }
 
+.headerWrapperEn {
+  gap: 400px;
+}
+
 @media (max-width: 1400px) {
   .headerWrapper {
     width: 100%;

@@ -1,4 +1,5 @@
 import type { RequestGeo } from "./requestGeo";
+import { intlDisplayLocale } from "./locale";
 
 export type SubmissionLocation = {
   ipCity?: string;
@@ -22,7 +23,7 @@ function sanitizeField(value: unknown): string | undefined {
 
 export function countryNameFromCode(code: string, locale = "uk") {
   try {
-    const displayLocale = locale === "ru" ? "ru" : "uk";
+    const displayLocale = intlDisplayLocale(locale);
     return (
       new Intl.DisplayNames([displayLocale], { type: "region" }).of(code) || code
     );

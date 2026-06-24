@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { hreflangLanguages, localePathPrefix } from "@/lib/locale";
 import Quiz from "../../../../components/Quiz/Quiz";
 
 const SITE_URL = "https://ikomarova.com";
@@ -6,17 +7,14 @@ const SITE_URL = "https://ikomarova.com";
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadataQuiz" });
-  const localePath = locale === "uk" ? "" : `/${locale}`;
+  const localePath = localePathPrefix(locale);
 
   return {
     title: t("title"),
     description: t("description"),
     alternates: {
       canonical: `${SITE_URL}${localePath}/quiz`,
-      languages: {
-        uk: `${SITE_URL}/quiz`,
-        ru: `${SITE_URL}/ru/quiz`,
-      },
+      languages: hreflangLanguages("/quiz"),
     },
   };
 }

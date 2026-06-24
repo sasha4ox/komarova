@@ -1,28 +1,58 @@
 import type { ContactMethod, SubmissionBody } from "./validateSubmission";
 import { formatAttributionDetails } from "./attribution";
 import { formatLocationDetails } from "./location";
+import { localeTag, normalizeAppLocale } from "./locale";
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = process.env.CHAT_ID;
 
-function localeTag(locale?: string) {
-  if (locale === "ru") return "[RU]";
-  if (locale === "uk") return "[UK]";
-  return "";
-}
+const CONTACT_METHOD_LABELS: Record<
+  ContactMethod,
+  { uk: string; ru: string; en: string }
+> = {
+  telegram: { uk: "Telegram", ru: "Telegram", en: "Telegram" },
+  viber: { uk: "Viber", ru: "Viber", en: "Viber" },
+  whatsapp: { uk: "WhatsApp", ru: "WhatsApp", en: "WhatsApp" },
+  signal: { uk: "Signal", ru: "Signal", en: "Signal" },
+  phone: {
+    uk: "Телефонний дзвінок",
+    ru: "Телефонный звонок",
+    en: "Phone call",
+  },
+};
 
-const CONTACT_METHOD_LABELS: Record<ContactMethod, { uk: string; ru: string }> =
-  {
-    telegram: { uk: "Telegram", ru: "Telegram" },
-    viber: { uk: "Viber", ru: "Viber" },
-    whatsapp: { uk: "WhatsApp", ru: "WhatsApp" },
-    signal: { uk: "Signal", ru: "Signal" },
-    phone: { uk: "Телефонний дзвінок", ru: "Телефонный звонок" },
-  };
+const NOTIFICATION_LABELS = {
+  uk: {
+    name: "Ім'я",
+    email: "Пошта",
+    phone: "Телефон",
+    contactMethod: "Спосіб зв'язку",
+    message: "Повідомлення",
+  },
+  ru: {
+    name: "Имя",
+    email: "Почта",
+    phone: "Телефон",
+    contactMethod: "Способ связи",
+    message: "Сообщение",
+  },
+  en: {
+    name: "Name",
+    email: "Email",
+    phone: "Phone",
+    contactMethod: "Contact method",
+    message: "Message",
+  },
+} as const;
 
 function contactMethodLabel(method: ContactMethod, locale?: string) {
-  const labels = CONTACT_METHOD_LABELS[method];
-  return locale === "ru" ? labels.ru : labels.uk;
+  const normalized = normalizeAppLocale(locale);
+  return CONTACT_METHOD_LABELS[method][normalized];
+}
+
+function notificationLabels(locale?: string) {
+  const normalized = normalizeAppLocale(locale);
+  return NOTIFICATION_LABELS[normalized];
 }
 
 export async function sendTelegramNotification(body: SubmissionBody) {
@@ -31,6 +61,7 @@ export async function sendTelegramNotification(body: SubmissionBody) {
   }
 
   const prefix = localeTag(body.locale);
+  const labels = notificationLabels(body.locale);
   const sourceDetails = formatAttributionDetails(body.attribution);
   const locationDetails = formatLocationDetails(body.location);
 
@@ -44,11 +75,11 @@ export async function sendTelegramNotification(body: SubmissionBody) {
       body: JSON.stringify({
         chat_id: CHAT_ID,
         text: `${prefix ? `${prefix} ` : ""}💬 Website:\n
-          Ім'я: ${body.firstName}\r\n
-          Пошта: ${body.email}\r\n
-          Телефон: ${body.phone}\r\n
-          Спосіб зв'язку: ${contactMethodLabel(body.contactMethod, body.locale)}\r\n
-          ${body.text ? `Повідомлення: ${body.text}\r\n` : ""}
+          ${labels.name}: ${body.firstName}\r\n
+          ${labels.email}: ${body.email}\r\n
+          ${labels.phone}: ${body.phone}\r\n
+          ${labels.contactMethod}: ${contactMethodLabel(body.contactMethod, body.locale)}\r\n
+          ${body.text ? `${labels.message}: ${body.text}\r\n` : ""}
           ${locationDetails ? `${locationDetails}\r\n` : ""}
           ${sourceDetails ? `${sourceDetails}\r\n` : ""}
           `,

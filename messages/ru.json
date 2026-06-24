@@ -392,7 +392,8 @@
   "languageSwitcher": {
     "ariaLabel": "Выбор языка",
     "uk": "УК",
-    "ru": "РУ"
+    "ru": "РУ",
+    "en": "EN"
   },
   "legal": {
     "oferta": {

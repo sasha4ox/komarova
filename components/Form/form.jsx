@@ -12,6 +12,7 @@ import {
   storeLeadTransactionId,
 } from "../../helpers/leadTracking";
 import { getAttribution } from "../../helpers/attribution";
+import { telInputLang } from "@/lib/locale";
 import styles from "./form.module.css";
 
 const conriesToShow = [
@@ -212,7 +213,7 @@ export default function Form({ defaultText = "", compact = false, inModal = fals
               {...field}
               defaultCountry="UA"
               onlyCountries={conriesToShow}
-              lang={locale === "ru" ? "ru" : "uk"}
+              lang={telInputLang(locale)}
               label={t("phone")}
               variant="outlined"
               error={!!error}

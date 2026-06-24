@@ -5,6 +5,7 @@ import {
 } from "./attribution";
 import { isDisposableEmailDomain } from "./disposableEmailDomains";
 import { countryNameFromCode, type SubmissionLocation } from "./location";
+import { intlDisplayLocale, normalizeAppLocale } from "./locale";
 
 export type { SubmissionAttribution };
 
@@ -65,7 +66,7 @@ export function normalizeSubmission(body: unknown): NormalizedSubmission | null 
     contactMethod: String(data.contactMethod ?? "").trim(),
     email: String(data.email ?? "").trim().toLowerCase(),
     text: String(data.text ?? "").trim(),
-    locale: String(data.locale ?? "uk").trim() || "uk",
+    locale: normalizeAppLocale(String(data.locale ?? "uk").trim() || "uk"),
     attribution: normalizeAttribution(data),
   };
 }
@@ -113,13 +114,13 @@ export function validateSubmission(
       ...body,
       contactMethod,
       phone: phoneNumber.formatInternational(),
-      locale: body.locale === "ru" ? "ru" : "uk",
+      locale: normalizeAppLocale(body.locale),
       location: phoneNumber.country
         ? {
             phoneCountryCode: phoneNumber.country,
             phoneCountry: countryNameFromCode(
               phoneNumber.country,
-              body.locale === "ru" ? "ru" : "uk",
+              intlDisplayLocale(body.locale),
             ),
           }
         : body.location,

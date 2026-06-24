@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { verifyConfirmToken } from "@/lib/confirmToken";
 import { getSiteUrl } from "@/lib/emailVerification";
+import { localePathPrefix, normalizeAppLocale } from "@/lib/locale";
 import { sendTelegramNotification } from "@/lib/telegramNotify";
 import {
   buildSubmissionKeys,
@@ -8,18 +9,22 @@ import {
   markCompletedSubmission,
 } from "@/lib/submissionDedup";
 
-function getConfirmationUrl(locale: string) {
+function localizedPath(locale: string, path: string) {
   const base = getSiteUrl();
-  return locale === "ru"
-    ? `${base}/ru/form-confirmation`
-    : `${base}/form-confirmation`;
+  const prefix = localePathPrefix(normalizeAppLocale(locale));
+  return `${base}${prefix}${path}`;
+}
+
+function getConfirmationUrl(locale: string) {
+  return localizedPath(locale, "/form-confirmation");
 }
 
 function getExpiredUrl(locale: string) {
-  const base = getSiteUrl();
-  return locale === "ru"
-    ? `${base}/ru/email-pending?status=expired`
-    : `${base}/email-pending?status=expired`;
+  return localizedPath(locale, "/email-pending?status=expired");
+}
+
+function getErrorUrl(locale: string) {
+  return localizedPath(locale, "/email-pending?status=error");
 }
 
 export default async function confirmEmailHandler(
@@ -50,14 +55,14 @@ export default async function confirmEmailHandler(
       markCompletedSubmission(submissionKeys);
     }
 
-    return res.redirect(302, getConfirmationUrl(payload.locale || "uk"));
+    return res.redirect(
+      302,
+      getConfirmationUrl(payload.locale || "uk"),
+    );
   } catch {
-    const locale = payload.locale || "uk";
-    const base = getSiteUrl();
-    const errorUrl =
-      locale === "ru"
-        ? `${base}/ru/email-pending?status=error`
-        : `${base}/email-pending?status=error`;
-    return res.redirect(302, errorUrl);
+    return res.redirect(
+      302,
+      getErrorUrl(payload.locale || "uk"),
+    );
   }
 }

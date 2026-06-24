@@ -1,12 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { localeTag } from "@/lib/locale";
 
 const mail = require("@sendgrid/mail");
-
-function localeTag(locale?: string) {
-  if (locale === "ru") return "[RU]";
-  if (locale === "uk") return "[UK]";
-  return "";
-}
 
 export default async function contactsHandler(
   req: NextApiRequest,

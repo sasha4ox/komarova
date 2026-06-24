@@ -9,6 +9,7 @@ import HeaderComponent from "../../../components/header";
 import Footer from "../../../components/Footer/footer";
 import AttributionCapture from "../../../components/AttributionCapture/AttributionCapture";
 import { routing } from "../../i18n/routing";
+import { hreflangLanguages, localePathPrefix } from "../../lib/locale";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,7 +56,7 @@ export async function generateMetadata({ params }) {
     })),
   };
 
-  const localePath = locale === routing.defaultLocale ? "" : `/${locale}`;
+  const localePath = localePathPrefix(locale);
 
   return {
     title: t("title"),
@@ -63,10 +64,7 @@ export async function generateMetadata({ params }) {
     keywords: t.raw("keywords"),
     alternates: {
       canonical: `${SITE_URL}${localePath}`,
-      languages: {
-        uk: `${SITE_URL}`,
-        ru: `${SITE_URL}/ru`,
-      },
+      languages: hreflangLanguages(),
     },
     other: {
       "application/ld+json": JSON.stringify(jsonLd),

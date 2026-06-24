@@ -23,6 +23,7 @@ export default function HeaderComponent() {
         <div
           className={classNames(styles.headerWrapper, {
             [styles.headerWrapperRu]: locale === "ru",
+            [styles.headerWrapperEn]: locale === "en",
           })}
         >
           <Link className={styles.name} href="/" aria-label={t("logoAria")}>

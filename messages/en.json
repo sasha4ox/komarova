@@ -1,0 +1,562 @@
+{
+  "metadata": {
+    "title": "Psychologist Irina Komarova — Online Consultations & Psychotherapy",
+    "description": "Psychologist Irina Komarova — online consultations for adults. Individual and couples therapy, support with anxiety, crises, and relocation. Confidential.",
+    "keywords": [
+      "online psychologist",
+      "psychologist Ukraine",
+      "online psychotherapy",
+      "psychologist Irina Komarova",
+      "individual psychotherapy",
+      "couples therapy",
+      "anxiety",
+      "emotional crises"
+    ],
+    "jsonLd": [
+      {
+        "question": "How does an online consultation work?",
+        "answer": "Consultations take place online via Zoom, Google Meet, or Telegram."
+      },
+      {
+        "question": "How long is a session?",
+        "answer": "An individual session lasts 60 minutes; a couples session lasts 80 minutes."
+      }
+    ]
+  },
+  "metadataQuiz": {
+    "title": "Mental Health Quiz — Irina Komarova",
+    "description": "A short quiz to help you better understand your inner state. Your result can point you toward the right focus for working with a psychologist."
+  },
+  "nav": {
+    "services": "Services",
+    "contacts": "Contact",
+    "price": "Pricing",
+    "faq": "FAQ",
+    "privacy": "Privacy Policy",
+    "oferta": "Terms of Service",
+    "quiz": "Quiz",
+    "book": "Book a Session"
+  },
+  "header": {
+    "name": "Irina Komarova",
+    "role": "Psychologist for Adults",
+    "logoAria": "Irina Komarova logo"
+  },
+  "hero": {
+    "imageAlt": "Portrait of psychologist Irina Komarova",
+    "eyebrow": "ONLINE PSYCHOLOGIST · IRINA KOMAROVA",
+    "title": "Online psychologist — a safe ",
+    "titleHighlight": "space for change",
+    "lead": "Individual and couples therapy online. I work with anxiety, relationships, and life crises. Zoom, Meet, or Telegram — wherever works best for you.",
+    "trustConfidential": "Confidential",
+    "trustNoQueue": "No waiting list",
+    "trustPrice": "1900 UAH / session",
+    "ctaBook": "Book a consultation →",
+    "ctaQuiz": "Take the quiz →"
+  },
+  "about": {
+    "title": "About Me",
+    "text": "My name is Irina. I'm a psychologist who helps people better understand themselves, their reactions, and their relationships with others.\nI work with anxiety, emotional states, inner conflicts, and life crises. My approach is individual: I don't offer ready-made answers — I help you find your own.\nI practice gestalt therapy, which allows us to work with what you're experiencing here and now — without getting lost in endless analysis of the past."
+  },
+  "services": {
+    "title": "SERVICES",
+    "subtitle": "Come for a consultation if you are experiencing:",
+    "items": [
+      "Anxiety",
+      "Love addiction",
+      "Difficulties in interpersonal relationships",
+      "Low self-confidence",
+      "Feelings of loneliness",
+      "A desire to know yourself better"
+    ]
+  },
+  "pricing": {
+    "title": "pricing",
+    "subtitle": "Therapy fees",
+    "individual": {
+      "name": "Individual Therapy",
+      "price": "60 min / 1900 UAH",
+      "checkName": "Work focused on creating meaningful change in the client's life:",
+      "items": [
+        "Sessions take place once or twice a week, depending on the client's needs.",
+        "A space where you can freely explore your feelings and better understand your own needs.",
+        "We can't rewrite the past, but we can choose how to live here and now."
+      ]
+    },
+    "couples": {
+      "name": "Couples Therapy",
+      "price": "80 min / 3300 UAH",
+      "checkName": "Support in resolving challenges in the life of a couple:",
+      "items": [
+        "Finding ways to overcome difficulties in the relationship.",
+        "Navigating children growing up, grief, truth, and dishonesty.",
+        "A space where you can truly see each other and decide how to build your life — together or apart."
+      ]
+    }
+  },
+  "reviews": {
+    "items": [
+      {
+        "text": "I'm grateful for the support during a very difficult period. After the consultations, I felt more grounded in myself and found it easier to make decisions.",
+        "author": "Maria B."
+      },
+      {
+        "text": "After our sessions, I learned to better understand my emotions. I feel less anxiety and more inner calm.",
+        "author": "Olena K."
+      },
+      {
+        "text": "It felt safe to talk about difficult things in the sessions. I deeply value the attentiveness, sensitivity, and professional support throughout the process of change.",
+        "author": "Natalia Sh."
+      },
+      {
+        "text": "Through our work, I was able to see recurring patterns in my relationships and gradually change them. I feel more clarity and confidence.",
+        "author": "Anna S."
+      },
+      {
+        "text": "I came in exhausted and constantly tense. Gradually I reconnected with my body and learned to notice my boundaries and needs.",
+        "author": "Tetiana K."
+      },
+      {
+        "text": "Therapy helped me sort through what I hadn't been able to understand for a long time. I gained a sense of direction and inner stability.",
+        "author": "Andrii L."
+      },
+      {
+        "text": "Sincere thanks for the warm connection and deep work. After each meeting, I was left with the feeling that I was heard and understood.",
+        "author": "Kateryna R."
+      },
+      {
+        "text": "Therapy helped me get through a difficult period of relocation. It became easier to cope with uncertainty and find support within myself.",
+        "author": "Iryna H."
+      },
+      {
+        "text": "I feel significant changes in how I treat myself: less criticism, more acceptance. This has also affected my relationships with loved ones.",
+        "author": "Oksana M."
+      },
+      {
+        "text": "Professional, gentle, and at the same time very precise. I recommend her to anyone who wants to understand themselves more deeply and move out of an emotional dead end.",
+        "author": "Sofia N."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "What should you expect during your first meeting with a psychologist?",
+        "answer": "The first meeting is primarily about getting to know each other. There's no need to prepare specially: allow yourself to relax and don't set internal limits. You can start with any topic. Emotions are often intense during the first session — there's no need to hold them back. Sometimes it's hard to formulate one specific problem right away: thoughts may feel tangled, and experiences may overlap. As we work together, I'll help you gradually clarify what brings you here."
+      },
+      {
+        "question": "Can a single consultation with a psychologist significantly change your life?",
+        "answer": "There's a common belief that one consultation can completely transform your life, but that's a myth. Our psyche has been shaped over years by family, experience, and environment. Changing established patterns of thinking and behavior takes time. In a safe therapeutic space — one that is built gradually — openness becomes possible, along with access to the deeper causes of difficulties."
+      },
+      {
+        "question": "How often do therapeutic sessions usually take place?",
+        "answer": "Most often, sessions happen once a week. After active therapy is complete, supportive sessions every two weeks or once a month are possible — as a form of caring for your mental health. An individual consultation or therapy session lasts 50 minutes; couples sessions last 80 minutes. More details about formats and duration are available upon request."
+      },
+      {
+        "question": "What does a psychotherapy session usually look like?",
+        "answer": "Our work is primarily based on dialogue. Through conversation, the session becomes a shared exploration of your inner world. You share your experiences and difficulties, and I don't just listen — I clarify, reflect, and ask questions, sometimes uncomfortable ones. This dialogue helps you see yourself more clearly and understand how you build relationships with others. Throughout the process, it's important to talk about everything — what works for you and what causes discomfort. Confidentiality is guaranteed."
+      },
+      {
+        "question": "How can you sense or recognize that therapy is working?",
+        "answer": "Gradually, your behavior and way of responding begin to change. You start applying skills gained in therapy to everyday life, becoming more mindful and attentive toward yourself and others. You develop a greater ability to hear yourself, understand the motives behind your actions, and notice automatic thoughts and reactions. You become more aware of your desires and better able to distinguish your own feelings."
+      },
+      {
+        "question": "Why are questions asked during a session that may seem unclear?",
+        "answer": "Working with me involves dialogue. Throughout the process, I keep focus on your situation, form initial hypotheses, and test them through questions. Every question is aimed at expanding awareness of what is happening within you and around you. This is how so-called \"blind spots\" are revealed — things that previously went unnoticed. Often, that's enough for new ways of acting and changes in life to emerge."
+      },
+      {
+        "question": "Is it possible to book a consultation for a loved one or partner?",
+        "answer": "I accept adult clients only at their own request. Reaching out independently shows inner readiness for work and is an important first step toward change. Psychotherapy is a process that is only possible with voluntary participation. It's impossible to work with the wish that \"someone else should change\" if that person isn't ready themselves."
+      }
+    ]
+  },
+  "form": {
+    "title": "Book a Consultation",
+    "intro": "If you have any questions or need to discuss a mental health concern, please don't hesitate to reach out.",
+    "firstName": "Your name",
+    "phone": "Your phone number",
+    "contactMethodLabel": "Choose a convenient way to get in touch:",
+    "contactTelegram": "Telegram",
+    "contactViber": "Viber",
+    "contactWhatsapp": "WhatsApp",
+    "contactSignal": "Signal",
+    "contactPhoneCall": "Phone call",
+    "contactMethodRequired": "Please choose a convenient way to get in touch",
+    "email": "Your e-mail",
+    "request": "Your request",
+    "placeholder": "Write your request",
+    "required": "This field is required",
+    "phoneRequired": "Phone number is required",
+    "emailInvalid": "Please enter a valid email address",
+    "disposableEmail": "Please use a permanent email address, not a temporary one",
+    "phoneInvalid": "Please enter a valid phone number",
+    "submitFailed": "Unfortunately, we couldn't send your request. Please try again.",
+    "alreadySubmitted": "You've already submitted a request. We'll contact you shortly.",
+    "submit": "Send request",
+    "submitting": "Sending request",
+    "error": "Unfortunately, we couldn't send your request!"
+  },
+  "quiz": {
+    "srTitle": "Mental health quiz by psychologist Irina Komarova",
+    "stepLabel": "Question {current} of {total}",
+    "back": "← Back",
+    "next": "Next →",
+    "showResult": "See result →",
+    "bookConsultation": "Book a consultation",
+    "restart": "Take again",
+    "disclaimer": "This is not a clinical tool and does not replace consultation with a specialist.",
+    "resultPrefix": "Quiz result: {category} ({scores})",
+    "questions": [
+      {
+        "q": "What most often keeps you up at night?",
+        "opts": [
+          { "text": "Anxious thoughts that won't switch off", "cat": "anxiety" },
+          { "text": "Thoughts about relationships or loved ones", "cat": "relations" },
+          { "text": "A feeling that something is going wrong in life", "cat": "selfcrisis" },
+          { "text": "Simply no energy, but sleep won't come", "cat": "burnout" },
+          { "text": "I generally sleep well — just curious to try", "cat": "self" }
+        ]
+      },
+      {
+        "q": "How do you usually react to conflict?",
+        "opts": [
+          { "text": "I worry in advance, even before the conversation", "cat": "anxiety" },
+          { "text": "I'm afraid of losing the person, so I avoid or give in", "cat": "relations" },
+          { "text": "I doubt whether I have the right to my point of view", "cat": "selfcrisis" },
+          { "text": "No energy to argue — I don't care", "cat": "burnout" },
+          { "text": "Calmly — I usually resolve things without stress", "cat": "self" }
+        ]
+      },
+      {
+        "q": "If you had to describe your inner state in one word?",
+        "opts": [
+          { "text": "Tension", "cat": "anxiety" },
+          { "text": "Loneliness", "cat": "relations" },
+          { "text": "Lostness", "cat": "selfcrisis" },
+          { "text": "Emptiness", "cat": "burnout" },
+          { "text": "Curiosity", "cat": "self" }
+        ]
+      },
+      {
+        "q": "What troubles you most in relationships?",
+        "opts": [
+          { "text": "A constant fear that something will go wrong", "cat": "anxiety" },
+          { "text": "Dependence on the other person's reaction", "cat": "relations" },
+          { "text": "I don't understand what I actually want from relationships", "cat": "selfcrisis" },
+          { "text": "No strength to invest energy in them", "cat": "burnout" },
+          { "text": "Generally things are fine — I want to understand deeper", "cat": "self" }
+        ]
+      },
+      {
+        "q": "When did you last feel genuine peace?",
+        "opts": [
+          { "text": "Hard to remember — anxiety is constant background noise", "cat": "anxiety" },
+          { "text": "When things were good in my relationship", "cat": "relations" },
+          { "text": "I don't remember when I last felt like \"myself\"", "cat": "selfcrisis" },
+          { "text": "A long time ago — now I'm just functioning", "cat": "burnout" },
+          { "text": "Recently — overall I feel good", "cat": "self" }
+        ]
+      },
+      {
+        "q": "What's hardest for you right now?",
+        "opts": [
+          { "text": "Letting go of control and not spiraling", "cat": "anxiety" },
+          { "text": "Building closeness without fear of being rejected", "cat": "relations" },
+          { "text": "Understanding who I am and what I want", "cat": "selfcrisis" },
+          { "text": "Finding any motivation at all", "cat": "burnout" },
+          { "text": "Nothing specific — I just want to understand myself better", "cat": "self" }
+        ]
+      },
+      {
+        "q": "What do you most want from therapy?",
+        "opts": [
+          { "text": "To learn to calm myself and worry less", "cat": "anxiety" },
+          { "text": "To understand my relationships and patterns", "cat": "relations" },
+          { "text": "To find myself and feel inner support", "cat": "selfcrisis" },
+          { "text": "To get my energy and joy in life back", "cat": "burnout" },
+          { "text": "To know myself better — even without an acute problem", "cat": "self" }
+        ]
+      }
+    ],
+    "results": {
+      "anxiety": {
+        "emoji": "🌊",
+        "cat": "Anxiety and tension",
+        "title": "You're living in anticipation of danger",
+        "desc": "Your nervous system is constantly on alert. It's exhausting — even when everything looks calm on the outside. Anxiety responds well to therapy, and changes are often felt after just a few sessions."
+      },
+      "relations": {
+        "emoji": "🤝",
+        "cat": "Relationships and closeness",
+        "title": "Closeness is both what you want and what scares you",
+        "desc": "You invest a lot in relationships, but something keeps you from feeling real support beside another person. This can be explored — and changed."
+      },
+      "selfcrisis": {
+        "emoji": "🧭",
+        "cat": "Self-esteem and crisis",
+        "title": "You're searching for yourself — and that takes courage",
+        "desc": "Feeling lost or in inner conflict isn't weakness. It's a signal that it's time to get to know yourself better and find your own footing."
+      },
+      "burnout": {
+        "emoji": "🕯️",
+        "cat": "Burnout",
+        "title": "Your resources are running low",
+        "desc": "When you don't have the strength even for things that used to bring joy — that's not laziness. It's an important signal worth hearing in time, before it gets harder."
+      },
+      "self": {
+        "emoji": "🌱",
+        "cat": "Self-discovery",
+        "title": "You're in a good place — and that's the best time to work on yourself",
+        "desc": "Therapy isn't only for crises. Deeper self-understanding helps you make better decisions, build relationships, and live more consciously."
+      }
+    },
+    "catLabels": {
+      "anxiety": "Anxiety",
+      "relations": "Relationships",
+      "selfcrisis": "Self-esteem",
+      "burnout": "Burnout",
+      "self": "Self-discovery"
+    }
+  },
+  "contacts": {
+    "title": "Contact",
+    "meetingsTitle": "Where do sessions take place?",
+    "body": "Online sessions take place in a format that works for you. You can choose any platform — Zoom, Google Meet, or Telegram. We adapt to your circumstances and preferences so the consultation feels comfortable, without unnecessary stress, and as helpful as possible. Wherever works for you — that's where we meet.",
+    "book": "Book a Session"
+  },
+  "typewriter": {
+    "phrases": [
+      "Improve your relationships",
+      "Believe in yourself",
+      "Change your <strong>life</strong>",
+      "<strong>attitude toward yourself</strong>",
+      "<strong>inner alignment</strong>",
+      "Live in harmony"
+    ],
+    "button": "Book a consultation"
+  },
+  "reviewsSlider": {
+    "title": "reviews",
+    "subtitle": "What clients say",
+    "count": "based on 260+ reviews",
+    "prevAria": "Previous review",
+    "nextAria": "Next review"
+  },
+  "confirmation": {
+    "headline": "You're ",
+    "headlineEm": "booked!",
+    "subtext": "Thank you for reaching out — we'll call you shortly to confirm a convenient time.",
+    "nextLabel": "What's next",
+    "nextValue": "Expect a call from a specialist",
+    "timeLabel": "Response time",
+    "timeValue": "Usually within a few hours",
+    "back": "← Back to site"
+  },
+  "emailPending": {
+    "title": "Check your email",
+    "headline": "Almost there!",
+    "subtext": "We've sent a confirmation link to {email}. Please open it and click the confirm button.",
+    "hint": "If you don't see the email — check your Spam or Promotions folder.",
+    "expired": "This link is invalid or has expired. Please fill out the form again.",
+    "error": "We couldn't confirm your request. Please try submitting the form again.",
+    "back": "← Back to site"
+  },
+  "emailConfirm": {
+    "subject": "Confirm your request — Irina Komarova",
+    "greeting": "Hello, {name}!",
+    "body": "Thank you for reaching out. To complete your consultation booking, please confirm your email address.",
+    "button": "Confirm email",
+    "expiry": "This link is valid for 24 hours.",
+    "ignore": "If you didn't submit a request on the website, simply ignore this email."
+  },
+  "footer": {
+    "brandName": "Irina Komarova",
+    "brandRole": "Psychologist for Adults",
+    "tagline": "Online consultations · Zoom, Meet, Telegram",
+    "price": "1900 UAH / 60 min",
+    "navigation": "Navigation",
+    "contacts": "Contact",
+    "navAria": "Footer navigation",
+    "copyright": "© {year} Irina Komarova"
+  },
+  "card": {
+    "photoAlt": "Photo for {name}"
+  },
+  "descriptionCard": {
+    "openAria": "Open booking window"
+  },
+  "scrollTop": {
+    "ariaLabel": "Scroll to top"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "Language selection",
+    "uk": "UK",
+    "ru": "RU",
+    "en": "EN"
+  },
+  "legal": {
+    "oferta": {
+      "title": "Public Offer",
+      "intro": "This document is a public offer pursuant to Articles 633, 641, and 642 of the Civil Code of Ukraine. It sets out the terms for the provision of psychological services by FOP Komarova Irina Volodymyrivna. Use of the services constitutes full and unconditional acceptance of this Offer.",
+      "sections": [
+        {
+          "title": "1. General Provisions",
+          "paragraphs": [
+            "1.1. Service Provider: FOP Komarova Irina Volodymyrivna.",
+            "1.2. Client: any individual who requests services and accepts the terms of this Offer.",
+            "1.3. Services: psychological and sexological consultations and therapeutic sessions provided remotely (online) or in person by prior arrangement.",
+            "1.4. The agreement between the Service Provider and the Client is considered concluded from the moment of booking a consultation and/or making payment."
+          ]
+        },
+        {
+          "title": "2. Subject of the Agreement",
+          "paragraphs": [
+            "2.1. The Service Provider delivers psychological services, and the Client accepts and pays for these services in accordance with the terms of this Agreement.",
+            "2.2. Services may include individual, family, or couples consultations, as well as psychotherapy and sexological counseling."
+          ]
+        },
+        {
+          "title": "3. Provision of Services",
+          "paragraphs": [
+            "3.1. Booking a consultation is done via the website form, by phone, or through another agreed communication channel.",
+            "3.2. The Service Provider agrees with the Client on the format of the consultation: in person or online (video call via Zoom, Google Meet, etc.).",
+            "3.3. Session frequency is determined individually.",
+            "3.4. If the Client is more than 15 minutes late without prior notice, the Service Provider has the right to end the session at the scheduled time without refund."
+          ]
+        },
+        {
+          "title": "4. Fees and Payment",
+          "paragraphs": [
+            "4.1. Service fees are listed on the Service Provider's website or agreed separately with the Client.",
+            "4.2. Payment is made by bank transfer or another agreed method.",
+            "4.3. If a session is cancelled less than 24 hours before the scheduled time, the service fee is non-refundable.",
+            "4.4. If the Service Provider is unable to conduct a session for their own reasons, the Client has the right to choose a new time or request a refund."
+          ]
+        },
+        {
+          "title": "5. Rights and Obligations of the Parties",
+          "paragraphs": [],
+          "listSections": [
+            {
+              "title": "5.1. Rights of the Service Provider:",
+              "items": [
+                "To refuse services if the Client violates the terms of this Agreement.",
+                "To independently determine therapeutic methods and approaches."
+              ]
+            },
+            {
+              "title": "5.2. Rights of the Client:",
+              "items": [
+                "To receive quality and professional consultations.",
+                "To discontinue therapy at any time by notifying the Service Provider in advance."
+              ]
+            },
+            {
+              "title": "5.3. Obligations of the Service Provider:",
+              "items": [
+                "To adhere to principles of confidentiality and ethical standards.",
+                "To provide services at the agreed time and in the agreed format."
+              ]
+            },
+            {
+              "title": "5.4. Obligations of the Client:",
+              "items": [
+                "To pay for services on time.",
+                "To provide accurate information necessary for conducting consultations."
+              ]
+            }
+          ]
+        },
+        {
+          "title": "6. Liability of the Parties",
+          "paragraphs": [
+            "6.1. The Service Provider is not liable for decisions or actions taken by the Client based on recommendations received during sessions.",
+            "6.2. The Client is responsible for the accuracy of provided data and timely payment for services."
+          ]
+        },
+        {
+          "title": "7. Processing of Personal Data",
+          "paragraphs": [
+            "7.1. The Client consents to the processing of their personal data in accordance with the Law of Ukraine \"On Personal Data Protection\".",
+            "7.2. Personal data is used solely for providing services and maintaining records.",
+            "7.3. The Service Provider does not transfer personal data to third parties without the Client's consent, except as required by law."
+          ]
+        },
+        {
+          "title": "8. Dispute Resolution",
+          "paragraphs": [
+            "8.1. All disputes arising from this Agreement shall be resolved through negotiation. If agreement cannot be reached, the dispute shall be referred to a court in accordance with the applicable law of Ukraine."
+          ]
+        },
+        {
+          "title": "9. Term of the Agreement",
+          "paragraphs": [
+            "9.1. This Offer remains in effect until withdrawn by the Service Provider or amended.",
+            "9.2. The Service Provider reserves the right to amend the terms of the Offer unilaterally by publishing a new version on the website."
+          ]
+        },
+        {
+          "title": "10. Contact Information",
+          "paragraphs": [
+            "FOP Komarova Irina Volodymyrivna",
+            "Registered: 01.01.2026"
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "intro": "This document defines the privacy policy of the Service Provider's website in accordance with the Law of Ukraine \"On Personal Data Protection\".",
+      "sections": [
+        {
+          "title": "1. General Provisions",
+          "paragraphs": [
+            "1.1. The Service Provider undertakes to protect the confidentiality and security of users' personal data.",
+            "1.2. This Policy applies to all data that the Client provides through the website."
+          ]
+        },
+        {
+          "title": "2. Processing of Personal Data",
+          "paragraphs": [
+            "2.1. Personal data is collected solely for providing services, communication, and maintaining accounting records.",
+            "2.2. The Service Provider may process the following data: name, contact phone number, email address, information about consultations."
+          ]
+        },
+        {
+          "title": "3. Storage and Protection of Data",
+          "paragraphs": [
+            "3.1. Personal data is stored in secure databases for the period necessary to fulfill services.",
+            "3.2. The Service Provider takes all necessary measures to protect data from unauthorized access."
+          ]
+        },
+        {
+          "title": "4. User Rights",
+          "paragraphs": [
+            "4.1. The Client has the right to access their data, correct it, or request its deletion.",
+            "4.2. To exercise these rights, please contact the Service Provider using the contact details listed on the website."
+          ]
+        },
+        {
+          "title": "5. Transfer of Data to Third Parties",
+          "paragraphs": [
+            "5.1. The Service Provider does not transfer personal data to third parties without the user's consent, except as required by law."
+          ]
+        },
+        {
+          "title": "6. Changes to the Privacy Policy",
+          "paragraphs": [
+            "6.1. The Service Provider reserves the right to amend this Policy by publishing a new version on the website."
+          ]
+        },
+        {
+          "title": "7. Contact Information",
+          "paragraphs": [
+            "FOP Komarova Irina Volodymyrivna",
+            "Publication date: 01.01.2026"
+          ]
+        }
+      ]
+    }
+  }
+}
