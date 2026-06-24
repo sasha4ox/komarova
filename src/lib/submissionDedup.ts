@@ -14,6 +14,36 @@ export function buildSubmissionKey(email: string, phone: string) {
   return `${normalizedEmail}:${normalizedPhone}`;
 }
 
+export function buildPhoneKey(phone: string) {
+  return `phone:${phone.replace(/\D/g, "")}`;
+}
+
+export function buildEmailKey(email: string) {
+  return `email:${email.toLowerCase().trim()}`;
+}
+
+export function buildIpKey(ip: string) {
+  return `ip:${ip}`;
+}
+
+export function buildSubmissionKeys(
+  email: string,
+  phone: string,
+  ip?: string,
+): string[] {
+  const keys = [
+    buildSubmissionKey(email, phone),
+    buildPhoneKey(phone),
+    buildEmailKey(email),
+  ];
+
+  if (ip) {
+    keys.push(buildIpKey(ip));
+  }
+
+  return keys;
+}
+
 function pruneMap(map: Map<string, number>) {
   const windowMs = getWindowMs();
   const now = Date.now();
@@ -48,15 +78,33 @@ export function isDuplicateSubmission(key: string) {
   );
 }
 
+export function isAnyDuplicateSubmission(keys: string[]) {
+  return keys.some((key) => isDuplicateSubmission(key));
+}
+
 export function isCompletedSubmission(key: string) {
   return isActiveInMap(completedSubmissions, key);
 }
 
-export function markPendingSubmission(key: string) {
-  pendingSubmissions.set(key, Date.now());
+export function isAnyCompletedSubmission(keys: string[]) {
+  return keys.some((key) => isCompletedSubmission(key));
 }
 
-export function markCompletedSubmission(key: string) {
-  pendingSubmissions.delete(key);
-  completedSubmissions.set(key, Date.now());
+export function markPendingSubmission(keys: string | string[]) {
+  const list = Array.isArray(keys) ? keys : [keys];
+  const now = Date.now();
+
+  for (const key of list) {
+    pendingSubmissions.set(key, now);
+  }
+}
+
+export function markCompletedSubmission(keys: string | string[]) {
+  const list = Array.isArray(keys) ? keys : [keys];
+  const now = Date.now();
+
+  for (const key of list) {
+    pendingSubmissions.delete(key);
+    completedSubmissions.set(key, now);
+  }
 }

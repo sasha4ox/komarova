@@ -27,7 +27,7 @@ function readStoredLead() {
     }
 
     const parsed = JSON.parse(raw);
-    if (!parsed?.key || !parsed?.ts) {
+    if (!parsed?.ts) {
       return null;
     }
 
@@ -42,16 +42,11 @@ function readStoredLead() {
   }
 }
 
-export function hasRecentLeadSubmission(email, phone) {
-  const stored = readStoredLead();
-  if (!stored) {
-    return false;
-  }
-
-  return stored.key === buildLeadKey(email, phone);
+export function hasRecentLeadSubmission() {
+  return readStoredLead() !== null;
 }
 
-export function markLeadSubmitted(email, phone) {
+export function markLeadSubmitted() {
   if (typeof window === "undefined") {
     return;
   }
@@ -59,7 +54,6 @@ export function markLeadSubmitted(email, phone) {
   localStorage.setItem(
     LEAD_KEY,
     JSON.stringify({
-      key: buildLeadKey(email, phone),
       ts: Date.now(),
     }),
   );

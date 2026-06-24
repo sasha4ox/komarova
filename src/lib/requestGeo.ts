@@ -16,18 +16,6 @@ function headerValue(value: string | string[] | undefined): string | undefined {
   return trimmed || undefined;
 }
 
-function decodeCity(city?: string) {
-  if (!city) {
-    return undefined;
-  }
-
-  try {
-    return decodeURIComponent(city.replace(/\+/g, " "));
-  } catch {
-    return city;
-  }
-}
-
 export function getRequestGeo(req: NextApiRequest): RequestGeo | undefined {
   const countryCode =
     headerValue(req.headers["x-vercel-ip-country"]) ||
@@ -51,4 +39,34 @@ export function getRequestGeo(req: NextApiRequest): RequestGeo | undefined {
     countryCode: countryCode?.toUpperCase(),
     region,
   };
+}
+
+function decodeCity(city?: string) {
+  if (!city) {
+    return undefined;
+  }
+
+  try {
+    return decodeURIComponent(city.replace(/\+/g, " "));
+  } catch {
+    return city;
+  }
+}
+
+export function getClientIp(req: NextApiRequest): string | undefined {
+  const forwarded = req.headers["x-forwarded-for"];
+  const fromForwarded = Array.isArray(forwarded)
+    ? forwarded[0]
+    : forwarded?.split(",")[0]?.trim();
+
+  const ip =
+    fromForwarded ||
+    headerValue(req.headers["x-real-ip"]) ||
+    req.socket?.remoteAddress;
+
+  if (!ip || ip === "::1" || ip === "127.0.0.1") {
+    return undefined;
+  }
+
+  return ip;
 }

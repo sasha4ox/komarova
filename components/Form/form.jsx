@@ -106,7 +106,7 @@ export default function Form({ defaultText = "", compact = false }) {
   };
 
   const onSubmit = async (data) => {
-    if (hasRecentLeadSubmission(data.email, data.phone)) {
+    if (hasRecentLeadSubmission()) {
       setError("email", {
         type: "custom",
         message: t("alreadySubmitted"),
@@ -134,7 +134,7 @@ export default function Form({ defaultText = "", compact = false }) {
           return;
         }
 
-        markLeadSubmitted(data.email, data.phone);
+        markLeadSubmitted();
         storeLeadTransactionId(data.email, data.phone);
 
         if (result.pendingEmail) {

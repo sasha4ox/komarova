@@ -3,8 +3,8 @@ import { verifyConfirmToken } from "@/lib/confirmToken";
 import { getSiteUrl } from "@/lib/emailVerification";
 import { sendTelegramNotification } from "@/lib/telegramNotify";
 import {
-  buildSubmissionKey,
-  isCompletedSubmission,
+  buildSubmissionKeys,
+  isAnyCompletedSubmission,
   markCompletedSubmission,
 } from "@/lib/submissionDedup";
 
@@ -43,11 +43,11 @@ export default async function confirmEmailHandler(
   }
 
   try {
-    const submissionKey = buildSubmissionKey(payload.email, payload.phone);
+    const submissionKeys = buildSubmissionKeys(payload.email, payload.phone);
 
-    if (!isCompletedSubmission(submissionKey)) {
+    if (!isAnyCompletedSubmission(submissionKeys)) {
       await sendTelegramNotification(payload);
-      markCompletedSubmission(submissionKey);
+      markCompletedSubmission(submissionKeys);
     }
 
     return res.redirect(302, getConfirmationUrl(payload.locale || "uk"));

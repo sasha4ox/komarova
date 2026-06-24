@@ -2,12 +2,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { createConfirmToken } from "@/lib/confirmToken";
 import { isEmailVerificationEnabled } from "@/lib/emailVerification";
 import { buildSubmissionLocation } from "@/lib/location";
-import { getRequestGeo } from "@/lib/requestGeo";
+import { getClientIp, getRequestGeo } from "@/lib/requestGeo";
 import { sendConfirmationEmail } from "@/lib/sendConfirmationEmail";
 import { sendTelegramNotification } from "@/lib/telegramNotify";
 import {
-  buildSubmissionKey,
-  isDuplicateSubmission,
+  buildSubmissionKeys,
+  isAnyDuplicateSubmission,
   markCompletedSubmission,
   markPendingSubmission,
 } from "@/lib/submissionDedup";
@@ -43,22 +43,26 @@ export default async function submitHandler(
       validation.data.locale,
     ),
   };
-  const submissionKey = buildSubmissionKey(data.email, data.phone);
+  const submissionKeys = buildSubmissionKeys(
+    data.email,
+    data.phone,
+    getClientIp(req),
+  );
 
-  if (isDuplicateSubmission(submissionKey)) {
+  if (isAnyDuplicateSubmission(submissionKeys)) {
     return res.status(200).json({ ok: true, duplicate: true });
   }
 
   try {
     if (!isEmailVerificationEnabled()) {
       await sendTelegramNotification(data);
-      markCompletedSubmission(submissionKey);
+      markCompletedSubmission(submissionKeys);
       return res.status(200).json({ ok: true });
     }
 
     const token = await createConfirmToken(data);
     await sendConfirmationEmail(data, token);
-    markPendingSubmission(submissionKey);
+    markPendingSubmission(submissionKeys);
 
     return res.status(200).json({ ok: true, pendingEmail: true });
   } catch (error) {
