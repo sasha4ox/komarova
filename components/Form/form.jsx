@@ -7,9 +7,10 @@ import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import {
-  hasRecentLeadSubmission,
   markLeadSubmitted,
+  releaseSubmitLock,
   storeLeadTransactionId,
+  tryAcquireSubmitLock,
 } from "../../helpers/leadTracking";
 import { getAttribution } from "../../helpers/attribution";
 import { telInputLang } from "@/lib/locale";
@@ -120,7 +121,7 @@ export default function Form({ defaultText = "", compact = false, inModal = fals
   };
 
   const onSubmit = async (data) => {
-    if (hasRecentLeadSubmission()) {
+    if (!tryAcquireSubmitLock(data.email, data.phone)) {
       setError("email", {
         type: "custom",
         message: t("alreadySubmitted"),
@@ -141,6 +142,7 @@ export default function Form({ defaultText = "", compact = false, inModal = fals
 
       if (response.ok) {
         if (result.duplicate) {
+          markLeadSubmitted(data.email, data.phone);
           setError("email", {
             type: "custom",
             message: t("alreadySubmitted"),
@@ -148,7 +150,7 @@ export default function Form({ defaultText = "", compact = false, inModal = fals
           return;
         }
 
-        markLeadSubmitted();
+        markLeadSubmitted(data.email, data.phone);
         storeLeadTransactionId(data.email, data.phone);
 
         if (result.pendingEmail) {
@@ -161,6 +163,7 @@ export default function Form({ defaultText = "", compact = false, inModal = fals
         return;
       }
 
+      releaseSubmitLock();
       const errorCode = result.error || "submit_failed";
       const field = ERROR_FIELD_MAP[errorCode] || "email";
       const message =
@@ -172,6 +175,7 @@ export default function Form({ defaultText = "", compact = false, inModal = fals
         message,
       });
     } catch {
+      releaseSubmitLock();
       setError("email", { type: "custom", message: t("submitFailed") });
     }
   };

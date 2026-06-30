@@ -1,4 +1,4 @@
-const DEFAULT_WINDOW_HOURS = 24;
+const DEFAULT_WINDOW_HOURS = 3;
 
 function getWindowMs() {
   const hours = Number(process.env.SUBMIT_DEDUP_HOURS || DEFAULT_WINDOW_HOURS);

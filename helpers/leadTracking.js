@@ -1,9 +1,11 @@
 import { hasGoogleAdsClick } from "./attribution";
 
-const LEAD_KEY = "komarova_lead_submitted";
+const LEAD_KEY_PREFIX = "komarova_lead_submitted:";
+const LEGACY_LEAD_KEY = "komarova_lead_submitted";
+const INFLIGHT_KEY = "komarova_lead_inflight";
 const CONVERSION_KEY = "komarova_conversion_fired";
 const TRANSACTION_KEY = "komarova_lead_transaction_id";
-const WINDOW_MS = 24 * 60 * 60 * 1000;
+const WINDOW_MS = 3 * 60 * 60 * 1000;
 
 export function buildLeadKey(email, phone) {
   const normalizedEmail = String(email || "").toLowerCase().trim();
@@ -15,13 +17,17 @@ export function buildTransactionId(email, phone) {
   return buildLeadKey(email, phone);
 }
 
-function readStoredLead() {
+function leadStorageKey(email, phone) {
+  return `${LEAD_KEY_PREFIX}${buildLeadKey(email, phone)}`;
+}
+
+function readStoredLead(email, phone) {
   if (typeof window === "undefined") {
     return null;
   }
 
   try {
-    const raw = localStorage.getItem(LEAD_KEY);
+    const raw = localStorage.getItem(leadStorageKey(email, phone));
     if (!raw) {
       return null;
     }
@@ -32,7 +38,7 @@ function readStoredLead() {
     }
 
     if (Date.now() - parsed.ts > WINDOW_MS) {
-      localStorage.removeItem(LEAD_KEY);
+      localStorage.removeItem(leadStorageKey(email, phone));
       return null;
     }
 
@@ -42,21 +48,48 @@ function readStoredLead() {
   }
 }
 
-export function hasRecentLeadSubmission() {
-  return readStoredLead() !== null;
+export function hasRecentLeadSubmission(email, phone) {
+  return readStoredLead(email, phone) !== null;
 }
 
-export function markLeadSubmitted() {
+export function markLeadSubmitted(email, phone) {
   if (typeof window === "undefined") {
     return;
   }
 
   localStorage.setItem(
-    LEAD_KEY,
+    leadStorageKey(email, phone),
     JSON.stringify({
       ts: Date.now(),
     }),
   );
+  localStorage.removeItem(LEGACY_LEAD_KEY);
+  releaseSubmitLock();
+}
+
+export function tryAcquireSubmitLock(email, phone) {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  if (hasRecentLeadSubmission(email, phone)) {
+    return false;
+  }
+
+  if (sessionStorage.getItem(INFLIGHT_KEY)) {
+    return false;
+  }
+
+  sessionStorage.setItem(INFLIGHT_KEY, buildLeadKey(email, phone));
+  return true;
+}
+
+export function releaseSubmitLock() {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  sessionStorage.removeItem(INFLIGHT_KEY);
 }
 
 export function storeLeadTransactionId(email, phone) {
