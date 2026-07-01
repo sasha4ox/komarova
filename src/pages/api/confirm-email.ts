@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { verifyConfirmToken } from "@/lib/confirmToken";
 import { getSiteUrl } from "@/lib/emailVerification";
 import { localePathPrefix, normalizeAppLocale } from "@/lib/locale";
+import { sendLeadToGoogleSheets } from "@/lib/googleSheetsWebhook";
 import { sendTelegramNotification } from "@/lib/telegramNotify";
 import {
   buildSubmissionKeys,
@@ -51,7 +52,10 @@ export default async function confirmEmailHandler(
     const submissionKeys = buildSubmissionKeys(payload.email, payload.phone);
 
     if (!isAnyCompletedSubmission(submissionKeys)) {
-      await sendTelegramNotification(payload);
+      await Promise.all([
+        sendTelegramNotification(payload),
+        sendLeadToGoogleSheets(payload),
+      ]);
       markCompletedSubmission(submissionKeys);
     }
 

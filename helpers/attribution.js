@@ -1,5 +1,35 @@
 const ATTRIBUTION_KEY = "komarova_attribution";
 const WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
+const GCLID_COOKIE = "gclid";
+const GCLID_COOKIE_DAYS = 90;
+
+function getCookie(name) {
+  if (typeof document === "undefined") {
+    return null;
+  }
+
+  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+function setCookie(name, value, days) {
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+}
+
+function captureGclidCookie() {
+  const fromUrl = new URLSearchParams(window.location.search)
+    .get("gclid")
+    ?.trim();
+
+  if (fromUrl) {
+    setCookie(GCLID_COOKIE, fromUrl, GCLID_COOKIE_DAYS);
+  }
+}
+
+export function getGclid() {
+  return getCookie(GCLID_COOKIE) || "";
+}
 
 const TRACKED_PARAMS = [
   "utm_source",
@@ -79,6 +109,8 @@ export function captureAttribution() {
     return;
   }
 
+  captureGclidCookie();
+
   const fromUrl = readUrlAttribution();
   const stored = readStoredAttribution();
   const referrer = document.referrer?.trim() || "";
@@ -112,13 +144,15 @@ export function getAttribution() {
       return {};
     }
 
+    const gclid = getGclid();
     const referrer = document.referrer?.trim();
-    if (!referrer) {
+    if (!referrer && !gclid) {
       return {};
     }
 
     return {
-      referrer,
+      ...(gclid ? { gclid } : {}),
+      ...(referrer ? { referrer } : {}),
       landingPage: `${window.location.pathname}${window.location.search}`,
     };
   }
@@ -129,7 +163,7 @@ export function getAttribution() {
     utm_campaign: fromUrl.utm_campaign || stored?.utm_campaign,
     utm_term: fromUrl.utm_term || stored?.utm_term,
     utm_content: fromUrl.utm_content || stored?.utm_content,
-    gclid: fromUrl.gclid || stored?.gclid,
+    gclid: getGclid() || fromUrl.gclid || stored?.gclid,
     fbclid: fromUrl.fbclid || stored?.fbclid,
     referrer: stored?.referrer || document.referrer?.trim() || undefined,
     landingPage:

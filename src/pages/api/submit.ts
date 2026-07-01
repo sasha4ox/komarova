@@ -4,6 +4,7 @@ import { isEmailVerificationEnabled } from "@/lib/emailVerification";
 import { buildSubmissionLocation } from "@/lib/location";
 import { getClientIp, getRequestGeo } from "@/lib/requestGeo";
 import { sendConfirmationEmail } from "@/lib/sendConfirmationEmail";
+import { sendLeadToGoogleSheets } from "@/lib/googleSheetsWebhook";
 import { sendTelegramNotification } from "@/lib/telegramNotify";
 import {
   buildSubmissionKeys,
@@ -55,7 +56,10 @@ export default async function submitHandler(
 
   try {
     if (!isEmailVerificationEnabled()) {
-      await sendTelegramNotification(data);
+      await Promise.all([
+        sendTelegramNotification(data),
+        sendLeadToGoogleSheets(data),
+      ]);
       markCompletedSubmission(submissionKeys);
       return res.status(200).json({ ok: true });
     }

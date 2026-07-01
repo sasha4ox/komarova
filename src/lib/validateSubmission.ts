@@ -28,6 +28,7 @@ export type SubmissionBody = {
   locale?: string;
   attribution?: SubmissionAttribution;
   location?: SubmissionLocation;
+  gclid?: string;
 };
 
 export function isContactMethod(value: string): value is ContactMethod {
@@ -67,6 +68,7 @@ export function normalizeSubmission(body: unknown): NormalizedSubmission | null 
     email: String(data.email ?? "").trim().toLowerCase(),
     text: String(data.text ?? "").trim(),
     locale: normalizeAppLocale(String(data.locale ?? "uk").trim() || "uk"),
+    gclid: String(data.gclid ?? "").trim() || undefined,
     attribution: normalizeAttribution(data),
   };
 }

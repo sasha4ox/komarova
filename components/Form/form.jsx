@@ -12,7 +12,7 @@ import {
   storeLeadTransactionId,
   tryAcquireSubmitLock,
 } from "../../helpers/leadTracking";
-import { getAttribution } from "../../helpers/attribution";
+import { getAttribution, getGclid } from "../../helpers/attribution";
 import { telInputLang } from "@/lib/locale";
 import styles from "./form.module.css";
 
@@ -135,7 +135,12 @@ export default function Form({ defaultText = "", compact = false, inModal = fals
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...data, locale, attribution: getAttribution() }),
+        body: JSON.stringify({
+          ...data,
+          locale,
+          gclid: getGclid(),
+          attribution: getAttribution(),
+        }),
       });
 
       const result = await response.json().catch(() => ({}));

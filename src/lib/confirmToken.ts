@@ -37,6 +37,7 @@ export async function verifyConfirmToken(
     const contactMethod = String(payload.contactMethod ?? "");
     const text = String(payload.text ?? "");
     const locale = String(payload.locale ?? "uk");
+    const gclid = String(payload.gclid ?? "").trim() || undefined;
     const attribution = normalizeAttribution(payload as Record<string, unknown>);
     const location = normalizeLocation(payload as Record<string, unknown>);
 
@@ -51,6 +52,7 @@ export async function verifyConfirmToken(
       contactMethod,
       text,
       locale,
+      gclid,
       attribution,
       location,
     };
