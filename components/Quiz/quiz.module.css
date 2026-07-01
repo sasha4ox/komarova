@@ -1,7 +1,22 @@
 .quizWrap {
   max-width: 600px;
+  width: 100%;
   margin: 0 auto;
   padding: 1.5rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .quizWrap {
+    min-height: 620px;
+  }
+
+  .question {
+    min-height: 5.6em;
+  }
+
+  .options {
+    min-height: 320px;
+  }
 }
 
 .progressBarBg {

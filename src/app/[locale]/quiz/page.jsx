@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { hreflangLanguages, localePathPrefix } from "@/lib/locale";
 import Quiz from "../../../../components/Quiz/Quiz";
+import pageStyles from "../../quiz/quizPage.module.css";
 
 const SITE_URL = "https://ikomarova.com";
 
@@ -23,5 +24,9 @@ export default async function QuizPage({ params }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return <Quiz />;
+  return (
+    <div className={pageStyles.page}>
+      <Quiz />
+    </div>
+  );
 }

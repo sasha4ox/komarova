@@ -1,5 +1,6 @@
 "use client";
 
+import CircularProgress from "@mui/material/CircularProgress";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { useForm, Controller } from "react-hook-form";
@@ -187,8 +188,14 @@ export default function Form({ defaultText = "", compact = false, inModal = fals
 
   return (
     <section
-      className={`${styles.formWrapper}${inModal ? ` ${styles.formWrapperInModal}` : ""}`}
+      className={`${styles.formWrapper}${inModal ? ` ${styles.formWrapperInModal}` : ""}${isSubmitting ? ` ${styles.formWrapperSubmitting}` : ""}`}
+      aria-busy={isSubmitting}
     >
+      {isSubmitting && (
+        <div className={styles.submitOverlay} aria-hidden="true">
+          <CircularProgress size={44} sx={{ color: "var(--fourth-color)" }} />
+        </div>
+      )}
       <h2>{t("title")}</h2>
       {!compact && <span className={styles.formHeader}>{t("intro")}</span>}
       {showSocialLinks && <div className={styles.links} />}
@@ -287,7 +294,15 @@ export default function Form({ defaultText = "", compact = false, inModal = fals
           )}
         />
         <button type="submit" className={styles.send} disabled={isSubmitting}>
-          {isSubmitting ? t("submitting") : t("submit")}
+          {isSubmitting && (
+            <CircularProgress
+              size={22}
+              thickness={5}
+              className={styles.sendSpinner}
+              sx={{ color: "inherit" }}
+            />
+          )}
+          <span>{isSubmitting ? t("submitting") : t("submit")}</span>
         </button>
       </form>
     </section>
