@@ -1,4 +1,5 @@
 import { hasGoogleAdsClick } from "./attribution";
+import { isCategoryAllowed } from "./cookieConsent";
 
 const LEAD_KEY_PREFIX = "komarova_lead_submitted:";
 const LEGACY_LEAD_KEY = "komarova_lead_submitted";
@@ -104,6 +105,10 @@ export function storeLeadTransactionId(email, phone) {
 
 export function fireConversionOnce() {
   if (typeof window === "undefined" || typeof window.gtag !== "function") {
+    return;
+  }
+
+  if (!isCategoryAllowed("marketing")) {
     return;
   }
 

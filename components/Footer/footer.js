@@ -2,11 +2,13 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { useCookieConsentContext } from "../../contexts/CookieConsentContext";
 import styles from "./footer.module.css";
 
 export default function Footer() {
   const tNav = useTranslations("nav");
   const tFooter = useTranslations("footer");
+  const { reopenBanner } = useCookieConsentContext();
   const year = new Date().getFullYear();
 
   const navLinks = [
@@ -19,6 +21,7 @@ export default function Footer() {
 
   const legalLinks = [
     { href: "/polityka-konfidentsiynosti", label: tNav("privacy") },
+    { href: "/cookie-policy", label: tNav("cookiePolicy") },
     { href: "/oferta", label: tNav("oferta") },
   ];
 
@@ -77,6 +80,18 @@ export default function Footer() {
                 </Link>
               </span>
             ))}
+            <span className={styles.legalItem}>
+              <span className={styles.legalDivider} aria-hidden="true">
+                ·
+              </span>
+              <button
+                type="button"
+                className={styles.legalButton}
+                onClick={reopenBanner}
+              >
+                {tFooter("cookiePreferences")}
+              </button>
+            </span>
           </div>
         </div>
       </div>

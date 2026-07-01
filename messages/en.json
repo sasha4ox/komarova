@@ -33,6 +33,7 @@
     "price": "Pricing",
     "faq": "FAQ",
     "privacy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy",
     "oferta": "Terms of Service",
     "quiz": "Quiz",
     "book": "Book a Session"
@@ -378,7 +379,27 @@
     "navigation": "Navigation",
     "contacts": "Contact",
     "navAria": "Footer navigation",
-    "copyright": "© {year} Irina Komarova"
+    "copyright": "© {year} Irina Komarova",
+    "cookiePreferences": "Cookie preferences"
+  },
+  "CookieConsent": {
+    "title": "We use cookies",
+    "description": "We use cookies to ensure the website works properly and, with your consent, to measure advertising effectiveness (Google Ads). You can accept all, reject non-essential cookies, or customize your preferences.",
+    "privacyPolicy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy",
+    "acceptAll": "Accept all",
+    "rejectNonEssential": "Reject non-essential",
+    "customize": "Customize",
+    "savePreferences": "Save preferences",
+    "customizeTitle": "Cookie preferences",
+    "category_essential": "Essential cookies",
+    "category_essential_desc": "Required for the website and form to work. Always enabled.",
+    "category_analytics": "Analytics cookies",
+    "category_analytics_desc": "Help us understand how visitors use the site.",
+    "category_marketing": "Marketing cookies",
+    "category_marketing_desc": "Google Ads, GCLID, and conversion tracking to measure ad performance.",
+    "category_functional": "Functional cookies",
+    "category_functional_desc": "Remember your preferences, such as language settings."
   },
   "card": {
     "photoAlt": "Photo for {name}"
@@ -540,7 +561,9 @@
         {
           "title": "5. Transfer of Data to Third Parties",
           "paragraphs": [
-            "5.1. The Service Provider does not transfer personal data to third parties without the user's consent, except as required by law."
+            "5.1. The Service Provider does not transfer personal data to third parties without the user's consent, except as required by law.",
+            "5.2. With your consent to marketing cookies, we may share certain data (such as email address, phone number, and advertising identifiers including GCLID) with Google for enhanced conversion measurement and advertising analytics in Google Ads.",
+            "5.3. In such cases, Google acts as a data processor on our behalf under the Google Ads Data Processing Terms (https://privacy.google.com/businesses/processorterms/). You may withdraw consent at any time via the cookie preferences link in the website footer."
           ]
         },
         {
@@ -554,6 +577,52 @@
           "paragraphs": [
             "FOP Komarova Irina Volodymyrivna",
             "Publication date: 01.01.2026"
+          ]
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "intro": "This Cookie Policy explains how the website uses cookies and similar technologies, and how you can manage your preferences.",
+      "sections": [
+        {
+          "title": "1. What are cookies",
+          "paragraphs": [
+            "1.1. Cookies are small text files stored on your device when you visit a website.",
+            "1.2. We use cookies to keep the site working, remember your choices, and — only with your consent — measure advertising effectiveness."
+          ]
+        },
+        {
+          "title": "2. Categories of cookies we use",
+          "paragraphs": [
+            "2.1. Essential cookies — required for the website and consultation booking form to function.",
+            "2.2. Analytics cookies — help us understand how visitors use the site (only if you consent).",
+            "2.3. Marketing cookies — Google Ads tags, GCLID storage, and conversion tracking (only if you consent).",
+            "2.4. Functional cookies — remember preferences such as language (only if you consent)."
+          ]
+        },
+        {
+          "title": "3. Google and advertising",
+          "paragraphs": [
+            "3.1. If you accept marketing cookies, we use Google Ads technologies to measure whether our advertising is effective.",
+            "3.2. Google may process advertising identifiers and, where applicable, hashed contact data for enhanced conversions, in accordance with Google's policies and our Privacy Policy.",
+            "3.3. Google acts as a data processor under the Google Ads Data Processing Terms."
+          ]
+        },
+        {
+          "title": "4. Managing your consent",
+          "paragraphs": [
+            "4.1. On your first visit, you can accept all cookies, reject non-essential cookies, or customize categories.",
+            "4.2. You can change your choice at any time using the \"Cookie preferences\" link in the website footer.",
+            "4.3. You can also delete cookies through your browser settings. Disabling essential cookies may limit site functionality."
+          ]
+        },
+        {
+          "title": "5. Contact",
+          "paragraphs": [
+            "FOP Komarova Irina Volodymyrivna",
+            "Email: irinavfox@gmail.com",
+            "Publication date: 01.07.2026"
           ]
         }
       ]

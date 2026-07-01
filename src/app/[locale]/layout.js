@@ -2,12 +2,15 @@ import { Geist, Geist_Mono, Yeseva_One, Great_Vibes } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 import "../globals.css";
 import styles from "../layout.module.css";
 import HeaderComponent from "../../../components/header";
 import Footer from "../../../components/Footer/footer";
 import AttributionCapture from "../../../components/AttributionCapture/AttributionCapture";
+import ConsentModeDefaults from "../../../components/ConsentModeDefaults/ConsentModeDefaults";
+import ConditionalGoogleAds from "../../../components/ConditionalGoogleAds/ConditionalGoogleAds";
+import CookieConsent from "../../../components/CookieConsent/CookieConsent";
+import Providers from "../../../components/Providers/Providers";
 import { routing } from "../../i18n/routing";
 import { hreflangLanguages, localePathPrefix } from "../../lib/locale";
 
@@ -88,56 +91,22 @@ export default async function LocaleLayout({ children, params }) {
         name="google-site-verification"
         content="TR--N6OV8NJ0SCNRunEeDhPJgWKWA1IDzB5zCSIJJt8"
       />
-      <Script
-        strategy="afterInteractive"
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=AW-18083838611"
-      />
-      <Script
-        id="google-analytics"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-18083838611');
-          `,
-        }}
-      />
-      <Script
-        id="google-analytics-report-conversion"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            function gtag_report_conversion(url) {
-              var callback = function () {
-                if (typeof(url) != 'undefined') {
-                  window.location = url;
-                }
-              };
-              gtag('event', 'conversion', {
-                'send_to': 'AW-18083838611/MoN6CJDR1uAbEIe-g_MC',
-                'value': 1.0,
-                'currency': 'UAH',
-                'event_callback': callback
-              });
-              return false;
-            }
-          `,
-        }}
-      />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${yesevaSans.variable} ${greatVibes.variable}`}
       >
-        <NextIntlClientProvider messages={messages}>
-          <AttributionCapture />
-          <div className={styles.pageShell}>
-            <HeaderComponent />
-            <div className={styles.main}>{children}</div>
-            <Footer />
-          </div>
-        </NextIntlClientProvider>
+        <ConsentModeDefaults />
+        <Providers>
+          <NextIntlClientProvider messages={messages}>
+            <AttributionCapture />
+            <ConditionalGoogleAds />
+            <div className={styles.pageShell}>
+              <HeaderComponent />
+              <div className={styles.main}>{children}</div>
+              <Footer />
+            </div>
+            <CookieConsent />
+          </NextIntlClientProvider>
+        </Providers>
       </body>
     </html>
   );

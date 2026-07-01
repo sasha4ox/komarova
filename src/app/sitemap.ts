@@ -11,6 +11,11 @@ const paths = [
     changeFrequency: "yearly" as const,
     priority: 0.8,
   },
+  {
+    path: "/cookie-policy",
+    changeFrequency: "yearly" as const,
+    priority: 0.7,
+  },
   { path: "/oferta", changeFrequency: "yearly" as const, priority: 0.5 },
 ];
 
