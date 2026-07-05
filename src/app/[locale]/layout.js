@@ -8,6 +8,10 @@ import HeaderComponent from "../../../components/header";
 import Footer from "../../../components/Footer/footer";
 import AttributionCapture from "../../../components/AttributionCapture/AttributionCapture";
 import ConsentModeDefaults from "../../../components/ConsentModeDefaults/ConsentModeDefaults";
+import {
+  GoogleTagManagerHead,
+  GoogleTagManagerNoscript,
+} from "../../../components/GoogleTagManager/GoogleTagManager";
 import ConditionalGoogleAds from "../../../components/ConditionalGoogleAds/ConditionalGoogleAds";
 import CookieConsent from "../../../components/CookieConsent/CookieConsent";
 import Providers from "../../../components/Providers/Providers";
@@ -87,14 +91,18 @@ export default async function LocaleLayout({ children, params }) {
 
   return (
     <html lang={locale}>
-      <meta
-        name="google-site-verification"
-        content="TR--N6OV8NJ0SCNRunEeDhPJgWKWA1IDzB5zCSIJJt8"
-      />
+      <head>
+        <ConsentModeDefaults />
+        <GoogleTagManagerHead />
+        <meta
+          name="google-site-verification"
+          content="TR--N6OV8NJ0SCNRunEeDhPJgWKWA1IDzB5zCSIJJt8"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${yesevaSans.variable} ${greatVibes.variable}`}
       >
-        <ConsentModeDefaults />
+        <GoogleTagManagerNoscript />
         <Providers>
           <NextIntlClientProvider messages={messages}>
             <AttributionCapture />
