@@ -107,8 +107,18 @@ export function storeLeadTransactionId(email, phone) {
   localStorage.setItem(TRANSACTION_KEY, transactionId);
 }
 
+function isGoogleAdsTagLoaded() {
+  return typeof document !== "undefined" && Boolean(
+    document.getElementById("google-ads-gtag-js"),
+  );
+}
+
 function tryFireConversion() {
   if (typeof window === "undefined" || typeof window.gtag !== "function") {
+    return "retry";
+  }
+
+  if (!isGoogleAdsTagLoaded()) {
     return "retry";
   }
 
@@ -139,6 +149,13 @@ function tryFireConversion() {
   }
 
   window.gtag("event", "conversion", {
+    send_to: GOOGLE_ADS_CONVERSION,
+    transaction_id: effectiveTransactionId,
+  });
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "google_ads_conversion",
     send_to: GOOGLE_ADS_CONVERSION,
     transaction_id: effectiveTransactionId,
   });
