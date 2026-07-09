@@ -1,4 +1,4 @@
-import { isCategoryAllowed } from "./cookieConsent";
+import { isMarketingTrackingAllowed } from "./cookieConsent";
 
 const ATTRIBUTION_KEY = "komarova_attribution";
 const WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
@@ -6,7 +6,7 @@ const GCLID_COOKIE = "gclid";
 const GCLID_COOKIE_DAYS = 90;
 
 function canUseMarketingTracking() {
-  return isCategoryAllowed("marketing");
+  return isMarketingTrackingAllowed();
 }
 
 function getCookie(name) {

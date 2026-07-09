@@ -1,5 +1,7 @@
 import { hasGoogleAdsClick } from "./attribution";
-import { isCategoryAllowed } from "./cookieConsent";
+import { isMarketingTrackingAllowed } from "./cookieConsent";
+import { isGoogleTagDebugSession } from "./googleTagVerification";
+import { GOOGLE_ADS_CONVERSION } from "./googleAds";
 
 const LEAD_KEY_PREFIX = "komarova_lead_submitted:";
 const LEGACY_LEAD_KEY = "komarova_lead_submitted";
@@ -7,6 +9,8 @@ const INFLIGHT_KEY = "komarova_lead_inflight";
 const CONVERSION_KEY = "komarova_conversion_fired";
 const TRANSACTION_KEY = "komarova_lead_transaction_id";
 const WINDOW_MS = 3 * 60 * 60 * 1000;
+const RETRY_INTERVAL_MS = 200;
+const MAX_RETRY_MS = 10000;
 
 export function buildLeadKey(email, phone) {
   const normalizedEmail = String(email || "").toLowerCase().trim();
@@ -103,39 +107,68 @@ export function storeLeadTransactionId(email, phone) {
   localStorage.setItem(TRANSACTION_KEY, transactionId);
 }
 
-export function fireConversionOnce() {
+function tryFireConversion() {
   if (typeof window === "undefined" || typeof window.gtag !== "function") {
-    return;
+    return "retry";
   }
 
-  if (!isCategoryAllowed("marketing")) {
-    return;
+  if (!isMarketingTrackingAllowed()) {
+    return "retry";
   }
 
-  // Only report to Google Ads when the user actually arrived via a Google Ad click.
-  if (!hasGoogleAdsClick()) {
-    return;
+  const debugSession = isGoogleTagDebugSession();
+
+  if (!hasGoogleAdsClick() && !debugSession) {
+    return "done";
   }
 
   const transactionId =
     sessionStorage.getItem(TRANSACTION_KEY) ||
     localStorage.getItem(TRANSACTION_KEY);
 
-  if (!transactionId) {
-    return;
+  if (!transactionId && !debugSession) {
+    return "done";
   }
 
+  const effectiveTransactionId =
+    transactionId || `tag-assistant-${Date.now()}`;
+
   const alreadyFired = localStorage.getItem(CONVERSION_KEY);
-  if (alreadyFired === transactionId) {
-    return;
+  if (alreadyFired === effectiveTransactionId) {
+    return "done";
   }
 
   window.gtag("event", "conversion", {
-    send_to: "AW-18083838611/elCKrciKIcEJP1ha9D",
-    transaction_id: transactionId,
+    send_to: GOOGLE_ADS_CONVERSION,
+    transaction_id: effectiveTransactionId,
   });
 
-  localStorage.setItem(CONVERSION_KEY, transactionId);
+  localStorage.setItem(CONVERSION_KEY, effectiveTransactionId);
   sessionStorage.removeItem(TRANSACTION_KEY);
   localStorage.removeItem(TRANSACTION_KEY);
+  return "done";
+}
+
+export function fireConversionOnce() {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  const startedAt = Date.now();
+
+  const attempt = () => {
+    const result = tryFireConversion();
+
+    if (result === "done") {
+      return;
+    }
+
+    if (Date.now() - startedAt >= MAX_RETRY_MS) {
+      return;
+    }
+
+    window.setTimeout(attempt, RETRY_INTERVAL_MS);
+  };
+
+  attempt();
 }

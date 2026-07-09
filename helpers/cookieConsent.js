@@ -2,6 +2,8 @@
  * GDPR-compliant cookie consent management.
  */
 
+import { isGoogleTagDebugSession } from "./googleTagVerification";
+
 export const STORAGE_KEY = "cookie_consent";
 export const CONSENT_VERSION = "1";
 
@@ -84,6 +86,14 @@ export function setStoredConsent(state) {
 export function hasUserConsented() {
   const stored = getStoredConsent();
   return stored !== null && stored.timestamp > 0;
+}
+
+export function isMarketingTrackingAllowed() {
+  if (isGoogleTagDebugSession()) {
+    return true;
+  }
+
+  return isCategoryAllowed("marketing");
 }
 
 /**

@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCookieConsent } from "../../hooks/useCookieConsent";
-
-const GOOGLE_ADS_ID = "AW-18083838611";
+import { GOOGLE_ADS_CONVERSION, GOOGLE_ADS_ID } from "../../helpers/googleAds";
+import { isGoogleTagDebugSession } from "../../helpers/googleTagVerification";
 
 function updateConsentMode(marketingGranted, analyticsGranted) {
   if (typeof window === "undefined" || typeof window.gtag !== "function") {
@@ -31,7 +31,7 @@ function defineConversionHelper() {
     };
 
     window.gtag("event", "conversion", {
-      send_to: "AW-18083838611/elCKrciKIcEJP1ha9D",
+      send_to: GOOGLE_ADS_CONVERSION,
       value: 1.0,
       currency: "UAH",
       event_callback: callback,
@@ -41,15 +41,30 @@ function defineConversionHelper() {
   };
 }
 
-function loadGoogleAdsTag() {
+function initGoogleAdsTag() {
+  window.dataLayer = window.dataLayer || [];
+  window.gtag =
+    window.gtag ||
+    function gtag() {
+      window.dataLayer.push(arguments);
+    };
+
+  window.gtag("js", new Date());
+  window.gtag("config", GOOGLE_ADS_ID);
+  defineConversionHelper();
+}
+
+function loadGoogleAdsTag(onReady) {
   if (typeof document === "undefined") {
     return;
   }
 
   const scriptId = "google-ads-gtag-js";
-  if (document.getElementById(scriptId)) {
-    updateConsentMode(true, true);
-    defineConversionHelper();
+  const existingScript = document.getElementById(scriptId);
+
+  if (existingScript) {
+    initGoogleAdsTag();
+    onReady();
     return;
   }
 
@@ -58,17 +73,8 @@ function loadGoogleAdsTag() {
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`;
   script.onload = () => {
-    window.dataLayer = window.dataLayer || [];
-    window.gtag =
-      window.gtag ||
-      function gtag() {
-        window.dataLayer.push(arguments);
-      };
-
-    window.gtag("js", new Date());
-    updateConsentMode(true, true);
-    window.gtag("config", GOOGLE_ADS_ID);
-    defineConversionHelper();
+    initGoogleAdsTag();
+    onReady();
   };
 
   document.head.appendChild(script);
@@ -78,19 +84,29 @@ export default function ConditionalGoogleAds() {
   const { consent } = useCookieConsent();
   const marketingConsented = consent?.marketing ?? false;
   const analyticsConsented = consent?.analytics ?? false;
-  const loadedRef = useRef(false);
+  const [tagReady, setTagReady] = useState(false);
+  const loadStartedRef = useRef(false);
 
   useEffect(() => {
-    if (marketingConsented) {
-      loadGoogleAdsTag();
-      loadedRef.current = true;
+    if (loadStartedRef.current) {
       return;
     }
 
-    if (loadedRef.current) {
-      updateConsentMode(false, analyticsConsented);
+    loadStartedRef.current = true;
+    loadGoogleAdsTag(() => setTagReady(true));
+  }, []);
+
+  useEffect(() => {
+    if (!tagReady) {
+      return;
     }
-  }, [marketingConsented, analyticsConsented]);
+
+    const debugSession = isGoogleTagDebugSession();
+    updateConsentMode(
+      marketingConsented || debugSession,
+      analyticsConsented || debugSession,
+    );
+  }, [tagReady, marketingConsented, analyticsConsented]);
 
   return null;
 }
