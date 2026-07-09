@@ -131,7 +131,7 @@ export function fireConversionOnce() {
   }
 
   window.gtag("event", "conversion", {
-    send_to: "AW-18083838611/--elCKrciKIcEJP1ha9D",
+    send_to: "AW-18083838611/elCKrciKIcEJP1ha9D",
     transaction_id: transactionId,
   });
 

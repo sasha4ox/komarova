@@ -31,7 +31,7 @@ function defineConversionHelper() {
     };
 
     window.gtag("event", "conversion", {
-      send_to: "AW-18083838611/MoN6CJDR1uAbEIe-g_MC",
+      send_to: "AW-18083838611/elCKrciKIcEJP1ha9D",
       value: 1.0,
       currency: "UAH",
       event_callback: callback,
