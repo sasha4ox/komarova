@@ -25,6 +25,12 @@ export default function ConsentModeDefaults() {
             return search.has(param);
           });
 
+          if (!isDebugSession) {
+            try {
+              isDebugSession = sessionStorage.getItem('komarova_gtm_debug_session') === '1';
+            } catch (e) {}
+          }
+
           if (isDebugSession) {
             try {
               sessionStorage.setItem('komarova_gtm_debug_session', '1');

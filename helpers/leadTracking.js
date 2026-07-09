@@ -148,19 +148,22 @@ function tryFireConversion() {
     return "done";
   }
 
+  localStorage.setItem(CONVERSION_KEY, effectiveTransactionId);
+
+  if (debugSession && typeof window.gtag === "function") {
+    window.gtag("consent", "update", {
+      ad_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted",
+      analytics_storage: "granted",
+    });
+  }
+
   window.gtag("event", "conversion", {
     send_to: GOOGLE_ADS_CONVERSION,
     transaction_id: effectiveTransactionId,
   });
 
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: "google_ads_conversion",
-    send_to: GOOGLE_ADS_CONVERSION,
-    transaction_id: effectiveTransactionId,
-  });
-
-  localStorage.setItem(CONVERSION_KEY, effectiveTransactionId);
   sessionStorage.removeItem(TRANSACTION_KEY);
   localStorage.removeItem(TRANSACTION_KEY);
   return "done";

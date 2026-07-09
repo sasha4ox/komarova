@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { useCookieConsent } from "../../hooks/useCookieConsent";
-import { GOOGLE_ADS_ID } from "../../helpers/googleAds";
 import { isGoogleTagDebugSession } from "../../helpers/googleTagVerification";
 
 function updateConsentMode(marketingGranted, analyticsGranted) {
@@ -33,7 +32,6 @@ export default function ConditionalGoogleAds() {
       marketingConsented || debugSession,
       analyticsConsented || debugSession,
     );
-    window.gtag("config", GOOGLE_ADS_ID);
   }, [marketingConsented, analyticsConsented]);
 
   return null;
