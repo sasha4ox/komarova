@@ -6,6 +6,12 @@ import { localeTag, normalizeAppLocale } from "./locale";
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = process.env.CHAT_ID;
 
+export type EmailConfirmStatus = "pending" | "confirmed";
+
+type SendTelegramOptions = {
+  emailStatus?: EmailConfirmStatus;
+};
+
 const CONTACT_METHOD_LABELS: Record<
   ContactMethod,
   { uk: string; ru: string; en: string }
@@ -28,6 +34,9 @@ const NOTIFICATION_LABELS = {
     phone: "Телефон",
     contactMethod: "Спосіб зв'язку",
     message: "Повідомлення",
+    emailStatus: "Статус email",
+    emailPending: "не підтверджено",
+    emailConfirmed: "підтверджено",
   },
   ru: {
     name: "Имя",
@@ -35,6 +44,9 @@ const NOTIFICATION_LABELS = {
     phone: "Телефон",
     contactMethod: "Способ связи",
     message: "Сообщение",
+    emailStatus: "Статус email",
+    emailPending: "не подтверждён",
+    emailConfirmed: "подтверждён",
   },
   en: {
     name: "Name",
@@ -42,6 +54,9 @@ const NOTIFICATION_LABELS = {
     phone: "Phone",
     contactMethod: "Contact method",
     message: "Message",
+    emailStatus: "Email status",
+    emailPending: "not confirmed",
+    emailConfirmed: "confirmed",
   },
 } as const;
 
@@ -55,7 +70,25 @@ function notificationLabels(locale?: string) {
   return NOTIFICATION_LABELS[normalized];
 }
 
-export async function sendTelegramNotification(body: SubmissionBody) {
+function emailStatusLine(
+  emailStatus: EmailConfirmStatus | undefined,
+  locale?: string,
+) {
+  if (!emailStatus) {
+    return "";
+  }
+
+  const labels = notificationLabels(locale);
+  const value =
+    emailStatus === "pending" ? labels.emailPending : labels.emailConfirmed;
+
+  return `${labels.emailStatus}: ${value}\r\n`;
+}
+
+export async function sendTelegramNotification(
+  body: SubmissionBody,
+  options: SendTelegramOptions = {},
+) {
   if (!BOT_TOKEN || !CHAT_ID) {
     throw new Error("Telegram is not configured");
   }
@@ -64,6 +97,7 @@ export async function sendTelegramNotification(body: SubmissionBody) {
   const labels = notificationLabels(body.locale);
   const sourceDetails = formatAttributionDetails(body.attribution);
   const locationDetails = formatLocationDetails(body.location);
+  const statusLine = emailStatusLine(options.emailStatus, body.locale);
 
   const response = await fetch(
     `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
@@ -75,6 +109,7 @@ export async function sendTelegramNotification(body: SubmissionBody) {
       body: JSON.stringify({
         chat_id: CHAT_ID,
         text: `${prefix ? `${prefix} ` : ""}💬 Website:\n
+          ${statusLine}
           ${labels.name}: ${body.firstName}\r\n
           ${labels.email}: ${body.email}\r\n
           ${labels.phone}: ${body.phone}\r\n

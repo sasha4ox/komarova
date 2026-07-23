@@ -64,6 +64,7 @@ export default async function submitHandler(
       return res.status(200).json({ ok: true });
     }
 
+    await sendTelegramNotification(data, { emailStatus: "pending" });
     const token = await createConfirmToken(data);
     await sendConfirmationEmail(data, token);
     markPendingSubmission(submissionKeys);

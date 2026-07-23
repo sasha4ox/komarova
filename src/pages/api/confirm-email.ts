@@ -53,7 +53,7 @@ export default async function confirmEmailHandler(
 
     if (!isAnyCompletedSubmission(submissionKeys)) {
       await Promise.all([
-        sendTelegramNotification(payload),
+        sendTelegramNotification(payload, { emailStatus: "confirmed" }),
         sendLeadToGoogleSheets(payload),
       ]);
       markCompletedSubmission(submissionKeys);
