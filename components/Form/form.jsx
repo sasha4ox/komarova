@@ -14,6 +14,7 @@ import {
   tryAcquireSubmitLock,
 } from "../../helpers/leadTracking";
 import { getAttribution, getGclid } from "../../helpers/attribution";
+import { isGoogleTagDebugSession } from "../../helpers/googleTagVerification";
 import { telInputLang } from "@/lib/locale";
 import styles from "./form.module.css";
 
@@ -141,6 +142,7 @@ export default function Form({ defaultText = "", compact = false, inModal = fals
           locale,
           gclid: getGclid(),
           attribution: getAttribution(),
+          googleTagDebug: isGoogleTagDebugSession(),
         }),
       });
 

@@ -55,7 +55,11 @@ export default async function submitHandler(
   }
 
   try {
-    if (!isEmailVerificationEnabled()) {
+    const googleTagDebug = req.body?.googleTagDebug === true;
+    const requireEmailVerification =
+      isEmailVerificationEnabled() && !googleTagDebug;
+
+    if (!requireEmailVerification) {
       await Promise.all([
         sendTelegramNotification(data),
         sendLeadToGoogleSheets(data),
