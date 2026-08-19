@@ -1,22 +1,21 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { hreflangLanguages, localePathPrefix } from "@/lib/locale";
+import { buildPageMetadata } from "@/lib/seo";
 import LegalDocument from "../../../../components/LegalDocument/LegalDocument";
 import styles from "./polityka-konfidentsiynosti.module.css";
-
-const SITE_URL = "https://ikomarova.com";
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "legal" });
-  const localePath = localePathPrefix(locale);
+  const tTemplates = await getTranslations({ locale, namespace: "templates" });
+  const content = t.raw("privacy");
 
-  return {
-    title: t("privacy.title"),
-    alternates: {
-      canonical: `${SITE_URL}${localePath}/polityka-konfidentsiynosti`,
-      languages: hreflangLanguages("/polityka-konfidentsiynosti"),
-    },
-  };
+  return buildPageMetadata({
+    locale,
+    path: "/polityka-konfidentsiynosti",
+    title: content.title,
+    description: content.intro,
+    siteName: tTemplates("siteName"),
+  });
 }
 
 export default async function PrivacyPage({ params }) {

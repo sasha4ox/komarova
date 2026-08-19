@@ -1,22 +1,26 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useCookieConsentContext } from "../../contexts/CookieConsentContext";
+import { SERVICES } from "@/content/services";
+import { pick } from "@/content/localize";
 import styles from "./footer.module.css";
 
 export default function Footer() {
   const tNav = useTranslations("nav");
   const tFooter = useTranslations("footer");
+  const locale = useLocale();
   const { reopenBanner } = useCookieConsentContext();
   const year = new Date().getFullYear();
 
   const navLinks = [
-    { href: "/#offers", label: tNav("services") },
-    { href: "/#price", label: tNav("price") },
+    { href: "/services", label: tNav("services") },
+    { href: "/knowledge-base", label: tNav("knowledgeBase") },
+    { href: "/about", label: tNav("about") },
     { href: "/quiz", label: tNav("quiz") },
+    { href: "/#price", label: tNav("price") },
     { href: "/#contacts", label: tNav("book") },
-    { href: "/#faq", label: tNav("faq") },
   ];
 
   const legalLinks = [
@@ -31,7 +35,7 @@ export default function Footer() {
         <div className={styles.columns}>
           <section className={styles.brand}>
             <Link href="/" className={styles.brandLink}>
-              <h2 className={styles.brandName}>{tFooter("brandName")}</h2>
+              <p className={styles.brandName}>{tFooter("brandName")}</p>
             </Link>
             <p className={styles.brandRole}>{tFooter("brandRole")}</p>
             <p className={styles.brandTagline}>{tFooter("tagline")}</p>
@@ -39,7 +43,7 @@ export default function Footer() {
           </section>
 
           <nav className={styles.nav} aria-label={tFooter("navAria")}>
-            <h3 className={styles.columnTitle}>{tFooter("navigation")}</h3>
+            <h2 className={styles.columnTitle}>{tFooter("navigation")}</h2>
             <ul className={styles.navList}>
               {navLinks.map((link) => (
                 <li key={link.href}>
@@ -51,8 +55,21 @@ export default function Footer() {
             </ul>
           </nav>
 
+          <nav className={styles.nav} aria-label={tNav("services")}>
+            <h2 className={styles.columnTitle}>{tNav("services")}</h2>
+            <ul className={styles.navList}>
+              {SERVICES.map((service) => (
+                <li key={service.id}>
+                  <Link href={`/services/${service.id}`} className={styles.link}>
+                    {pick(service.name, locale)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
           <section className={styles.contact}>
-            <h3 className={styles.columnTitle}>{tFooter("contacts")}</h3>
+            <h2 className={styles.columnTitle}>{tFooter("contacts")}</h2>
             <ul className={styles.contactList}>
               <li>
                 <a href="mailto:irinavfox@gmail.com" className={styles.contactLink}>

@@ -36,7 +36,9 @@
     "cookiePolicy": "Cookie Policy",
     "oferta": "Terms of Service",
     "quiz": "Quiz",
-    "book": "Book a Session"
+    "book": "Book a Session",
+    "about": "About",
+    "knowledgeBase": "Knowledge base"
   },
   "header": {
     "name": "Irina Komarova",
@@ -57,7 +59,8 @@
   },
   "about": {
     "title": "About Me",
-    "text": "My name is Irina. I'm a psychologist who helps people better understand themselves, their reactions, and their relationships with others.\nI work with anxiety, emotional states, inner conflicts, and life crises. My approach is individual: I don't offer ready-made answers — I help you find your own.\nI practice gestalt therapy, which allows us to work with what you're experiencing here and now — without getting lost in endless analysis of the past."
+    "text": "My name is Irina. I'm a psychologist who helps people better understand themselves, their reactions, and their relationships with others.\nI work with anxiety, emotional states, inner conflicts, and life crises. My approach is individual: I don't offer ready-made answers — I help you find your own.\nI practice gestalt therapy, which allows us to work with what you're experiencing here and now — without getting lost in endless analysis of the past.",
+    "more": "More about the specialist →"
   },
   "services": {
     "title": "SERVICES",
@@ -412,9 +415,52 @@
   },
   "languageSwitcher": {
     "ariaLabel": "Language selection",
+    "ua": "UK",
     "uk": "UK",
     "ru": "RU",
     "en": "EN"
+  },
+  "templates": {
+    "siteName": "Irina Komarova",
+    "home": "Home",
+    "services": "Services",
+    "knowledgeBase": "Knowledge base",
+    "about": "About",
+    "serviceEyebrow": "Service",
+    "articleEyebrow": "Knowledge base",
+    "whatIs": "What is it?",
+    "symptoms": "Signs",
+    "causes": "Causes",
+    "howTherapyHelps": "How therapy can help",
+    "methods": "Therapy methods",
+    "format": "Consultation format",
+    "pricing": "Pricing",
+    "pricingBody": "Individual session — 60 minutes / 1900 UAH. Couples session — 80 minutes / 3300 UAH. Online.",
+    "faq": "Frequently asked questions",
+    "relatedArticles": "From the knowledge base",
+    "relatedServices": "Related services",
+    "relatedService": "Related service",
+    "shortAnswer": "Short answer",
+    "selfHelp": "What can I do myself?",
+    "whenToSeekHelp": "When to seek professional help",
+    "disclaimer": "This text is educational and does not replace a psychiatrist or emergency care.",
+    "ctaTitle": "Book a consultation",
+    "ctaText": "Online and confidential. We will arrange a time after email confirmation.",
+    "ctaButton": "Leave a request",
+    "servicesHubTitle": "Online psychologist services — Irina Komarova",
+    "servicesHubDescription": "Psychological help with anxiety, panic attacks, depression, relationships, burnout, and other requests. Online.",
+    "servicesHubH1": "What I work with",
+    "servicesHubIntro": "Each page answers one request: what it is, signs, how therapy helps, and how to book.",
+    "kbHubTitle": "Psychologist knowledge base — Irina Komarova",
+    "kbHubDescription": "Short answers to common questions about anxiety, relationships, burnout, self-esteem, and more. For understanding, not self-diagnosis.",
+    "kbHubH1": "Knowledge base",
+    "kbHubIntro": "Articles follow a question → answer form: definition, signs, causes, what to do yourself, and when to seek help.",
+    "photoAlt": "Portrait of psychologist Irina Komarova",
+    "biography": "About me",
+    "education": "Education",
+    "certificates": "Certificates",
+    "experience": "Experience",
+    "diplomas": "Diplomas"
   },
   "legal": {
     "oferta": {

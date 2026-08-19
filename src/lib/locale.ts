@@ -1,51 +1,69 @@
 import { routing } from "../i18n/routing";
 
-const SITE_URL = "https://ikomarova.com";
+export const SITE_URL = "https://ikomarova.com";
 
-export const SUPPORTED_LOCALES = ["uk", "ru", "en"] as const;
+export const SUPPORTED_LOCALES = ["ua", "ru", "en"] as const;
 export type AppLocale = (typeof SUPPORTED_LOCALES)[number];
+export type ContentLocale = "uk" | "ru" | "en";
 
 export function isAppLocale(value: string): value is AppLocale {
   return SUPPORTED_LOCALES.includes(value as AppLocale);
 }
 
 export function normalizeAppLocale(locale?: string): AppLocale {
-  if (locale && isAppLocale(locale)) {
-    return locale;
-  }
+  if (locale === "uk" || locale === "ua") return "ua";
+  if (locale === "ru" || locale === "en") return locale;
   return routing.defaultLocale as AppLocale;
 }
 
-export function localePathPrefix(locale: string): string {
-  return locale === routing.defaultLocale ? "" : `/${locale}`;
+export function contentLocale(locale?: string): ContentLocale {
+  const app = normalizeAppLocale(locale);
+  if (app === "ua") return "uk";
+  return app;
+}
+
+export function htmlLang(locale?: string): ContentLocale {
+  return contentLocale(locale);
+}
+
+export function localePathPrefix(locale?: string): string {
+  return `/${normalizeAppLocale(locale)}`;
+}
+
+export function localizedUrl(path = "", locale?: string): string {
+  const prefix = localePathPrefix(locale);
+  const normalizedPath = !path || path === "/" ? "" : path.startsWith("/") ? path : `/${path}`;
+  return `${SITE_URL}${prefix}${normalizedPath}`;
 }
 
 export function hreflangLanguages(path = "") {
-  return Object.fromEntries(
-    routing.locales.map((locale) => [
-      locale,
-      `${SITE_URL}${localePathPrefix(locale)}${path}`,
-    ]),
-  );
+  const normalizedPath = !path || path === "/" ? "" : path.startsWith("/") ? path : `/${path}`;
+  return {
+    uk: localizedUrl(normalizedPath, "ua"),
+    ru: localizedUrl(normalizedPath, "ru"),
+    en: localizedUrl(normalizedPath, "en"),
+    "x-default": localizedUrl(normalizedPath, "ua"),
+  };
 }
 
-export function localeTag(locale?: string): string {
-  const normalized = normalizeAppLocale(locale);
-  if (normalized === "ru") return "[RU]";
-  if (normalized === "en") return "[EN]";
-  return "[UK]";
+export function ogLocale(locale?: string): string {
+  const app = normalizeAppLocale(locale);
+  if (app === "ru") return "ru_UA";
+  if (app === "en") return "en_US";
+  return "uk_UA";
 }
 
 export function telInputLang(locale?: string): "uk" | "ru" | "en" {
-  const normalized = normalizeAppLocale(locale);
-  if (normalized === "ru") return "ru";
-  if (normalized === "en") return "en";
-  return "uk";
+  return contentLocale(locale);
+}
+
+export function localeTag(locale?: string): string {
+  const app = normalizeAppLocale(locale);
+  if (app === "ru") return "[RU]";
+  if (app === "en") return "[EN]";
+  return "[UK]";
 }
 
 export function intlDisplayLocale(locale?: string): string {
-  const normalized = normalizeAppLocale(locale);
-  if (normalized === "ru") return "ru";
-  if (normalized === "en") return "en";
-  return "uk";
+  return contentLocale(locale);
 }

@@ -1,46 +1,40 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import styles from "./descriptionCard.module.css";
-import Modal from "@mui/material/Modal";
-import ConsultationModalBox from "../Form/ConsultationModalBox";
 
-export default function DescriptionCard({ name, photo }) {
+export default function DescriptionCard({ name, photo, href }) {
   const t = useTranslations("descriptionCard");
-  const [open, setOpen] = useState(false);
 
-  const handleModal = () => {
-    setOpen(!open);
-  };
+  const inner = (
+    <>
+      <p className={styles.descriptionCardName}>{name}</p>
+      <div className={styles.descriptionCardPhotoCover}>
+        <Image
+          className={styles.photo}
+          src={`/${photo}`}
+          quality={80}
+          fill
+          sizes="412px"
+          alt={name}
+        />
+      </div>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link className={styles.descriptionCard} href={href} aria-label={name}>
+        {inner}
+      </Link>
+    );
+  }
 
   return (
-    <>
-      <div
-        className={styles.descriptionCard}
-        onClick={handleModal}
-        aria-label={t("openAria")}
-      >
-        <p className={styles.descriptionCardName}>{name}</p>
-        <div className={styles.descriptionCardPhotoCover}>
-          <Image
-            className={styles.photo}
-            src={`/${photo}`}
-            quality={100}
-            fill
-            alt={name}
-          />
-        </div>
-      </div>
-      <Modal
-        open={open}
-        onClose={handleModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <ConsultationModalBox onClose={handleModal} />
-      </Modal>
-    </>
+    <div className={styles.descriptionCard} aria-label={t("openAria")}>
+      {inner}
+    </div>
   );
 }

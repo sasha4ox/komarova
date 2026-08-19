@@ -141,7 +141,7 @@ export default function Quiz() {
 
   return (
     <div className={styles.quizWrap}>
-      <h2 className={styles.srOnly}>{t("srTitle")}</h2>
+      <h1 className={styles.srOnly}>{t("srTitle")}</h1>
       <div className={styles.progressBarBg}>
         <div className={styles.progressBarFill} style={{ width: `${progress}%` }} />
       </div>

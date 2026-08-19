@@ -1,23 +1,20 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { hreflangLanguages, localePathPrefix } from "@/lib/locale";
+import { buildPageMetadata } from "@/lib/seo";
 import Quiz from "../../../../components/Quiz/Quiz";
 import pageStyles from "../../quiz/quizPage.module.css";
-
-const SITE_URL = "https://ikomarova.com";
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadataQuiz" });
-  const localePath = localePathPrefix(locale);
+  const tTemplates = await getTranslations({ locale, namespace: "templates" });
 
-  return {
+  return buildPageMetadata({
+    locale,
+    path: "/quiz",
     title: t("title"),
     description: t("description"),
-    alternates: {
-      canonical: `${SITE_URL}${localePath}/quiz`,
-      languages: hreflangLanguages("/quiz"),
-    },
-  };
+    siteName: tTemplates("siteName"),
+  });
 }
 
 export default async function QuizPage({ params }) {
@@ -25,8 +22,8 @@ export default async function QuizPage({ params }) {
   setRequestLocale(locale);
 
   return (
-    <div className={pageStyles.page}>
+    <main className={pageStyles.page}>
       <Quiz />
-    </div>
+    </main>
   );
 }

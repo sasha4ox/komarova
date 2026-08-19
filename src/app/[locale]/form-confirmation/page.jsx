@@ -1,20 +1,22 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { hreflangLanguages, localePathPrefix } from "@/lib/locale";
+import { buildPageMetadata } from "@/lib/seo";
 import FormConfirmationContent from "./FormConfirmationContent";
-
-const SITE_URL = "https://ikomarova.com";
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "confirmation" });
-  const localePath = localePathPrefix(locale);
+  const tTemplates = await getTranslations({ locale, namespace: "templates" });
 
   return {
-    title: `${t("headline")} ${t("headlineEm")}`,
-    alternates: {
-      canonical: `${SITE_URL}${localePath}/form-confirmation`,
-      languages: hreflangLanguages("/form-confirmation"),
-    },
+    ...buildPageMetadata({
+      locale,
+      path: "/form-confirmation",
+      title: `${t("headline")} ${t("headlineEm")}`,
+      description: t("subtext"),
+      siteName: tTemplates("siteName"),
+      index: false,
+    }),
+    robots: { index: false, follow: false },
   };
 }
 
@@ -22,5 +24,9 @@ export default async function FormConfirmationPage({ params }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return <FormConfirmationContent />;
+  return (
+    <main>
+      <FormConfirmationContent />
+    </main>
+  );
 }

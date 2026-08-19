@@ -1,7 +1,7 @@
 import uk from "../../messages/uk.json";
 import ru from "../../messages/ru.json";
 import en from "../../messages/en.json";
-import { normalizeAppLocale } from "./locale";
+import { contentLocale } from "./locale";
 
 type EmailConfirmCopy = {
   subject: string;
@@ -19,6 +19,6 @@ const messagesByLocale = {
 } as const;
 
 export function getEmailConfirmMessages(locale?: string): EmailConfirmCopy {
-  const normalized = normalizeAppLocale(locale);
-  return messagesByLocale[normalized].emailConfirm as EmailConfirmCopy;
+  const lang = contentLocale(locale);
+  return messagesByLocale[lang].emailConfirm as EmailConfirmCopy;
 }

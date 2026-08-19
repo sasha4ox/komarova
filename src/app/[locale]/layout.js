@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono, Yeseva_One, Great_Vibes } from "next/font/google";
+import { Geist, Yeseva_One, Great_Vibes } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -15,32 +15,31 @@ import {
 import ConditionalGoogleAds from "../../../components/ConditionalGoogleAds/ConditionalGoogleAds";
 import CookieConsent from "../../../components/CookieConsent/CookieConsent";
 import Providers from "../../../components/Providers/Providers";
+import ScrollTop from "../../../components/ScrollTop/scrollTop";
+import ScrollRestoration from "../../../components/ScrollRestoration/ScrollRestoration";
 import { routing } from "../../i18n/routing";
-import { hreflangLanguages, localePathPrefix } from "../../lib/locale";
+import { htmlLang } from "../../lib/locale";
+import { buildPageMetadata } from "../../lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const yesevaSans = Yeseva_One({
   variable: "--font-yeseva-one",
   weight: "400",
   subsets: ["cyrillic"],
+  display: "swap",
 });
 
 const greatVibes = Great_Vibes({
   variable: "--font-great-vibes",
   weight: "400",
   subsets: ["cyrillic"],
+  display: "swap",
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const SITE_URL = "https://ikomarova.com";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -49,33 +48,17 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata" });
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: t.raw("jsonLd").map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-
-  const localePath = localePathPrefix(locale);
+  const tTemplates = await getTranslations({ locale, namespace: "templates" });
 
   return {
-    title: t("title"),
-    description: t("description"),
+    ...buildPageMetadata({
+      locale,
+      path: "/",
+      title: t("title"),
+      description: t("description"),
+      siteName: tTemplates("siteName"),
+    }),
     keywords: t.raw("keywords"),
-    alternates: {
-      canonical: `${SITE_URL}${localePath}`,
-      languages: hreflangLanguages(),
-    },
-    other: {
-      "application/ld+json": JSON.stringify(jsonLd),
-    },
   };
 }
 
@@ -90,7 +73,7 @@ export default async function LocaleLayout({ children, params }) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={htmlLang(locale)}>
       <head>
         <ConsentModeDefaults />
         <GoogleTagManagerHead />
@@ -100,7 +83,7 @@ export default async function LocaleLayout({ children, params }) {
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${yesevaSans.variable} ${greatVibes.variable}`}
+        className={`${geistSans.variable} ${yesevaSans.variable} ${greatVibes.variable}`}
       >
         <GoogleTagManagerNoscript />
         <Providers>
@@ -113,6 +96,8 @@ export default async function LocaleLayout({ children, params }) {
               <Footer />
             </div>
             <CookieConsent />
+            <ScrollTop />
+            <ScrollRestoration />
           </NextIntlClientProvider>
         </Providers>
       </body>

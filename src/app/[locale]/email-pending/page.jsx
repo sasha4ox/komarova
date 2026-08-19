@@ -20,8 +20,10 @@ export default async function EmailPendingPage({ params }) {
   setRequestLocale(locale);
 
   return (
-    <Suspense fallback={null}>
-      <EmailPendingContent />
-    </Suspense>
+    <main>
+      <Suspense fallback={null}>
+        <EmailPendingContent />
+      </Suspense>
+    </main>
   );
 }

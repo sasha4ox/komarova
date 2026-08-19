@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import classNames from "classnames";
 import styles from "./header.module.css";
 import Menu from "./Menu/menu";
@@ -10,7 +10,6 @@ import useScrollDirection from "../helpers/scrollDirection";
 
 export default function HeaderComponent() {
   const isScrollToBottom = useScrollDirection();
-  const locale = useLocale();
   const t = useTranslations("header");
 
   return (
@@ -20,19 +19,14 @@ export default function HeaderComponent() {
       })}
     >
       <header className={styles.header}>
-        <div
-          className={classNames(styles.headerWrapper, {
-            [styles.headerWrapperRu]: locale === "ru",
-            [styles.headerWrapperEn]: locale === "en",
-          })}
-        >
+        <div className={styles.headerWrapper}>
           <Link className={styles.name} href="/" aria-label={t("logoAria")}>
-            <h1>{t("name")}</h1>
+            <p className={styles.brandName}>{t("name")}</p>
             <p>{t("role")}</p>
           </Link>
-          <section className={styles.linkWrapper}>
+          <nav className={styles.linkWrapper} aria-label={t("logoAria")}>
             <Menu />
-          </section>
+          </nav>
         </div>
       </header>
       <div className={styles.langBar}>

@@ -14,7 +14,7 @@ export default function Contacts() {
 
   return (
     <div className={styles.whereWeMaCallWrapper}>
-      <h1 className={styles.sectionName}>{t("title")}</h1>
+      <h2 className={styles.sectionName}>{t("title")}</h2>
       <section>
         <p className={styles.whereWeMaCallHeader}>{t("meetingsTitle")}</p>
         <p>{t("body")}</p>

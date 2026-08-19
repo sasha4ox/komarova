@@ -16,8 +16,8 @@ import QuizIcon from "@mui/icons-material/Quiz";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import PolicyIcon from "@mui/icons-material/Policy";
-import FeedIcon from "@mui/icons-material/Feed";
+import PersonIcon from "@mui/icons-material/Person";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import styles from "./menu.module.css";
 import { useOnClickOutside } from "../../helpers/useOnClickOutside";
 
@@ -43,16 +43,12 @@ export default function Menu() {
   }, [open]);
 
   const navItems = [
-    { href: "/#offers", label: t("services"), icon: <PermContactCalendarIcon /> },
-    { href: "/#contacts", label: t("contacts"), icon: <PermContactCalendarIcon /> },
+    { href: "/services", label: t("services"), icon: <PermContactCalendarIcon /> },
+    { href: "/knowledge-base", label: t("knowledgeBase"), icon: <MenuBookIcon /> },
+    { href: "/about", label: t("about"), icon: <PersonIcon /> },
     { href: "/#price", label: t("price"), icon: <PaymentsIcon /> },
     { href: "/#faq", label: t("faq"), icon: <QuizIcon /> },
-    {
-      href: "/polityka-konfidentsiynosti",
-      label: t("privacy"),
-      icon: <PolicyIcon />,
-    },
-    { href: "/oferta", label: t("oferta"), icon: <FeedIcon /> },
+    { href: "/quiz", label: t("quiz"), icon: <QuizIcon /> },
   ];
 
   const DrawerList = (

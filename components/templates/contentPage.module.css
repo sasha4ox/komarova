@@ -1,0 +1,217 @@
+.page {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+  color: var(--third-color);
+  line-height: 1.7;
+}
+
+.hero {
+  margin-bottom: 36px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #9b8070;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.page h1 {
+  font-family: var(--font-yeseva-one);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 0 16px;
+  color: var(--third-color);
+}
+
+.lead,
+.intro {
+  font-size: 18px;
+  margin: 0 0 16px;
+}
+
+.definition {
+  background: var(--second-color);
+  border-left: 4px solid #c4977a;
+  padding: 16px 20px;
+  margin: 0 0 32px;
+}
+
+.definition dt {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9b8070;
+  margin-bottom: 8px;
+}
+
+.definition dd {
+  margin: 0;
+  font-size: 18px;
+}
+
+.section {
+  margin: 0 0 32px;
+}
+
+.section h2 {
+  font-family: var(--font-yeseva-one);
+  font-size: 22px;
+  font-weight: 400;
+  margin: 0 0 12px;
+}
+
+.section p {
+  margin: 0 0 12px;
+}
+
+.section ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.section li {
+  margin-bottom: 8px;
+}
+
+.placeholder {
+  background: #f3eee8;
+  border: 1px dashed #c4977a;
+  padding: 16px 20px;
+  margin: 0 0 24px;
+}
+
+.placeholder h2 {
+  font-family: var(--font-yeseva-one);
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 8px;
+}
+
+.disclaimer {
+  font-size: 14px;
+  color: var(--text-second-color);
+  margin: 24px 0 32px;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 14px;
+  margin: 0 0 24px;
+  color: var(--text-second-color);
+}
+
+.breadcrumbs a {
+  color: #725e65;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.related {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.related a {
+  display: block;
+  padding: 12px 14px;
+  background: var(--second-color);
+  border-radius: 8px;
+}
+
+.related a:hover {
+  background: #e3dcd3;
+}
+
+.cta {
+  margin-top: 40px;
+  padding: 24px;
+  background: #2d2926;
+  color: #f5f0eb;
+  border-radius: 12px;
+}
+
+.cta h2 {
+  font-family: var(--font-yeseva-one);
+  font-size: 22px;
+  margin: 0 0 8px;
+  color: #f5f0eb;
+}
+
+.cta p {
+  margin: 0 0 16px;
+}
+
+.cta button,
+.cta a.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  background: #c4977a;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.hubGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hubCard {
+  display: block;
+  padding: 20px;
+  background: var(--second-color);
+  border-radius: 10px;
+  min-height: 120px;
+}
+
+.hubCard h2,
+.hubCard h3 {
+  font-family: var(--font-yeseva-one);
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 8px;
+}
+
+.hubCard p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-second-color);
+}
+
+.aboutPhoto {
+  position: relative;
+  width: 220px;
+  height: 240px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 0 24px;
+}
+
+.faq h3 {
+  font-size: 16px;
+  margin: 16px 0 6px;
+}
+
+.faq p {
+  margin: 0 0 8px;
+}

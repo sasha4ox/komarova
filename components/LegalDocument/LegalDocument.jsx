@@ -2,7 +2,8 @@ import styles from "./legalDocument.module.css";
 
 export default function LegalDocument({ title, intro, sections, footer, className = "" }) {
   return (
-    <section className={`${styles.document} ${className}`.trim()}>
+    <main>
+    <article className={`${styles.document} ${className}`.trim()}>
       <h1>{title}</h1>
       {intro && <p>{intro}</p>}
       {sections.map((section) => (
@@ -26,6 +27,7 @@ export default function LegalDocument({ title, intro, sections, footer, classNam
       {footer?.map((line) => (
         <p key={line}>{line}</p>
       ))}
-    </section>
+    </article>
+    </main>
   );
 }

@@ -14,8 +14,9 @@
 
 .linkWrapper {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  margin-left: auto;
 }
 
 .header {
@@ -44,25 +45,11 @@
 
 .headerWrapper {
   width: 1400px;
+  max-width: 100%;
   display: flex;
   align-items: center;
-  gap: 250px;
-}
-
-.headerWrapperRu {
-  gap: 135px;
-}
-
-.headerWrapperEn {
-  gap: 400px;
-}
-
-@media (max-width: 1400px) {
-  .headerWrapper {
-    width: 100%;
-    gap: 50px;
-    padding: 0 20px;
-  }
+  justify-content: space-between;
+  padding: 0 20px;
 }
 
 @media (max-width: 800px) {
@@ -80,8 +67,19 @@
   .name {
     font-size: 14px;
   }
+
+  .brandName {
+    font-size: 18px;
+  }
 }
 
 .name {
-  /* font-size: 30px; */
+  flex-shrink: 0;
+}
+
+.brandName {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.15;
 }

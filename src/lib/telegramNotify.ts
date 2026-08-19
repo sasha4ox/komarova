@@ -1,7 +1,7 @@
 import type { ContactMethod, SubmissionBody } from "./validateSubmission";
 import { formatAttributionDetails } from "./attribution";
 import { formatLocationDetails } from "./location";
-import { localeTag, normalizeAppLocale } from "./locale";
+import { contentLocale, localeTag } from "./locale";
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = process.env.CHAT_ID;
@@ -61,13 +61,13 @@ const NOTIFICATION_LABELS = {
 } as const;
 
 function contactMethodLabel(method: ContactMethod, locale?: string) {
-  const normalized = normalizeAppLocale(locale);
-  return CONTACT_METHOD_LABELS[method][normalized];
+  const lang = contentLocale(locale);
+  return CONTACT_METHOD_LABELS[method][lang];
 }
 
 function notificationLabels(locale?: string) {
-  const normalized = normalizeAppLocale(locale);
-  return NOTIFICATION_LABELS[normalized];
+  const lang = contentLocale(locale);
+  return NOTIFICATION_LABELS[lang];
 }
 
 function emailStatusLine(
