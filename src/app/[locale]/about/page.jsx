@@ -36,10 +36,6 @@ export default async function AboutRoute({ params }) {
     methodsTitle: pick(ABOUT.methodsTitle, locale),
     methods: pick(ABOUT.methods, locale),
     format: pick(ABOUT.format, locale),
-    educationPlaceholder: pick(ABOUT.educationPlaceholder, locale),
-    certificatesPlaceholder: pick(ABOUT.certificatesPlaceholder, locale),
-    experiencePlaceholder: pick(ABOUT.experiencePlaceholder, locale),
-    diplomasPlaceholder: pick(ABOUT.diplomasPlaceholder, locale),
     faq: pick(ABOUT.faq, locale),
   };
 
@@ -51,10 +47,6 @@ export default async function AboutRoute({ params }) {
         photoAlt: t("photoAlt"),
         biography: t("biography"),
         format: t("format"),
-        education: t("education"),
-        certificates: t("certificates"),
-        experience: t("experience"),
-        diplomas: t("diplomas"),
         faq: t("faq"),
       }}
       about={about}

@@ -59,22 +59,6 @@ export default function AboutPage({ locale, path, copy, about, crumbs }) {
             ))}
           </ul>
         </section>
-        <section className={styles.placeholder}>
-          <h2>{copy.education}</h2>
-          <p>{about.educationPlaceholder}</p>
-        </section>
-        <section className={styles.placeholder}>
-          <h2>{copy.certificates}</h2>
-          <p>{about.certificatesPlaceholder}</p>
-        </section>
-        <section className={styles.placeholder}>
-          <h2>{copy.experience}</h2>
-          <p>{about.experiencePlaceholder}</p>
-        </section>
-        <section className={styles.placeholder}>
-          <h2>{copy.diplomas}</h2>
-          <p>{about.diplomasPlaceholder}</p>
-        </section>
         <FaqList title={copy.faq} items={about.faq} />
         <ConsultCta />
       </article>

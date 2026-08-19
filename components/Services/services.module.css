@@ -1,0 +1,176 @@
+.page {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+  color: var(--third-color);
+}
+
+.hero {
+  margin-bottom: 32px;
+  max-width: 720px;
+}
+
+.hero h1 {
+  font-family: var(--font-yeseva-one);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 0 16px;
+  color: var(--third-color);
+}
+
+.intro {
+  font-size: 18px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  gap: 16px;
+  height: 100%;
+  padding: 22px 22px 18px;
+  background: var(--second-color);
+  border-radius: 14px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 2px rgba(53, 34, 40, 0.05);
+  cursor: pointer;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-4px);
+  background: #efe9e2;
+  border-color: rgba(196, 151, 122, 0.45);
+  box-shadow: 0 12px 24px rgba(53, 34, 40, 0.1);
+}
+
+.card:focus-visible {
+  outline: 2px solid #c4977a;
+  outline-offset: 3px;
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: #f9f6f1;
+  color: #9b8070;
+  flex-shrink: 0;
+}
+
+.card:hover .iconWrap,
+.card:focus-visible .iconWrap {
+  background: #fff;
+  color: #c4977a;
+}
+
+.iconWrap svg {
+  width: 22px;
+  height: 22px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.cardTitle {
+  font-family: var(--font-yeseva-one);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.35;
+  margin: 2px 0 8px;
+  color: var(--third-color);
+}
+
+.cardExcerpt {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-second-color);
+  flex: 1;
+}
+
+.readMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: #9b8070;
+}
+
+.readMore svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.22s ease;
+}
+
+.card:hover .readMore,
+.card:focus-visible .readMore {
+  color: #c4977a;
+}
+
+.card:hover .readMore svg,
+.card:focus-visible .readMore svg {
+  transform: translateX(4px);
+}
+
+.ctaWrap {
+  margin-top: 48px;
+}
+
+@media (min-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .card {
+    padding: 24px 24px 20px;
+    gap: 18px;
+  }
+
+  .cardTitle {
+    font-size: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .readMore svg {
+    transition: none;
+  }
+
+  .card:hover,
+  .card:focus-visible {
+    transform: none;
+  }
+
+  .card:hover .readMore svg,
+  .card:focus-visible .readMore svg {
+    transform: none;
+  }
+}

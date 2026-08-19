@@ -9,11 +9,11 @@ export const ABOUT: AboutRecord = {
     "About psychologist Irina Komarova — education, methods, experience",
   ),
   description: L(
-    "Хто така Ірина Комарова: гештальт-підхід, онлайн-терапія для дорослих, формат роботи. Освіта та сертифікати будуть додані.",
-    "Кто такая Ирина Комарова: гештальт-подход, онлайн-терапия для взрослых, формат работы. Образование и сертификаты будут добавлены.",
-    "Who Irina Komarova is: a Gestalt approach, online therapy for adults, how sessions work. Education and certificates will be added.",
+    "Хто така Ірина Комарова: гештальт-підхід, онлайн-терапія для дорослих, формат роботи.",
+    "Кто такая Ирина Комарова: гештальт-подход, онлайн-терапия для взрослых, формат работы.",
+    "Who Irina Komarova is: a Gestalt approach, online therapy for adults, how sessions work.",
   ),
-  h1: L("Про спеціалістку", "О специалисте", "About the specialist"),
+  h1: L("Про психолога", "О психологе", "About the psychologist"),
   intro: L(
     "Мене звати Ірина Комарова. Я психолог для дорослих. Працюю онлайн — з людьми в Україні та за кордоном.",
     "Меня зовут Ирина Комарова. Я психолог для взрослых. Работаю онлайн — с людьми в Украине и за границей.",
@@ -109,11 +109,6 @@ export const ABOUT: AboutRecord = {
           "Гештальт-терапія: опора на переживання в моменті, контакт і відповідальність, а не готові поради.",
       },
       {
-        question: "Де можна подивитися дипломи?",
-        answer:
-          "Розділ із фото документів готується. Коли файли будуть додані, вони з’являться на цій сторінці.",
-      },
-      {
         question: "Як записатися?",
         answer:
           "Залиште заявку на сайті. Після підтвердження email зі мною зв’яжуться щодо зручного часу.",
@@ -130,11 +125,6 @@ export const ABOUT: AboutRecord = {
           "Гештальт-терапия: опора на переживание в моменте, контакт и ответственность, а не готовые советы.",
       },
       {
-        question: "Где можно посмотреть дипломы?",
-        answer:
-          "Раздел с фото документов готовится. Когда файлы будут добавлены, они появятся на этой странице.",
-      },
-      {
         question: "Как записаться?",
         answer:
           "Оставьте заявку на сайте. После подтверждения email со мной свяжутся по удобному времени.",
@@ -149,11 +139,6 @@ export const ABOUT: AboutRecord = {
         question: "What is your approach?",
         answer:
           "Gestalt therapy: staying with experience in the moment, contact and responsibility, not ready-made advice.",
-      },
-      {
-        question: "Where can I see diplomas?",
-        answer:
-          "The document gallery is being prepared. When files are added, they will appear on this page.",
       },
       {
         question: "How do I book?",

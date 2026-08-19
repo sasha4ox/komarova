@@ -2,6 +2,12 @@ export { SERVICES, getService } from "./services";
 export { ARTICLES, getArticle, getArticlesByService } from "./articles";
 export { ABOUT } from "./about";
 export {
+  FEATURED_ARTICLE_SLUGS,
+  KB_CATEGORY_ORDER,
+  kbCategoryId,
+  toKbCard,
+} from "./kbHub";
+export {
   SERVICE_IDS,
   SERVICE_PHOTOS,
   ARTICLE_SLUGS_BY_SERVICE,
