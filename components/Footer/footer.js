@@ -7,6 +7,8 @@ import { SERVICES } from "@/content/services";
 import { pick } from "@/content/localize";
 import styles from "./footer.module.css";
 
+const AUTHOR_TELEGRAM_URL = "https://t.me/+30936744794";
+
 export default function Footer() {
   const tNav = useTranslations("nav");
   const tFooter = useTranslations("footer");
@@ -76,6 +78,17 @@ export default function Footer() {
                   irinavfox@gmail.com
                 </a>
               </li>
+              <li>
+                <a
+                  href={AUTHOR_TELEGRAM_URL}
+                  className={styles.contactLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={tFooter("createdByAria")}
+                >
+                  Telegram
+                </a>
+              </li>
             </ul>
           </section>
         </div>
@@ -83,6 +96,19 @@ export default function Footer() {
         <div className={styles.bottomBar}>
           <p className={styles.copyright}>
             {tFooter("copyright", { year })}
+            <span className={styles.legalDivider} aria-hidden="true">
+              ·
+            </span>
+            {tFooter("createdBy")}{" "}
+            <a
+              href={AUTHOR_TELEGRAM_URL}
+              className={styles.creditLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={tFooter("createdByAria")}
+            >
+              Fox
+            </a>
           </p>
           <div className={styles.legalLinks}>
             {legalLinks.map((link, index) => (

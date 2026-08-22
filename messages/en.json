@@ -383,6 +383,8 @@
     "contacts": "Contact",
     "navAria": "Footer navigation",
     "copyright": "© {year} Irina Komarova",
+    "createdBy": "Website by",
+    "createdByAria": "Contact the website author on Telegram",
     "cookiePreferences": "Cookie preferences"
   },
   "CookieConsent": {

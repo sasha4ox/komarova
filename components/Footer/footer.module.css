@@ -104,7 +104,21 @@
 .copyright {
   font-size: 13px;
   color: rgba(245, 240, 235, 0.55);
-  white-space: nowrap;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.creditLink {
+  color: #c4977a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.creditLink:hover {
+  color: #e0b396;
 }
 
 .legalLinks {

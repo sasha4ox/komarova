@@ -383,6 +383,8 @@
     "contacts": "Контакты",
     "navAria": "Навигация в подвале",
     "copyright": "© {year} Ирина Комарова",
+    "createdBy": "Сайт создал",
+    "createdByAria": "Написать автору сайта в Telegram",
     "cookiePreferences": "Настройки cookies"
   },
   "CookieConsent": {
