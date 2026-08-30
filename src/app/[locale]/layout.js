@@ -7,6 +7,7 @@ import styles from "../layout.module.css";
 import HeaderComponent from "../../../components/header";
 import Footer from "../../../components/Footer/footer";
 import AttributionCapture from "../../../components/AttributionCapture/AttributionCapture";
+import GoogleTagDebugPersistence from "../../../components/GoogleTagDebugPersistence/GoogleTagDebugPersistence";
 import ConsentModeDefaults from "../../../components/ConsentModeDefaults/ConsentModeDefaults";
 import {
   GoogleTagManagerHead,
@@ -89,6 +90,7 @@ export default async function LocaleLayout({ children, params }) {
         <Providers>
           <NextIntlClientProvider messages={messages}>
             <AttributionCapture />
+            <GoogleTagDebugPersistence />
             <ConditionalGoogleAds />
             <div className={styles.pageShell}>
               <HeaderComponent />

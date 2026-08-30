@@ -13,6 +13,7 @@ import {
   hasUserConsented,
   setStoredConsent,
 } from "../helpers/cookieConsent";
+import { isGoogleTagDebugSession } from "../helpers/googleTagVerification";
 
 const CookieConsentContext = createContext(null);
 
@@ -24,7 +25,7 @@ export function CookieConsentProvider({ children }) {
   useEffect(() => {
     const stored = getStoredConsent();
     setConsent(stored ?? DEFAULT_CONSENT);
-    setShowBanner(!hasUserConsented());
+    setShowBanner(!isGoogleTagDebugSession() && !hasUserConsented());
   }, []);
 
   const hasConsented = consent !== null && consent.timestamp > 0;

@@ -14,7 +14,10 @@ import {
   tryAcquireSubmitLock,
 } from "../../helpers/leadTracking";
 import { getAttribution, getGclid } from "../../helpers/attribution";
-import { isGoogleTagDebugSession } from "../../helpers/googleTagVerification";
+import {
+  isGoogleTagDebugSession,
+  withGoogleTagDebugParams,
+} from "../../helpers/googleTagVerification";
 import { telInputLang } from "@/lib/locale";
 import styles from "./form.module.css";
 
@@ -163,11 +166,13 @@ export default function Form({ defaultText = "", compact = false, inModal = fals
 
         if (result.pendingEmail) {
           const params = new URLSearchParams({ email: data.email });
-          router.push(`/email-pending?${params.toString()}`);
+          router.push(
+            withGoogleTagDebugParams(`/email-pending?${params.toString()}`),
+          );
           return;
         }
 
-        router.push("/form-confirmation");
+        router.push(withGoogleTagDebugParams("/form-confirmation"));
         return;
       }
 
