@@ -152,7 +152,7 @@ export default function Form({ defaultText = "", compact = false, inModal = fals
       const result = await response.json().catch(() => ({}));
 
       if (response.ok) {
-        if (result.duplicate) {
+        if (result.duplicate && !isGoogleTagDebugSession()) {
           markLeadSubmitted(data.email, data.phone);
           setError("email", {
             type: "custom",

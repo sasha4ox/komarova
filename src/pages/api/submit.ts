@@ -49,13 +49,13 @@ export default async function submitHandler(
     data.phone,
     getClientIp(req),
   );
+  const googleTagDebug = req.body?.googleTagDebug === true;
 
-  if (isAnyDuplicateSubmission(submissionKeys)) {
+  if (!googleTagDebug && isAnyDuplicateSubmission(submissionKeys)) {
     return res.status(200).json({ ok: true, duplicate: true });
   }
 
   try {
-    const googleTagDebug = req.body?.googleTagDebug === true;
     const requireEmailVerification =
       isEmailVerificationEnabled() && !googleTagDebug;
 

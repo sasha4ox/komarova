@@ -77,6 +77,11 @@ export function tryAcquireSubmitLock(email, phone) {
     return false;
   }
 
+  if (isGoogleTagDebugSession()) {
+    sessionStorage.setItem(INFLIGHT_KEY, buildLeadKey(email, phone));
+    return true;
+  }
+
   if (hasRecentLeadSubmission(email, phone)) {
     return false;
   }
@@ -140,15 +145,18 @@ function tryFireConversion() {
     return "done";
   }
 
-  const effectiveTransactionId =
-    transactionId || `tag-assistant-${Date.now()}`;
+  const effectiveTransactionId = debugSession
+    ? `tag-assistant-${Date.now()}`
+    : transactionId;
 
-  const alreadyFired = localStorage.getItem(CONVERSION_KEY);
-  if (alreadyFired === effectiveTransactionId) {
-    return "done";
+  if (!debugSession) {
+    const alreadyFired = localStorage.getItem(CONVERSION_KEY);
+    if (alreadyFired === effectiveTransactionId) {
+      return "done";
+    }
+
+    localStorage.setItem(CONVERSION_KEY, effectiveTransactionId);
   }
-
-  localStorage.setItem(CONVERSION_KEY, effectiveTransactionId);
 
   if (debugSession && typeof window.gtag === "function") {
     window.gtag("consent", "update", {
