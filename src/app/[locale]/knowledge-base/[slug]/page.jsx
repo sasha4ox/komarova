@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { allArticleSlugs, getArticle } from "@/content";
 import { pick } from "@/content/localize";
+import { formatArticleDate } from "@/lib/author";
 import {
   getRelatedArticlesForSlug,
   getRelatedServiceForArticle,
@@ -24,10 +25,11 @@ export async function generateMetadata({ params }) {
   return buildPageMetadata({
     locale,
     path: `/knowledge-base/${slug}`,
-    title: pick(article.title, locale),
+    title: pick(article.seoTitle, locale),
     description: pick(article.description, locale),
     type: "article",
     siteName: t("siteName"),
+    imageAlt: pick(article.h1, locale),
   });
 }
 
@@ -45,6 +47,7 @@ export default async function ArticleRoute({ params }) {
   const langArticle = {
     ...article,
     title: pick(article.title, locale),
+    seoTitle: pick(article.seoTitle, locale),
     description: pick(article.description, locale),
     h1: pick(article.h1, locale),
     shortAnswer: pick(article.shortAnswer, locale),
@@ -54,6 +57,8 @@ export default async function ArticleRoute({ params }) {
     selfHelp: pick(article.selfHelp, locale),
     whenToSeekHelp: pick(article.whenToSeekHelp, locale),
     faq: pick(article.faq, locale),
+    datePublished: article.datePublished,
+    dateModified: article.dateModified,
   };
 
   const crumbs = [
@@ -78,6 +83,11 @@ export default async function ArticleRoute({ params }) {
         relatedService: t("relatedService"),
         relatedArticles: t("relatedArticles"),
         disclaimer: t("disclaimer"),
+        photoAlt: t("photoAlt"),
+        authorRole: t("authorRole"),
+        authorUpdated: t("authorUpdated", {
+          date: formatArticleDate(article.dateModified, locale),
+        }),
       }}
       article={langArticle}
       relatedService={

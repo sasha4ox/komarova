@@ -178,4 +178,6 @@ export function relatedArticleSlugs(slug: string, limit = 4): string[] {
     .slice(0, limit);
 }
 
-export const STATIC_LAST_MODIFIED = "2026-08-19";
+export const ARTICLE_DATE_PUBLISHED = "2026-08-01";
+export const ARTICLE_DATE_MODIFIED = "2026-09-04";
+export const STATIC_LAST_MODIFIED = ARTICLE_DATE_MODIFIED;

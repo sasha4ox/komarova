@@ -53,6 +53,9 @@ export type ArticleRecord = {
   whenToSeekHelp: LocalizedString;
   faq: LocalizedFaq;
   relatedArticleSlugs: string[];
+  datePublished: string;
+  dateModified: string;
+  seoTitle: LocalizedString;
 };
 
 export type AboutRecord = {

@@ -1,3 +1,9 @@
+import { ARTICLE_DATE_MODIFIED, ARTICLE_DATE_PUBLISHED } from "@/content/catalog";
+import {
+  AUTHOR_IMAGE_URL,
+  AUTHOR_JOB_TITLES,
+  AUTHOR_NAMES,
+} from "./author";
 import { SITE_URL, contentLocale, localizedUrl } from "./locale";
 
 export type FaqItem = {
@@ -21,19 +27,44 @@ type GraphOptions = {
     headline: string;
     datePublished?: string;
     dateModified?: string;
+    image?: string;
   };
   reviews?: ReviewItem[];
 };
+
+type ArticleJsonLdInput = {
+  locale: string;
+  path: string;
+  headline: string;
+  description: string;
+  datePublished?: string;
+  dateModified?: string;
+  image?: string;
+};
+
+function omitContext<T extends Record<string, unknown>>(node: T) {
+  const rest = { ...node };
+  delete rest["@context"];
+  return rest;
+}
+
+function absoluteImageUrl(image?: string) {
+  if (!image) {
+    return AUTHOR_IMAGE_URL;
+  }
+
+  if (image.startsWith("http://") || image.startsWith("https://")) {
+    return image;
+  }
+
+  return `${SITE_URL}${image.startsWith("/") ? image : `/${image}`}`;
+}
 
 const PERSON_ID = `${SITE_URL}/#person`;
 const BUSINESS_ID = `${SITE_URL}/#business`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 
-const PERSON_NAMES = {
-  uk: "Ірина Комарова",
-  ru: "Ирина Комарова",
-  en: "Irina Komarova",
-} as const;
+const PERSON_NAMES = AUTHOR_NAMES;
 
 const JOB_TITLES = {
   uk: "Психолог для дорослих",
@@ -147,6 +178,85 @@ function websiteNode(locale: string) {
   };
 }
 
+export function buildArticleJsonLd({
+  locale,
+  path,
+  headline,
+  description,
+  datePublished,
+  dateModified,
+  image,
+}: ArticleJsonLdInput) {
+  const lang = contentLocale(locale);
+  const pageUrl = localizedUrl(path, locale);
+  const imageUrl = absoluteImageUrl(image);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${pageUrl}#article`,
+    headline,
+    description,
+    image: {
+      "@type": "ImageObject",
+      url: imageUrl,
+    },
+    url: pageUrl,
+    inLanguage: lang === "uk" ? "uk" : lang,
+    datePublished: datePublished || ARTICLE_DATE_PUBLISHED,
+    dateModified: dateModified || ARTICLE_DATE_MODIFIED,
+    author: {
+      "@type": "Person",
+      name: AUTHOR_NAMES[lang],
+      jobTitle: AUTHOR_JOB_TITLES[lang],
+      url: localizedUrl("/about", locale),
+      image: AUTHOR_IMAGE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: AUTHOR_NAMES[lang],
+      logo: {
+        "@type": "ImageObject",
+        url: AUTHOR_IMAGE_URL,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+  };
+}
+
+export function buildFaqJsonLd({
+  locale,
+  path,
+  items,
+}: {
+  locale: string;
+  path: string;
+  items?: FaqItem[];
+}) {
+  if (!items?.length) {
+    return null;
+  }
+
+  const pageUrl = localizedUrl(path, locale);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+}
+
 export function buildJsonLdGraph({
   locale,
   path,
@@ -177,33 +287,26 @@ export function buildJsonLdGraph({
 
   if (article) {
     graph.push({
-      "@type": "Article",
-      "@id": `${pageUrl}#article`,
-      headline: article.headline,
-      description,
-      url: pageUrl,
-      inLanguage: contentLocale(locale),
-      author: { "@id": PERSON_ID },
-      publisher: { "@id": PERSON_ID },
+      ...omitContext(
+        buildArticleJsonLd({
+          locale,
+          path,
+          headline: article.headline,
+          description,
+          datePublished: article.datePublished,
+          dateModified: article.dateModified,
+          image: article.image,
+        }),
+      ),
       mainEntityOfPage: { "@id": pageId },
-      datePublished: article.datePublished || "2026-08-01",
-      dateModified: article.dateModified || "2026-08-19",
     });
   }
 
   if (faq?.length) {
-    graph.push({
-      "@type": "FAQPage",
-      "@id": `${pageUrl}#faq`,
-      mainEntity: faq.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: item.answer,
-        },
-      })),
-    });
+    const faqNode = buildFaqJsonLd({ locale, path, items: faq });
+    if (faqNode) {
+      graph.push(omitContext(faqNode));
+    }
   }
 
   if (breadcrumbs?.length) {

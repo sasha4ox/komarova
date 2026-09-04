@@ -106,6 +106,47 @@ export function visualTitle(h1: string): string {
   return title;
 }
 
+const SEO_BRAND = {
+  uk: "Ірина Комарова",
+  ru: "Ирина Комарова",
+  en: "Irina Komarova",
+} as const;
+
+const SEO_TITLE_MAX = 60;
+
+const TRAILING_PARTICLE =
+  /\s+(?:в|у|з|із|зі|і|та|й|на|до|для|про|об|від|по|за|як|чи|во|с|со|и|а|от|как|или|the|a|an|of|and|in|to|for|with|or|at)$/iu;
+
+function trimHeading(heading: string): string {
+  let next = heading.replace(/[—–:,;.…]+$/u, "").trim();
+  let previous = "";
+
+  while (next !== previous) {
+    previous = next;
+    next = next.replace(TRAILING_PARTICLE, "").trim();
+  }
+
+  return next;
+}
+
+function truncateHeading(heading: string, max: number): string {
+  if (heading.length <= max) {
+    return heading;
+  }
+
+  const cut = heading.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  return trimHeading(lastSpace > 16 ? cut.slice(0, lastSpace) : cut);
+}
+
+export function buildSeoTitle(h1: string, locale: ContentLocale): string {
+  const suffix = ` | ${SEO_BRAND[locale]}`;
+  const maxHeading = Math.max(22, SEO_TITLE_MAX - suffix.length);
+  const heading = truncateHeading(visualTitle(h1), maxHeading);
+
+  return `${heading}${suffix}`;
+}
+
 export function visualExcerpt(text: string, max = 128): string {
   const cleaned = text.replace(/\s+/g, " ").trim();
   const match = cleaned.match(/^(.+?[.!?…])(?:\s|$)/);

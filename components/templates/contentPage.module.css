@@ -24,8 +24,68 @@
   font-size: clamp(28px, 4vw, 42px);
   font-weight: 400;
   line-height: 1.25;
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   color: var(--third-color);
+}
+
+.authorByline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--text-second-color);
+}
+
+.authorPhoto {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.authorText {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 10px;
+  row-gap: 2px;
+  min-width: 0;
+}
+
+.authorName {
+  color: var(--third-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.authorName:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.authorRole::before,
+.authorUpdated::before {
+  content: "·";
+  margin-right: 10px;
+  color: #c4b6ae;
+}
+
+@media (max-width: 640px) {
+  .authorText {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .authorRole::before,
+  .authorUpdated::before {
+    content: none;
+    margin: 0;
+  }
 }
 
 .lead,

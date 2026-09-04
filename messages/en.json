@@ -446,6 +446,8 @@
     "selfHelp": "What can I do myself?",
     "whenToSeekHelp": "When to seek professional help",
     "disclaimer": "This text is educational and does not replace a psychiatrist or emergency care.",
+    "authorRole": "Gestalt therapist",
+    "authorUpdated": "Updated {date}",
     "ctaTitle": "Book a consultation",
     "ctaText": "Online and confidential. We will arrange a time after email confirmation.",
     "ctaButton": "Leave a request",

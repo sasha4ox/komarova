@@ -1,5 +1,10 @@
 import type { ArticleRecord, LocalizedFaq, LocalizedList, LocalizedString, ServiceId } from "../types";
-import { relatedArticleSlugs } from "../catalog";
+import {
+  ARTICLE_DATE_MODIFIED,
+  ARTICLE_DATE_PUBLISHED,
+  relatedArticleSlugs,
+} from "../catalog";
+import { buildSeoTitle } from "../kbHub";
 import { getService } from "../services";
 
 export const L = (uk: string, ru: string, en: string): LocalizedString => ({ uk, ru, en });
@@ -27,13 +32,16 @@ export function makeArticle(
   selfHelp: LocalizedList,
   whenToSeekHelp: LocalizedString,
   faqItems: LocalizedFaq,
+  seoTitleOverride?: LocalizedString,
 ): ArticleRecord {
   const service = getService(serviceId);
-  const title = L(
-    `${h1.uk} — психолог Ірина Комарова`,
-    `${h1.ru} — психолог Ирина Комарова`,
-    `${h1.en} — psychologist Irina Komarova`,
-  );
+  const seoTitle =
+    seoTitleOverride ??
+    L(
+      buildSeoTitle(h1.uk, "uk"),
+      buildSeoTitle(h1.ru, "ru"),
+      buildSeoTitle(h1.en, "en"),
+    );
   const description = L(
     shortAnswer.uk.slice(0, 158),
     shortAnswer.ru.slice(0, 158),
@@ -43,7 +51,8 @@ export function makeArticle(
   return {
     slug,
     serviceId,
-    title,
+    title: seoTitle,
+    seoTitle,
     description,
     h1,
     shortAnswer,
@@ -54,6 +63,8 @@ export function makeArticle(
     whenToSeekHelp,
     faq: faqItems,
     relatedArticleSlugs: relatedArticleSlugs(slug),
+    datePublished: ARTICLE_DATE_PUBLISHED,
+    dateModified: ARTICLE_DATE_MODIFIED,
     ...(service ? {} : {}),
   };
 }
