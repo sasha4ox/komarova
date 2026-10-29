@@ -172,6 +172,13 @@ function tryFireConversion() {
     transaction_id: effectiveTransactionId,
   });
 
+  // Same transaction_id as above, so Google Ads de-duplicates if a GTM tag also fires.
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "lead_form_success",
+    transaction_id: effectiveTransactionId,
+  });
+
   sessionStorage.removeItem(TRANSACTION_KEY);
   localStorage.removeItem(TRANSACTION_KEY);
   return "done";
