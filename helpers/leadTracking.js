@@ -169,6 +169,8 @@ function tryFireConversion() {
 
   window.gtag("event", "conversion", {
     send_to: GOOGLE_ADS_CONVERSION,
+    value: 1.0,
+    currency: "UAH",
     transaction_id: effectiveTransactionId,
   });
 
